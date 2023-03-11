@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
   {% load static %}
+  {% load sass_tags %}
+  
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="{% sass_src 'css/v.scss' %}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
-*,*:before,*:after {
-  box-sizing: border-box;
 
-}
 html {
   font-size: 16px;
 }
@@ -21,8 +22,51 @@ html {
   margin: 20px auto;
   max-width: 300px;
  
-  
 }
+.ledger{
+    height: 50 vh;
+    width: 60 vw;
+    position: absolute;
+    margin-top:-1900px ;
+    margin-left:30px ;
+    padding: 15px;
+}
+.square {
+  height: 20px;
+  width: 20px;
+  background: #26ebd0;
+  border-radius: 5px;
+}
+.square1 {
+  height: 20px;
+  width: 20px;
+  background: #171bea;
+  border-radius: 5px;
+}
+.square2 {
+  height: 20px;
+  width: 20px;
+  background: #e30202;
+  border-radius: 5px;
+}
+.square2::after{
+      content: "✓" !important; 
+      color: white;
+      margin-left: 5px;
+      font-weight: bold;
+    }
+.square3 {
+  height: 20px;
+  width: 20px;
+  background: #5e5e5e;
+  border-radius: 5px;
+}
+.square3::after{
+      content: "X" !important; 
+      color: white;
+      margin-left: 5px;
+      font-weight: bold;
+    }
 
 .cockpit {
   height: 240px; 
@@ -32,7 +76,7 @@ html {
   
   
 }
-
+/*
  .cockpit :before {
     content: "";
     display: block;
@@ -45,9 +89,9 @@ html {
     border-right: 10px solid #a7c1ea;
     border-left: 10px solid #a7c1ea;
     
-  }
+  }*/
   .cockpit-top {
-    margin-top: 60px;
+    margin-top: 18px;
   
   }
   h1 {
@@ -55,35 +99,33 @@ html {
     margin: 100px auto 35px auto;
   }
 
-.exit {
+  .exit {
   position: relative;
   height: 50px;
-} 
-  .exit:before,
-  .exit:after {
-    content: "EXIT";
-    font-size: 14px;
-    line-height: 18px;
-    padding: 0px 2px;
-    font-family: "Arial Narrow", Arial, sans-serif;
-    display: block;
-    position: absolute;
-    background: green;
-    color: white;
-    top: 50%;
-    transform: translate(0, -50%);
-  }
-  .exit:before {
-    left: 0;
-  }
-  .exit:after {
-    right: 0;
-  }
-
-
+}
+.exit:before, .exit:after {
+  content: "EXIT";
+  font-size: 12px;
+  line-height: 18px;
+  padding: 0px 2px 0px 2px;
+  display: block;
+  position: absolute;
+  background: rgb(238, 4, 4);
+  color: white;
+  top: 50%;
+  transform: translate(0, -50%);
+  border-radius: 5px;
+}
+.exit:before {
+  left: 10px;
+}
+.exit:after {
+  right: 10px;
+}
 .fuselage {
-  border-right: 10px solid #a7c1ea;
-  border-left: 10px solid #a7c1ea;
+  /*order-right: 10px solid #a7c1ea;
+  border-left: 10px solid #a7c1ea;*/
+  background-color: #ffffff;
 }
 
 ol {
@@ -109,22 +151,32 @@ ol {
   padding: 5px;
   position: relative; 
 }   
-.seat:nth-child(3) {
-    margin-right: 14.28571428571429%;
-  }
+
   input[type=checkbox] {
     position: absolute;
     opacity: 0;
   }
-  input[type=checkbox]:checked + label {
-      background: #bada55;      
+  input[type=checkbox]:checked + .seal{
+      background: #e70000;   
+       
       -webkit-animation-name: rubberBand;
           animation-name: rubberBand;
       animation-duration: 300ms;
       animation-fill-mode: both;
     }
+    input[type=checkbox]:checked + .seal::after{
+      content: "✓" !important; 
+      color: white;
+
+    }
+    input[type=checkbox]:checked + .seal1::after{
+      content: "✓" !important; 
+      color: white;
+
+    }
+    
   
-  input[type=checkbox]:disabled  + label {
+  input[type=checkbox]:disabled  + .seal{
       background: #dddddd;
       text-indent: -9999px;
       overflow: hidden;
@@ -137,27 +189,20 @@ input[type=checkbox]:disabled:after {
         left: 50%;
         transform: translate(-50%, 0%);
       }
-input[type=checkbox]:disabled:hover {
-        box-shadow: none;
-        cursor: not-allowed;
-      }
 
-  
-  label {    
+  .seal {    
     display: block;
     position: relative;    
-    width: 100%;    
+    width: 90%; 
+    height:25px;   
     text-align: center;
-    font-size: 14px;
     font-weight: bold;
-    line-height: 1.5rem;
-    padding: 4px 0;
-    background: #F42536;
+    background: #26ebd0;
     border-radius: 5px;
     animation-duration: 300ms;
     animation-fill-mode: both;
   }
-  label:before {
+  .seal:before {
       content: "";
       position: absolute;
       width: 75%;
@@ -165,14 +210,57 @@ input[type=checkbox]:disabled:hover {
       top: 1px;
       left: 50%;
       transform: translate(-50%, 0%);
-      background: rgba(255,255,255,.4);
       border-radius: 3px;
     }
     
-    label:hover {
+    .seal:hover {
       cursor: pointer;
       box-shadow: 0 0 0px 2px #5C6AFF;
     }
+
+    input[type=checkbox]:checked + .seal1 {
+      background:#e70000;       
+      -webkit-animation-name: rubberBand;
+          animation-name: rubberBand;
+      animation-duration: 300ms;
+      animation-fill-mode: both;
+    }
+  
+  input[type=checkbox]:disabled  + .seal1{
+      background: #dddddd;
+      text-indent: -9999px;
+      overflow: hidden;
+  }   
+
+  
+  .seal1 {    
+    display: block;
+    position: relative;    
+    width: 90%; 
+    height:25px;   
+    text-align: center;
+    font-weight: bold;
+    background: #171bea;
+    border-radius: 5px;
+    animation-duration: 300ms;
+    animation-fill-mode: both;
+  }
+  .seal1:before {
+      content: "";
+      position: absolute;
+      width: 75%;
+      height: 75%;
+      top: 1px;
+      left: 50%;
+      transform: translate(-50%, 0%);
+      border-radius: 3px;
+    }
+    
+    .seal1:hover {
+      cursor: pointer;
+      box-shadow: 0 0 0px 2px #3a5b5e;
+    }
+ 
  
 
 @-webkit-keyframes rubberBand {
@@ -254,12 +342,24 @@ input[type=checkbox]:disabled:hover {
           animation-name: rubberBand;
 }
 .col1,.col2 {
-
- padding: 0%;
+padding: 0%;
 }
 
 .col1{
   border-right: 2px solid rgb(187, 201, 215);
+  height: 70em !important;
+  overflow-y: scroll;
+}
+.col1::-webkit-scrollbar {
+    width: 4px;
+}
+                    
+.col1::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+                    
+.col1::-webkit-scrollbar-thumb {
+    border-radius: 10px;
 }
 #main2:after {
   content: "";
@@ -365,6 +465,85 @@ ul{
     transform: translateX(10px) rotate(-45deg);
     transform-origin: left bottom;
 }
+.iconflTail {
+    width: 300px;
+    height: 385px;
+    margin-top: -9px;
+}
+.bgProperties {
+    background-repeat: no-repeat;
+    background-position: center;
+    display: inline-block;
+    background-size: contain;
+    background-image: url("{% static 'image/back.png' %}")!important;
+}
+
+
+.letter{
+  margin-left: 8px;
+
+}
+.letter1{
+  margin-left: 5px;
+
+}
+.ledg{
+  height: 20px;
+  width: 20px;
+  background-color: #d20606;
+  border-radius: 2px;
+  display: block;
+    position: relative;    
+    width: 90%; 
+    height:25px;   
+    text-align: center;
+    font-weight: bold;
+    background: #26ebd0;
+}
+.passenger table{
+  margin: 0%;
+  padding: 0%;
+}
+.passenger th{
+  color: #696b76;
+  font-family:Garamond (serif);
+  
+}
+.passenger td{
+  color: #696b76;
+  font-family:Garamond (serif);
+  font-size: 1em;
+  text-align: center;
+}
+.passenger tr {
+    display:block;
+} 
+ 
+@media (min-width:380px) {
+  .pass {
+    width:380px;
+    text-align: center;}
+}
+@media (max-width:380px) {
+  .pass {
+    width:250px;
+    text-align: center;
+}
+}
+
+.passenger tbody::-webkit-scrollbar {
+    width: 10px;
+}
+                    
+.passenger tbody::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: #f1f1f1; 
+}
+                    
+.passenger tbody::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #888; 
+}
 </style>
 </head>
    
@@ -373,43 +552,235 @@ ul{
 </head>
 
 <body>
-<div class="container-fluid">
-<div class="row" id="main2">
-    <div class="col-lg-6  col1" style="background-color:#fcfcfc;">    
-    <div class="plane">
-        <div class="cockpit">
-          <div class="cockpit-top"><img src="{% static 'image/inm.png' %}" width="90%"></div>
-          <h4>Front</h4>
-        </div>
-        <div class="exit exit--front fuselage">
+  <div class="main row" >
+   <div class="col-lg-6" style="background-color:#e9f0f4;">
+    <label class="menu-button-wrapper" for="">
+      <input type="checkbox" class="menu-button">
+      <div class="icon-wrapper">
+        <label class="hamburger" >
+          <input class="hamburger-input" type="checkbox">
+          <span class="hamburger-line first"></span>
+          <span class="hamburger-line second"></span>
+          <span class="hamburger-line third"></span>
+        </label>
+        <div class="" style="display: inline-block;">
+         <img class="ms-2 mt-3" src="https://res.cloudinary.com/codiini/image/upload/v1616765127/tripma-blue_mausgl.svg" alt="Tripma Logo"></a>
+     </div>
+      </div>
+      <div class="item-list">
+        <div class="item-list1">
+              <a class="nav-link " href="#">Flight</a>
           
         </div>
+        <div class="item-list1">
+              <a class="nav-link " href="#">Hotels</a>
+          
+        </div>
+        <div class="item-list1">
+          <a class="nav-link " href="#">Packages</a>
+        </div>
+        <div class="item-list1"><a class="nav-link  active" href="{% url 'flight_signin' %}">Sign in</a></div>
+        <div class="item-list1">
+          <a class="nav-link " href="{% url 'flight_signup' %}">Sign up</a>
+        </div>
+    </label>
+  </div>
+  </div>
+  <div class="col-lg-6 col2">
+    <table>
+      <thead class="firsttab">
+          <th style="background-color: #303241;width:21% ;">SRV
+          <p>nmn</p></th>
+          
+          <th style="background-color: #303241;width:8% ;">
+              <div class="long-arrow-right"></div>
+          </th>
+          <th style="background-color: #303241;width:21% ;">NRT
+              <p>nmn</p></th>
+          <th style="background-color: #6c49ea;width:25% ;">DEC 25|12.00AM
+              <p>Departing</p></th>
+          <th style="background-color: #303241;width:25% ;">DEC 25|12.00AM
+              <p>Arriving</p></th>
+      </thead>
+      <tbody>
+      
+      </tbody>
+  </table>
+  </div>
+ 
+</div>
+<div class="container-fluid">
+<div class="row" id="main2 " style="position: relative;">
+  <div class="col-lg-6  order-lg-5">
+ 
+    <div class="container-fluid pb-5" style="border-bottom: 2px solid rgb(191, 191, 191);">
+        <div class="row mt-5">
+            <div class="col-md-6" >
+              <img src="{% static 'image/eseat.PNG' %}" alt="..." class="img-fluid">
+              <div class="row">
+                <div class="col-12">
+                  <h4 id="head1">
+                    Economy
+                  </h4>
+                </div>
+                <div class="col-12 mt-2">
+                  <pre>Rest and recharge during your flight with
+extended leg room,personalized service,
+and multi-course meal service</pre>
+                  <hr size="8" width="20%" color="red" style="background-color: #2938da;"> 
+                  <div class="col-12">
+                    <ul style="list-style-type:none;">
+                      <li class="l1"><span class="dot"></span>Built-in entertainment system</li>
+                      <li class="l1"><span class="dot"></span>Complimentary snacks and drinks</li>
+
+                      <li class="l1"><span class="dot"></span>free carry-on and personal item</li>
+
+                    </ul>
+                  </div> 
+                  </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <img src="{% static 'image/bseat.PNG' %}" alt="..." width="86%" class="img-fluid">
+              <div class="row">
+                <div class="col-12 ">
+                  <h4 id="head1">
+                    Business class
+                  </h4>
+                 </div> 
+                <div class="col-12 mt-2">
+                  <pre>Rest and recharge during your flight with
+extended leg room,personalized service,
+and multi-course meal service</pre>
+                <hr size="8" width="20%" color="red" style="background-color: #5cefff;">  
+                
+                <div class="col-12">
+                  <ul style="list-style-type:none;margin: 0%;">
+                    <li class="l1"><div id="tick-mark"></div>Extended leg room</li>
+                    <li class="l1"><div id="tick-mark"></div>Frist two checked bags free</li>
+
+                    <li class="l1"><div id="tick-mark"></div>Priority Boarding</li>
+                    <li class="l1"><div id="tick-mark"></div>Personalized service</li>
+                    <li class="l1"><div id="tick-mark"></div>Enhanced food and drink service</li>
+                    <li class="l1"><div id="tick-mark"></div>Seat that recline 40% more than economy</li>
+
+                  </ul>
+                </div>
+                </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="container-fluid mt-5 " >
+        <div class="row">
+        <div class="col-lg-7 passenger ">
+          <table class="table-wrap">
+            <thead>
+              <th class="pass">Passenger</th>
+              <th class="pass">Seat Number</th>
+            </thead>
+            <tbody class="mt-2"  style="height: 80px; display:block; overflow-y: auto;">
+              <tr class="pass">
+              <td class="pass">kavi</td>
+              <td class="pass">--</td>
+              </tr>
+              <tr class="pass">
+              <td class="pass">kavi</td>
+              <td class="pass">--</td>
+              </tr>
+              <tr class="pass">
+                <td class="pass">kavi</td>
+                <td class="pass">--</td>
+                </tr>
+                <tr class="pass">
+                  <td class="pass">kavi</td>
+                  <td class="pass">--</td>
+                  </tr>
+                  <tr>
+                    
+                      <tr class="pass">
+                        <td class="pass">kavi</td>
+                        <td class="pass">--</td>
+                        </tr>
+                       
+             
+            </tbody>
+          </table>  
+         </div>
+        <div class="col-lg-5 pt-3 mt-3 mb-5">
+          <button type="submit" class="btn btn-outline-primary">Save and Close</button>
+          
+          <button type="submit" class="btn btn-outline-primary">Next flight</button>
+        </div>
+      </div>
+      </div>
+    </div>      
+
+    <div class="col-lg-6  col1 " style="background-color:#e9f0f4;"> 
+        
+    <div class="plane">
+        <div class="cockpit">
+          <div class="cockpit-top"><img src="{% static 'image/inm.png' %}" width="100%"></div>
+        
+        </div>
+        <div class="exit fuselage"></div>
         <ol class="cabin fuselage">
-          <li class="row row--1">
-            <ol class="seats" type="A">
+        <div class="ms-3 me-3 p-1">  
+          <li class="row row--1" >
+            <ol class="seats " type="hletter">
+              <li class="seat" >
+                <label class="letter">A</label>
+              </li>
               <li class="seat">
+                <label class="letter">B</label>
+              </li>
+              <li class="seat">
+                <label class="letter">C</label>
+              </li>
+              <li class="seat">
+                <label class="letter"></label>
+              </li>
+              <li class="seat">
+                <label class="letter">D</label>
+              </li>
+              <li class="seat">
+                <label class="letter">E</label>
+              </li>
+              <li class="seat">
+                <label class="letter">F</label>
+              </li>
+            </ol>
+          </li>
+        </div>     
+        <div class="ms-3 me-3 p-1" style="background-color:  rgb(240, 238, 238);border-radius:10px;">
+          <li class="row row--1">
+            <ol class="seats " type="A">
+              <li class="seat ">
                 <input type="checkbox" id="1A" />
-                <label for="1A">1A</label>
+                <label for="1A" class="seal"></label>
               </li>
               <li class="seat">
                 <input type="checkbox" id="1B" />
-                <label for="1B">1B</label>
+                <label for="1B" class="seal"></label>
               </li>
               <li class="seat">
                 <input type="checkbox" id="1C" />
-                <label for="1C">1C</label>
+                <label for="1C" class="seal"></label>
               </li>
               <li class="seat">
-                <input type="checkbox" disabled id="1D" />
-                <label for="1D">Occupied</label>
+                <label for="" class="letter">1</label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="1D" />
+                <label for="1D" class="seal"></label>
               </li>
               <li class="seat">
                 <input type="checkbox" id="1E" />
-                <label for="1E">1E</label>
+                <label for="1E" class="seal"></label>
               </li>
               <li class="seat">
                 <input type="checkbox" id="1F" />
-                <label for="1F">1F</label>
+                <label for="1F" class="seal"></label>
               </li>
             </ol>
           </li>
@@ -417,27 +788,30 @@ ul{
             <ol class="seats" type="A">
               <li class="seat">
                 <input type="checkbox" id="2A" />
-                <label for="2A">2A</label>
+                <label for="2A" class="seal"></label>
               </li>
               <li class="seat">
                 <input type="checkbox" id="2B" />
-                <label for="2B">2B</label>
+                <label for="2B" class="seal"></label>
               </li>
               <li class="seat">
                 <input type="checkbox" id="2C" />
-                <label for="2C">2C</label>
+                <label for="2C" class="seal"></label>
+              </li>
+              <li class="seat">
+                <label for="" class="letter">2</label>
               </li>
               <li class="seat">
                 <input type="checkbox" id="2D" />
-                <label for="2D">2D</label>
+                <label for="2D" class="seal"></label>
               </li>
               <li class="seat">
                 <input type="checkbox" id="2E" />
-                <label for="2E">2E</label>
+                <label for="2E" class="seal"></label>
               </li>
               <li class="seat">
                 <input type="checkbox" id="2F" />
-                <label for="2F">2F</label>
+                <label for="2F" class="seal"></label>
               </li>
             </ol>
           </li>
@@ -445,27 +819,30 @@ ul{
             <ol class="seats" type="A">
               <li class="seat">
                 <input type="checkbox" id="3A" />
-                <label for="3A">3A</label>
+                <label for="3A" class="seal"></label>
               </li>
               <li class="seat">
                 <input type="checkbox" id="3B" />
-                <label for="3B">3B</label>
+                <label for="3B"class="seal"></label>
               </li>
               <li class="seat">
                 <input type="checkbox" id="3C" />
-                <label for="3C">3C</label>
+                <label for="3C" class="seal"></label>
+              </li>
+              <li class="seat">
+                <label for="" class="letter">3</label>
               </li>
               <li class="seat">
                 <input type="checkbox" id="3D" />
-                <label for="3D">3D</label>
+                <label for="3D" class="seal"></label>
               </li>
               <li class="seat">
                 <input type="checkbox" id="3E" />
-                <label for="3E">3E</label>
+                <label for="3E" class="seal"></label>
               </li>
               <li class="seat">
                 <input type="checkbox" id="3F" />
-                <label for="3F">3F</label>
+                <label for="3F" class="seal"></label>
               </li>
             </ol>
           </li>
@@ -473,27 +850,30 @@ ul{
             <ol class="seats" type="A">
               <li class="seat">
                 <input type="checkbox" id="4A" />
-                <label for="4A">4A</label>
+                <label for="4A" class="seal"></label>
               </li>
               <li class="seat">
                 <input type="checkbox" id="4B" />
-                <label for="4B">4B</label>
+                <label for="4B" class="seal"></label>
               </li>
               <li class="seat">
                 <input type="checkbox" id="4C" />
-                <label for="4C">4C</label>
+                <label for="4C" class="seal"></label>
+              </li>
+              <li class="seat">
+                <label for="" class="letter">4</label>
               </li>
               <li class="seat">
                 <input type="checkbox" id="4D" />
-                <label for="4D">4D</label>
+                <label for="4D" class="seal"></label>
               </li>
               <li class="seat">
                 <input type="checkbox" id="4E" />
-                <label for="4E">4E</label>
+                <label for="4E" class="seal"></label>
               </li>
               <li class="seat">
                 <input type="checkbox" id="4F" />
-                <label for="4F">4F</label>
+                <label for="4F" class="seal"></label>
               </li>
             </ol>
           </li>
@@ -501,55 +881,67 @@ ul{
             <ol class="seats" type="A">
               <li class="seat">
                 <input type="checkbox" id="5A" />
-                <label for="5A">5A</label>
+                <label for="5A" class="seal"></label>
               </li>
               <li class="seat">
                 <input type="checkbox" id="5B" />
-                <label for="5B">5B</label>
+                <label for="5B" class="seal"></label>
               </li>
               <li class="seat">
                 <input type="checkbox" id="5C" />
-                <label for="5C">5C</label>
+                <label for="5C" class="seal"></label>
+              </li>
+              <li class="seat">
+                <label for="" class="letter">5</label>
               </li>
               <li class="seat">
                 <input type="checkbox" id="5D" />
-                <label for="5D">5D</label>
+                <label for="5D" class="seal"></label>
               </li>
               <li class="seat">
                 <input type="checkbox" id="5E" />
-                <label for="5E">5E</label>
+                <label for="5E" class="seal"></label>
               </li>
               <li class="seat">
                 <input type="checkbox" id="5F" />
-                <label for="5F">5F</label>
+                <label for="5F" class="seal"></label>
               </li>
             </ol>
           </li>
+         </div>
+         <div class="fuselage ms-3" style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+          <i class="fa fa-info-circle" aria-hidden="true"></i>
+          Exit row
+         </div>
+         <div class="ms-3 me-3 p-1" style="background-color: rgb(240, 238, 238);border-radius:10px;">
           <li class="row row--6">
             <ol class="seats" type="A">
               <li class="seat">
                 <input type="checkbox" id="6A" />
-                <label for="6A">6A</label>
+                <label for="6A" class="seal1"></label>
               </li>
               <li class="seat">
                 <input type="checkbox" id="6B" />
-                <label for="6B">6B</label>
+                <label for="6B" class="seal1"></label>
               </li>
               <li class="seat">
                 <input type="checkbox" id="6C" />
-                <label for="6C">6C</label>
+                <label for="6C" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <label for="" class="letter">6</label>
               </li>
               <li class="seat">
                 <input type="checkbox" id="6D" />
-                <label for="6D">6D</label>
+                <label for="6D" class="seal1"></label>
               </li>
               <li class="seat">
                 <input type="checkbox" id="6E" />
-                <label for="6E">6E</label>
+                <label for="6E" class="seal1"></label>
               </li>
               <li class="seat">
                 <input type="checkbox" id="6F" />
-                <label for="6F">6F</label>
+                <label for="6F" class="seal1"></label>
               </li>
             </ol>
           </li>
@@ -557,27 +949,30 @@ ul{
             <ol class="seats" type="A">
               <li class="seat">
                 <input type="checkbox" id="7A" />
-                <label for="7A">7A</label>
+                <label for="7A" class="seal1"></label>
               </li>
               <li class="seat">
                 <input type="checkbox" id="7B" />
-                <label for="7B">7B</label>
+                <label for="7B" class="seal1"></label>
               </li>
               <li class="seat">
                 <input type="checkbox" id="7C" />
-                <label for="7C">7C</label>
+                <label for="7C" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <label for="" class="letter">7</label>
               </li>
               <li class="seat">
                 <input type="checkbox" id="7D" />
-                <label for="7D">7D</label>
+                <label for="7D" class="seal1"></label>
               </li>
               <li class="seat">
                 <input type="checkbox" id="7E" />
-                <label for="7E">7E</label>
+                <label for="7E" class="seal1"></label>
               </li>
               <li class="seat">
                 <input type="checkbox" id="7F" />
-                <label for="7F">7F</label>
+                <label for="7F" class="seal1"></label>
               </li>
             </ol>
           </li>
@@ -585,55 +980,62 @@ ul{
             <ol class="seats" type="A">
               <li class="seat">
                 <input type="checkbox" id="8A" />
-                <label for="8A">8A</label>
+                <label for="8A" class="seal1"></label>
               </li>
               <li class="seat">
                 <input type="checkbox" id="8B" />
-                <label for="8B">8B</label>
+                <label for="8B" class="seal1"></label>
               </li>
               <li class="seat">
                 <input type="checkbox" id="8C" />
-                <label for="8C">8C</label>
+                <label for="8C" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <label for="" class="letter">8</label>
               </li>
               <li class="seat">
                 <input type="checkbox" id="8D" />
-                <label for="8D">8D</label>
+                <label for="8D" class="seal1"></label>
               </li>
               <li class="seat">
                 <input type="checkbox" id="8E" />
-                <label for="8E">8E</label>
+                <label for="8E" class="seal1"></label>
               </li>
               <li class="seat">
                 <input type="checkbox" id="8F" />
-                <label for="8F">8F</label>
+                <label for="8F" class="seal1"></label>
               </li>
             </ol>
           </li>
+          
           <li class="row row--9">
             <ol class="seats" type="A">
               <li class="seat">
                 <input type="checkbox" id="9A" />
-                <label for="9A">9A</label>
+                <label for="9A" class="seal1"></label>
               </li>
               <li class="seat">
                 <input type="checkbox" id="9B" />
-                <label for="9B">9B</label>
+                <label for="9B" class="seal1"></label>
               </li>
               <li class="seat">
                 <input type="checkbox" id="9C" />
-                <label for="9C">9C</label>
+                <label for="9C" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <label for="" class="letter">9</label>
               </li>
               <li class="seat">
                 <input type="checkbox" id="9D" />
-                <label for="9D">9D</label>
+                <label for="9D" class="seal1"></label>
               </li>
               <li class="seat">
                 <input type="checkbox" id="9E" />
-                <label for="9E">9E</label>
+                <label for="9E" class="seal1"></label>
               </li>
               <li class="seat">
                 <input type="checkbox" id="9F" />
-                <label for="9F">9F</label>
+                <label for="9F" class="seal1"></label>
               </li>
             </ol>
           </li>
@@ -641,128 +1043,821 @@ ul{
             <ol class="seats" type="A">
               <li class="seat">
                 <input type="checkbox" id="10A" />
-                <label for="10A">10A</label>
+                <label for="10A" class="seal1"></label>
               </li>
               <li class="seat">
                 <input type="checkbox" id="10B" />
-                <label for="10B">10B</label>
+                <label for="10B" class="seal1"></label>
               </li>
               <li class="seat">
                 <input type="checkbox" id="10C" />
-                <label for="10C">10C</label>
+                <label for="10C" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <label for="" class="letter1">10</label>
               </li>
               <li class="seat">
                 <input type="checkbox" id="10D" />
-                <label for="10D">10D</label>
+                <label for="10D" class="seal1"></label>
               </li>
               <li class="seat">
                 <input type="checkbox" id="10E" />
-                <label for="10E">10E</label>
+                <label for="10E" class="seal1"></label>
               </li>
               <li class="seat">
                 <input type="checkbox" id="10F" />
-                <label for="10F">10F</label>
+                <label for="10F" class="seal1"></label>
               </li>
             </ol>
           </li>
+          <li class="row row--11">
+            <ol class="seats" type="A">
+              <li class="seat">
+                <input type="checkbox" id="11A" />
+                <label for="11A" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="11B" />
+                <label for="11B" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="11C" />
+                <label for="11C" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <label for="" class="letter">11</label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="11D" />
+                <label for="11D" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="11E" />
+                <label for="11E" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="11F" />
+                <label for="11F" class="seal1"></label>
+              </li>
+            </ol>
+          </li>
+          <li class="row row--12">
+            <ol class="seats" type="A">
+              <li class="seat">
+                <input type="checkbox" id="12A" />
+                <label for="12A" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="12B" />
+                <label for="12B" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="12C" />
+                <label for="12C" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <label for="" class="letter">12</label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="12D" />
+                <label for="12D" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="12E" />
+                <label for="12E" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="12F" />
+                <label for="12F" class="seal1"></label>
+              </li>
+            </ol>
+          </li>
+          <li class="row row--13">
+            <ol class="seats" type="A">
+              <li class="seat">
+                <input type="checkbox" id="13A" />
+                <label for="13A" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="13B" />
+                <label for="13B" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="13C" />
+                <label for="13C" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <label for="" class="letter">13</label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="13D" />
+                <label for="13D" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="13E" />
+                <label for="13E" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="13F" />
+                <label for="13F" class="seal1"></label>
+              </li>
+            </ol>
+          </li>
+         <div class="ms-2" style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+          <i class="fa fa-info-circle" aria-hidden="true"></i>
+          Exit row
+         </div>
+
+         
+          <li class="row row--14">
+            <ol class="seats" type="A">
+              <li class="seat">
+                <input type="checkbox" id="14A" />
+                <label for="14A" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="14B" />
+                <label for="14B" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="14C" />
+                <label for="14C" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <label for="" class="letter">14</label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="14D" />
+                <label for="14D" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="14E" />
+                <label for="14E" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="14F" />
+                <label for="14F" class="seal1"></label>
+              </li>
+            </ol>
+          </li>
+          <li class="row row--15">
+            <ol class="seats" type="A">
+              <li class="seat">
+                <input type="checkbox" id="15A" />
+                <label for="15A" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="15B" />
+                <label for="15B" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="15C" />
+                <label for="15C" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <label for="" class="letter">15</label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="15D" />
+                <label for="15D" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="15E" />
+                <label for="15E" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="15F" />
+                <label for="15F" class="seal1"></label>
+              </li>
+            </ol>
+          </li>
+          <li class="row row--8">
+            <ol class="seats" type="A">
+              <li class="seat">
+                <input type="checkbox" id="16A" />
+                <label for="16A" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="16B" />
+                <label for="16B" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="16C" />
+                <label for="16C" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <label for="" class="letter">16</label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="16D" />
+                <label for="16D" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="16E" />
+                <label for="16E" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="16F" />
+                <label for="16F" class="seal1"></label>
+              </li>
+            </ol>
+          </li>
+          
+          <li class="row row--17">
+            <ol class="seats" type="A">
+              <li class="seat">
+                <input type="checkbox" id="17A" />
+                <label for="17A" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="17B" />
+                <label for="17B" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="17C" />
+                <label for="17C" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <label for="" class="letter">17</label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="17D" />
+                <label for="17D" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="17E" />
+                <label for="17E" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="17F" />
+                <label for="17F" class="seal1"></label>
+              </li>
+            </ol>
+          </li>
+          <li class="row row--18">
+            <ol class="seats" type="A">
+              <li class="seat">
+                <input type="checkbox" id="18A" />
+                <label for="18A" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="18B" />
+                <label for="18B" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="18C" />
+                <label for="18C" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <label for="" class="letter1">18</label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="18D" />
+                <label for="18D" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="18E" />
+                <label for="18E" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="18F" />
+                <label for="18F" class="seal1"></label>
+              </li>
+            </ol>
+          </li>
+         
+         <div class="ms-2" style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+          <i class="fa fa-info-circle" aria-hidden="true"></i>
+          Exit row
+         </div>
+        
+          <li class="row row--19">
+            <ol class="seats" type="A">
+              <li class="seat">
+                <input type="checkbox" id="19A" />
+                <label for="19A" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="19B" />
+                <label for="19B" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="19C" />
+                <label for="19C" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <label for="" class="letter">19</label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="19D" />
+                <label for="19D" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="19E" />
+                <label for="19E" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="19F" />
+                <label for="19F" class="seal1"></label>
+              </li>
+            </ol>
+          </li>
+          <li class="row row--20">
+            <ol class="seats" type="A">
+              <li class="seat">
+                <input type="checkbox" id="20A" />
+                <label for="20A" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="20B" />
+                <label for="20B" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="20C" />
+                <label for="20C" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <label for="" class="letter">20</label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="20D" />
+                <label for="20D" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="20E" />
+                <label for="20E" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="20F" />
+                <label for="20F" class="seal1"></label>
+              </li>
+            </ol>
+          </li>
+          <li class="row row--21">
+            <ol class="seats" type="A">
+              <li class="seat">
+                <input type="checkbox" id="21A" />
+                <label for="21A" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="21B" />
+                <label for="21B" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="21C" />
+                <label for="21C" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <label for="" class="letter">21</label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="21D" />
+                <label for="21D" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="21E" />
+                <label for="21E" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="21F" />
+                <label for="21F" class="seal1"></label>
+              </li>
+            </ol>
+          </li>
+          
+          <li class="row row--22">
+            <ol class="seats" type="A">
+              <li class="seat">
+                <input type="checkbox" id="22A" />
+                <label for="22A" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="22B" />
+                <label for="22B" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="22C" />
+                <label for="22C" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <label for="" class="letter">22</label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="22D" />
+                <label for="22D" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="22E" />
+                <label for="22E" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="22F" />
+                <label for="22F" class="seal1"></label>
+              </li>
+            </ol>
+          </li>
+          <li class="row row--23">
+            <ol class="seats" type="A">
+              <li class="seat">
+                <input type="checkbox" id="23A" />
+                <label for="23A" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="23B" />
+                <label for="23B" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="23C" />
+                <label for="23C" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <label for="" class="letter1">23</label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="23D" />
+                <label for="23D" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="23E" />
+                <label for="23E" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="23F" />
+                <label for="23F" class="seal1"></label>
+              </li>
+            </ol>
+          </li>
+          <li class="row row--24">
+            <ol class="seats" type="A">
+              <li class="seat">
+                <input type="checkbox" id="24A" />
+                <label for="24A" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="24B" />
+                <label for="24B" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="24C" />
+                <label for="24C" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <label for="" class="letter">24</label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="24D" />
+                <label for="24D" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="24E" />
+                <label for="24E" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="24F" />
+                <label for="24F" class="seal1"></label>
+              </li>
+            </ol>
+          </li>
+          <li class="row row--25">
+            <ol class="seats" type="A">
+              <li class="seat">
+                <input type="checkbox" id="25A" />
+                <label for="25A" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="25B" />
+                <label for="25B" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="25C" />
+                <label for="25C" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <label for="" class="letter">25</label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="25D" />
+                <label for="25D" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="25E" />
+                <label for="25E" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="25F" />
+                <label for="25F" class="seal1"></label>
+              </li>
+            </ol>
+          </li>
+          <li class="row row--26">
+            <ol class="seats" type="A">
+              <li class="seat">
+                <input type="checkbox" id="26A" />
+                <label for="26A" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="26B" />
+                <label for="26B" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="26C" />
+                <label for="26C" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <label for="" class="letter">26</label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="26D" />
+                <label for="26D" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="26E" />
+                <label for="26E" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="26F" />
+                <label for="26F" class="seal1"></label>
+              </li>
+            </ol>
+          </li>
+          <li class="row row--27">
+            <ol class="seats" type="A">
+              <li class="seat">
+                <input type="checkbox" id="27A" />
+                <label for="27A" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="27B" />
+                <label for="27B" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="27C" />
+                <label for="27C" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <label for="" class="letter">27</label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="27D" />
+                <label for="27D" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="27E" />
+                <label for="27E" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="27F" />
+                <label for="27F" class="seal1"></label>
+              </li>
+            </ol>
+          </li>
+          <li class="row row--28">
+            <ol class="seats" type="A">
+              <li class="seat">
+                <input type="checkbox" id="28A" />
+                <label for="28A" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="28B" />
+                <label for="28B" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="28C" />
+                <label for="28C" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <label for="" class="letter">28</label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="28D" />
+                <label for="28D" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="28E" />
+                <label for="28E" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="28F" />
+                <label for="28F" class="seal1"></label>
+              </li>
+            </ol>
+          </li>
+       
+         <div class="ms-2" style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+          <i class="fa fa-info-circle" aria-hidden="true" ></i>
+          Exit row
+         </div>
+        
+          <li class="row row--29">
+            <ol class="seats" type="A">
+              <li class="seat">
+                <input type="checkbox" id="29A" />
+                <label for="29A" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="29B" />
+                <label for="29B" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="29C" />
+                <label for="29C" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <label for="" class="letter">29</label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="29D" />
+                <label for="29D" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="29E" />
+                <label for="29E" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="29F" />
+                <label for="29F" class="seal1"></label>
+              </li>
+            </ol>
+          </li>
+          <li class="row row--30">
+            <ol class="seats" type="A">
+              <li class="seat">
+                <input type="checkbox" id="30A" />
+                <label for="30A" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="30B" />
+                <label for="30B" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="30C" />
+                <label for="30C" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <label for="" class="letter">30</label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="30D" />
+                <label for="30D" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="30E" />
+                <label for="30E" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="30F" />
+                <label for="30F" class="seal1"></label>
+              </li>
+            </ol>
+          </li>
+          <li class="row row--31">
+            <ol class="seats" type="A">
+              <li class="seat">
+                <input type="checkbox" id="31A" />
+                <label for="31A" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="31B" />
+                <label for="31B" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="31C" />
+                <label for="31C" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <label for="" class="letter">31</label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="31D" />
+                <label for="31D" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="31E" />
+                <label for="31E" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="31F" />
+                <label for="31F" class="seal1"></label>
+              </li>
+            </ol>
+          </li>
+          
+          <li class="row row--32">
+            <ol class="seats" type="A">
+              <li class="seat">
+                <input type="checkbox" id="32A" />
+                <label for="32A" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="32B" />
+                <label for="32B" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="32C" />
+                <label for="32C" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <label for="" class="letter">32</label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="32D" />
+                <label for="32D" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="32E" />
+                <label for="32E" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="32F" />
+                <label for="32F" class="seal1"></label>
+              </li>
+            </ol>
+          </li>
+          <li class="row row--33">
+            <ol class="seats" type="A">
+              <li class="seat">
+                <input type="checkbox" id="33A" />
+                <label for="33A" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="33B" />
+                <label for="33B" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="33C" />
+                <label for="33C" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <label for="" class="letter1">33</label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="33D" />
+                <label for="33D" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="33E" />
+                <label for="33E" class="seal1"></label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="33F" />
+                <label for="33F" class="seal1"></label>
+              </li>
+            </ol>
+          </li>
+          
+         </div>  
+
+
         </ol>
         <div class="exit exit--back fuselage">
     </div>
+    
+    <div><span class="bgProperties iconflTail" style="background-image: url(&quot;//jsak.mmtcdn.com/flights/assets/media/ic_flightSmallTail.aa15f774.png&quot;);"></span></div>
    </div> 
-  </div> 
-    <div class="col-lg-6 col2">
-   
+   <div class="ledger" style="background-color: #ffffff;">
+    <div class="row">
+      <div class="col-12">
         <table>
-            <thead class="firsttab">
-                <th style="background-color: #303241;width:21% ;">SRV
-                <p>nmn</p></th>
-                
-                <th style="background-color: #303241;width:8% ;">
-                    <div class="long-arrow-right"></div>
-                </th>
-                <th style="background-color: #303241;width:21% ;">NRT
-                    <p>nmn</p></th>
-                <th style="background-color: #6c49ea;width:25% ;">DEC 25|12.00AM
-                    <p>Departing</p></th>
-                <th style="background-color: #303241;width:25% ;">DEC 25|12.00AM
-                    <p>Arriving</p></th>
-            </thead>
-            <tbody>
-            
-            </tbody>
+          <tr>
+            <td>
+              <div class="square me-3"></div>
+            </td>
+            <td >Business-600</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="square1"></div>
+            </td>
+            <td>Economy-200</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="square2"></div>
+            </td>
+            <td>Selected Seat</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="square3"></div>
+            </td>
+            <td>Unavailable</td>
+          </tr>
         </table>
-        <div class="container-fluid ">
-            <div class="row mt-5">
-                <div class="col-md-6" >
-                  <img src="{% static 'image/eseat.PNG' %}" alt="..." class="img-fluid">
-                  <div class="row">
-                    <div class="col-12">
-                      <h4 id="head1">
-                        Economy
-                      </h4>
-                    </div>
-                    <div class="col-12 mt-2">
-                      <pre>Rest and recharge during your flight with
-extended leg room,personalized service,
-and multi-course meal service</pre>
-                      <hr size="8" width="20%" color="red" style="background-color: #2938da;"> 
-                      <div class="col-12">
-                        <ul style="list-style-type:none;">
-                          <li class="l1"><span class="dot"></span>Built-in entertainment system</li>
-                          <li class="l1"><span class="dot"></span>Complimentary snacks and drinks</li>
-  
-                          <li class="l1"><span class="dot"></span>free carry-on and personal item</li>
-  
-                        </ul>
-                      </div> 
-                      </div>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <img src="{% static 'image/bseat.PNG' %}" alt="..." width="86%" class="img-fluid">
-                  <div class="row">
-                    <div class="col-12 ">
-                      <h4 id="head1">
-                        Business class
-                      </h4>
-                     </div> 
-                    <div class="col-12 mt-2">
-                      <pre>Rest and recharge during your flight with
-extended leg room,personalized service,
-and multi-course meal service</pre>
-                    <hr size="8" width="20%" color="red" style="background-color: #5cefff;">  
-                    
-                    <div class="col-12">
-                      <ul style="list-style-type:none;margin: 0%;">
-                        <li class="l1"><div id="tick-mark"></div>Extended leg room</li>
-                        <li class="l1"><div id="tick-mark"></div>Frist two checked bags free</li>
-
-                        <li class="l1"><div id="tick-mark"></div>Priority Boarding</li>
-                        <li class="l1"><div id="tick-mark"></div>Personalized service</li>
-                        <li class="l1"><div id="tick-mark"></div>Enhanced food and drink service</li>
-                        <li class="l1"><div id="tick-mark"></div>Seat that recline 40% more than economy</li>
-
-
-                      </ul>
-                    </div>
-                    </div>
-
-                    </div>
-                  </div>
-                </div>
-
-            </div>
-
-        </div>
+      </div>
     </div>
-         
-</div>
+   </div>
+   
+  </div> 
+  
+ </div>  
 </div>
 </div>
 <script>
 
   </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 </body>
 </html>
 

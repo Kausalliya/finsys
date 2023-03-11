@@ -1,0 +1,70 @@
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Sign in page</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    </head>
+    <style>
+      .clr{
+        color: rgb(86, 7, 169);
+      }
+      .bgclr{
+        background-color:rgb(86, 7, 169) ;
+
+      }
+    </style>
+
+    <body>
+        <div class="container-fluid vh-100" style="margin: top 0;">
+            <div class="" style="margin-top:10px">
+                <div class="rounded d-flex justify-content-center">
+                    <div class="col-md-4 col-sm-12 shadow-lg p-5 bg-light">
+                        <div class="text-center">
+                            <h3 class="clr" ><img data-v-7a06245d="" src="https://res.cloudinary.com/codiini/image/upload/v1616765127/tripma-blue_mausgl.svg" alt="Tripma Logo" style="width: 250px;padding-top: 5px;"></h3>
+                            <p><b>Sign Up for Tripma</b></p>
+                            <p>Tripma is totally free to use. Sign up using your email address or phone number below to get started</p>
+                        </div>
+                        <form action="{% url 'signupcreate' %}" method="post">
+                            {% csrf_token %}
+                            <div class="p-4">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text bgclr"><i
+                                            class="bi bi-person-plus-fill text-white"></i></span>
+                                    <input type="text" class="form-control" name="uname" placeholder="Username">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text bgclr"><i
+                                            class="bi bi-envelope-fill text-white"></i></span>
+                                    <input type="email" class="form-control" name="email" placeholder="Email id">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text bgclr"><i
+                                            class="bi bi-key-fill text-white"></i></span>
+                                    <input type="password" class="form-control" name="password" placeholder="password">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="option">I agree to the <a href="#">Terms and Conditions</a>
+                                        <input type="checkbox" >
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                                <!-- <div class="input-group mb-3">
+                                    <span class="input-group-text bgclr"><i
+                                            class="bi bi-key-fill text-white"></i></span>
+                                    <input type="password" class="form-control" placeholder="password">
+                                </div> -->
+                                
+                                <div class="d-grid gap-1">
+                                  <button id="submit" class="btn bgclr text-white"  type="submit">Sign Up</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
