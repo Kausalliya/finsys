@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
   {% load static %}
   {% load sass_tags %}
   
@@ -7,20 +7,25 @@
   <title>tripma</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"> 
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+
   <link href="{% sass_src 'css/v.scss' %}" rel="stylesheet" type="text/css" />
   <link href="{% static 'css/pass.css' %}" rel="stylesheet" type="text/css" />
 
 
   <style>
-    .nav{
+    .nav-link{
         color: rgb(99, 4, 188)
     }
   .topnav a.active {
     background-color: #6e2edd;
-    color: white;
+    color: white !important;
   }
   .main{
     display: none;
@@ -36,6 +41,108 @@
     }     
 
  }
+ @media (min-width:850px) {
+
+.flight{
+  margin-top:150px !important;
+  margin-left:140px !important;
+}
+}
+ .accordion-button{
+    font-size: large;
+    color: #645DEC;
+}
+.accordion-button:hover{
+    color: #ffffff;
+    background-color: #A4A4F4;
+    border: 2px solid #645DEC;
+}
+.h5{
+  color: #4c43f3;
+
+}
+.para{
+    color: #a1a1a9 !important;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+    justify-content: center;
+   
+
+}
+
+.accordion-item{
+  -webkit-box-shadow: 9px 9px 16px -5px rgba(153,153,153,1);
+-moz-box-shadow: 9px 9px 16px -5px rgba(153,153,153,1);
+box-shadow: 9px 9px 16px -5px rgba(153,153,153,1);
+
+}
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="date"]:focus,
+input[type="number"]:focus{
+  border-color: 2px solid rgba(62, 102, 232, 0.8);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(104, 126, 239, 0.6);
+  outline: 0 none;
+}
+input[type="checkbox"]{
+  margin: 0;
+  font: inherit;
+  color: currentColor;
+  width: 1.15em;
+  height: 1.15em;
+  border: 0.15em solid currentColor;
+  border-radius: 0.15em;
+  transform: translateY(-0.075em);
+}
+.add-more{
+  border-radius: 25px;
+  background-color:#645DEC;
+  border: none;
+
+}
+.add-more:hover{
+  background-color:#020030 ;
+  color: #ffffff;
+
+}
+span {cursor:pointer; }
+	  
+		.minus, .plus{
+      font-size:30px;
+			padding:8px 5px 8px 5px;
+      vertical-align: middle;
+      text-align: center;
+      color:#645DEC ;
+		}
+	.bag{
+			height:34px;
+      width:30px;
+      text-align: center;
+      font-size: 20px;
+      display: inline-block;
+      vertical-align: middle;
+      border: none;
+      color: #747479;
+    }
+    .user-card{
+  display: flex;
+  align-items: center;
+  padding: 2rem;
+  background-color: white;
+    }
+    .user-card__avatar img
+  {width: 50px;
+  height: 50px;
+  border-radius: 50%;
+    margin-right: 2rem;
+    border-radius:25px;
+  }
+    .user-card__heading {
+    line-height: 1.25;
+    font-size: 1.5rem;}
+  
+    .user-card__name{
+    display: block;
+    font-weight: 600;}
 
 </style>
 </head>
@@ -113,17 +220,335 @@
         the government-issued ID presented at the passport. </p>
     </div>
     <div class="row">
-      <div class="col-md-7" style="background-color: deeppink;">
-        <p>kjdsbjsi</p>
+      <div class="col-lg-6 p-2 ps-5 mt-4 order-lg-first">
+        <div class="accordion" id="accordionExample" >
+
+          <div class="accordion-item">
+            <h2 class="accordion-header " id="headingOne">
+                       
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              <img src="{% static 'image/profile-user.PNG' %}" alt="passenger" width="25px" height="25px" class="me-3">
+                ADULT(12yrs+)
+              </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+              <div class="accordion-body" id="text"  >
+                <p class="h5">Passenger 1 (Adult)</p>
+                
+                <form method="post" action="#">
+                  <div class="row">
+                    <div class="col-lg-4 mt-2">
+                      <input type="text" class="form-control"  placeholder="First name*" aria-label="First name" name="fname">
+                    </div>
+                    <div class="col-lg-4 mt-2">
+                      <input type="text" class="form-control" placeholder="Middle name" aria-label="Middle name" name="mname">
+                    </div>
+                    <div class="col-lg-4 mt-2">
+                      <input type="text" class="form-control" placeholder="Last name*" aria-label="Last name" name="lname">
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-4 mt-2">
+                      <input type="text" class="form-control" placeholder="Suffix" aria-label="Suffix" name="suffix">
+                    </div>
+                    <div class="col-lg-4 mt-2">
+                      <input type="text" class="form-control"   onfocus="(this.type='date')" placeholder="Date of Birth*" aria-label="Middle name" name="dob">
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-6 mt-2">
+                      <input type="email" class="form-control" placeholder="Email Id*" aria-label="Email Id" name="email">
+                    </div>
+                    <div class="col-lg-6 mt-2">
+                      <input type="tel" class="form-control" placeholder="Phone Number*" aria-label="Phone Number" name="phone">
+                    </div>
+                    
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-6 mt-2">
+                      <input type="number" class="form-control" placeholder="Redress Number*" aria-label="rnum" name="rnum">
+                    </div>
+                    <div class="col-lg-6 mt-2">
+                      <input type="number" class="form-control" placeholder="Known Traveller Number*" aria-label="Known Travelletr Number" name="ktnum">
+                    </div>
+                  </div>
+                  <div class="row mt-4">
+                  <div class="col-12">
+                  <div class="number">
+                    <p style="color: #747479;display:inline-block;">Checked Bags</p>
+                    <span class="minus ps-3">-</span>
+                    <input type="text" class="bag" value="1"/>
+                    <span class="plus">+</span>
+                  </div>
+                </div>
+                </div>
+ 
+                </form>
+                <div id="education_fields">
+          
+                </div>
+              </div>
+             
+              <button class="btn-small add-more m-3" onclick="education_fields();" type="button">
+               
+                <i class="fa fa-plus" style="color:white"></i></button>
+             
+           
+          </div>
+          </div>
+          
+          <div class="accordion" id="accordionExample" >
+          <div class="accordion-item mt-5">
+            <h2 class="accordion-header" id="headingTwo">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              <img src="{% static 'image/profile-user.PNG' %}" alt="passenger" width="25px" height="25px" class="me-3">
+                
+                CHILD (2-12Yrs)
+              </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                <p class="h5">Passenger 1 (Child)</p>
+                <form method="post" action="#">
+                  <div class="row">
+                    <div class="col-lg-4 mt-2">
+                      <input type="text" class="form-control"  placeholder="First name*" aria-label="First name" name="fname">
+                    </div>
+                    <div class="col-lg-4 mt-2">
+                      <input type="text" class="form-control" placeholder="Middle name" aria-label="Middle name" name="mname">
+                    </div>
+                    <div class="col-lg-4 mt-2">
+                      <input type="text" class="form-control" placeholder="Last name*" aria-label="Last name" name="lname">
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-4 mt-2">
+                      <input type="text" class="form-control" placeholder="Suffix" aria-label="Suffix" name="suffix">
+                    </div>
+                    <div class="col-lg-4 mt-2">
+                      <input type="text" class="form-control"   onfocus="(this.type='date')" placeholder="Date of Birth*" aria-label="Middle name" name="dob">
+                    </div>
+                  </div>
+                  </div>
+                  <div class="row mt-2 ps-2">
+                    <div class="col-12">
+                    <div class="number">
+                      <p style="color: #747479;display:inline-block;">Checked Bags</p>
+                      <span class="minus ps-3">-</span>
+                      <input type="text" class="bag" value="1"/>
+                      <span class="plus">+</span>
+                    </div>
+                  </div>
+                  </div>
+   
+                </form>
+                <div id="education_fields1" class="p-4">
+          
+                </div>
+                
+              <button class="btn-small add-more m-3" onclick="education_fields1();" type="button">
+               
+                <i class="fa fa-plus" style="color:white"></i></button>
+              </div>
+             
+           </div>   
+          </div>
+          </div>
+          <div class="accordion" id="accordionExample" >
+          <div class="accordion-item mt-5">
+            <h2 class="accordion-header" id="headingThree">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+              <img src="{% static 'image/profile-user.PNG' %}" alt="passenger" width="25px" height="25px" class="me-3">
+               
+                INFANT (15days-12Yrs)
+              </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                <p class="h5">Passenger 1 (Infant)</p>
+                <form method="post" action="#">
+                  <div class="row">
+                    <div class="col-lg-4 mt-2">
+                      <input type="text" class="form-control"  placeholder="First name*" aria-label="First name" name="fname">
+                    </div>
+                    <div class="col-lg-4 mt-2">
+                      <input type="text" class="form-control" placeholder="Middle name" aria-label="Middle name" name="mname">
+                    </div>
+                    <div class="col-lg-4 mt-2">
+                      <input type="text" class="form-control" placeholder="Last name*" aria-label="Last name" name="lname">
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-lg-4 mt-2">
+                      <input type="text" class="form-control" placeholder="Suffix" aria-label="Suffix" name="suffix">
+                    </div>
+                    <div class="col-lg-4 mt-2">
+                      <input type="text" class="form-control"   onfocus="(this.type='date')" placeholder="Date of Birth*" aria-label="Middle name" name="dob">
+                    </div>
+                  </div>
+                  </div>
+                  <div class="row mt-2 ps-2">
+                    <div class="col-12">
+                    <div class="number">
+                      <p style="color: #747479;display:inline-block;">Checked Bags</p>
+                      <span class="minus ps-3">-</span>
+                      <input type="text" class="bag" value="1"/>
+                      <span class="plus">+</span>
+                    </div>
+                  </div>
+                  </div>
+   
+                </form>
+                <div id="education_fields2" class="p-4">
+          
+                </div>
+                
+              <button class="btn-small add-more m-3" onclick="education_fields2();" type="button">
+               
+                <i class="fa fa-plus" style="color:white"></i></button>
+              </div>
+             
+            </div>
+            </div>
+          </div>
+      
+    
+    <div class="col-lg-6 p-5 pe-0 pb-0 order-lg-3">
+      <h2 class="h5">Emergency contact information</h2>
+       <div class="col-12 mt-4">
+         <label style="color: #747479;">
+           <input type="checkbox" class="me-2" /> Same as Passenger1(Adult)
+         </label>
+       </div>
+       <div class="col-11 mt-4 p-1">
+         <form method="post" action="#">
+           <div class="row">
+             <div class="col-lg-6 mt-2">
+               <input type="text" class="form-control"  placeholder="First name*" aria-label="First name" name="fname">
+             </div>
+           
+             <div class="col-lg-6 mt-2">
+               <input type="text" class="form-control" placeholder="Last name*" aria-label="Last name" name="lname">
+             </div>
+           </div>
+           <div class="row mt-3">
+             <div class="col-lg-6 mt-2">
+               <input type="email" class="form-control"  placeholder="Email Id*" aria-label="First name" name="fname">
+             </div>
+           
+             <div class="col-lg-6 mt-2">
+               <input type="text" class="form-control" placeholder="Phone Number*" aria-label="Last name" name="lname">
+             </div>
+           </div>
+         </form>  
+        
+       </div>
+    
+   </div>
+   
+    <div class="col-lg-6 p-5 order-lg-5 ">
+      <h2 class="h5">Bag Information</h2>
+      <div class="col-xxl-12 col-sm-12 mt-4 ">
+        <p class="h5 para">Each person is allowed to one free carry-on bag and one personal items.First
+          checked bag for each passenger is also free.Second bag check fees are wavied for loyalty  program
+          members.<br>See the <a href="#" style="color:#645DEC;text-decoration: none;">full bag policy</a>
+        </p>
       </div>
-      <div class="col-md-5" style="background-color: rgb(107, 216, 97);">
-        <p>kjdbjs</p>
-    </div>
+   </div>
+   <div class="col-lg-6 order-lg-4">
+    <p>nkjn</p>
+   </div>
+   <div class="col-lg-6 order-lg-2 p-2">
+    <div class="card w-50 m-lg-5 flight" style="border-radius:15px;">
+      <aside class="user-card">
+        <figure class="user-card__avatar">
+          <img src="//picsum.photos/50/50" alt="">
+        </figure>
+        <div class="p user-card__heading">
+          Hawaian Airlines <span class="user-card__name">F12DER</span>
+        </div>
+      </aside>
+     
+      </div>
     </div>
     
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+  </div> 
+   
+
+<script>
+ var room = 2;
+function education_fields() {
+ 
+    
+    var objTo = document.getElementById('education_fields')
+    var divtest = document.createElement("div");
+	divtest.setAttribute("class", "form-group removeclass"+room);
+	var rdiv = 'removeclass'+room;
+    divtest.innerHTML = '<p class="h5 mt-4">Passenger ' + room +' (Adult)</p><form method="post" action="#"><div class="row"> <div class="col-lg-4 mt-2"> <input type="text" class="form-control"  placeholder="First name*" aria-label="First name" name="fname"></div><div class="col-lg-4 mt-2"><input type="text" class="form-control" placeholder="Middle name" aria-label="Middle name" name="mname"></div><div class="col-lg-4 mt-2"><input type="text" class="form-control" placeholder="Last name*" aria-label="Last name" name="lname"></div></div><div class="row mt-3"><div class="col-lg-4 mt-2"><input type="text" class="form-control" placeholder="Suffix" aria-label="Suffix" name="suffix"></div><div class="col-lg-4 mt-2"><input type="date" class="form-control"   placeholder="Date of Birth*" aria-label="Middle name" name="dob"></div></div><div class="row mt-3"><div class="col-lg-6 mt-2"><input type="email" class="form-control" placeholder="Email Id*" aria-label="Email Id" name="email"></div> <div class="col-lg-6 mt-2"><input type="tel" class="form-control" placeholder="Phone Number*" aria-label="Phone Number" name="phone"></div></div><div class="row mt-3"><div class="col-lg-6 mt-2"><input type="number" class="form-control" placeholder="Redress Number*" aria-label="rnum" name="rnum"></div><div class="col-lg-6 mt-2"><input type="number" class="form-control" placeholder="Known Traveller Number*" aria-label="Known Travelletr Number" name="ktnum"></div></div><div class="row mt-4"><div class="col-12"><div class="number"><p style="color: #747479;display:inline-block;">Checked Bags</p><span class="minus ms-3">-</span><input type="text" class="bag" value="1"/><span class="plus">+</span></div></div> </div> </form><button class="btn pull-right " type="button" onclick="remove_education_fields('+ room +');"> <i class="fa fa-minus-circle" aria-hidden="true" style="color:red;font-size:29px"></i> </button>';
+    
+    objTo.appendChild(divtest)
+    room++;
+}
+   function remove_education_fields(rid) {
+	   $('.removeclass'+rid).remove();
+   }
+  </script>
+  <script>
+    var room = 2;
+   function education_fields1() {
+    
+       
+       var objTo = document.getElementById('education_fields1')
+       var divtest = document.createElement("div");
+     divtest.setAttribute("class", "form-group removeclass"+room);
+     var rdiv = 'removeclass'+room;
+       divtest.innerHTML = '<p class="h5 mt-4">Passenger ' + room +' (Child)</p><form method="post" action="#"><div class="row"> <div class="col-lg-4 mt-2"> <input type="text" class="form-control"  placeholder="First name*" aria-label="First name" name="fname"></div><div class="col-lg-4 mt-2"><input type="text" class="form-control" placeholder="Middle name" aria-label="Middle name" name="mname"></div><div class="col-lg-4 mt-2"><input type="text" class="form-control" placeholder="Last name*" aria-label="Last name" name="lname"></div></div><div class="row mt-3"><div class="col-lg-4 mt-2"><input type="text" class="form-control" placeholder="Suffix" aria-label="Suffix" name="suffix"></div><div class="col-lg-4 mt-2"><input type="date" class="form-control"   placeholder="Date of Birth*" aria-label="Middle name" name="dob"></div></div></div> <div class="row mt-4"><div class="col-12"><div class="number"><p style="color: #747479;display:inline-block;">Checked Bags</p><span class="minus ms-3">-</span><input type="text" class="bag" value="1"/><span class="plus">+</span></div></div> </div> </form><button class="btn pull-right " type="button" onclick="remove_education_fields('+ room +');"> <i class="fa fa-minus-circle" aria-hidden="true" style="color:red;font-size:29px"></i> </button>';
+       
+       objTo.appendChild(divtest)
+       room++;
+   }
+      function remove_education_fields(rid) {
+        $('.removeclass'+rid).remove();
+      }
+     </script>
+       <script>
+        var room = 2;
+       function education_fields2() {
+        
+           
+           var objTo = document.getElementById('education_fields2')
+           var divtest = document.createElement("div");
+         divtest.setAttribute("class", "form-group removeclass"+room);
+         var rdiv = 'removeclass'+room;
+           divtest.innerHTML = '<p class="h5 mt-4">Passenger ' + room +' (Infant)</p><form method="post" action="#"><div class="row"> <div class="col-lg-4 mt-2"> <input type="text" class="form-control"  placeholder="First name*" aria-label="First name" name="fname"></div><div class="col-lg-4 mt-2"><input type="text" class="form-control" placeholder="Middle name" aria-label="Middle name" name="mname"></div><div class="col-lg-4 mt-2"><input type="text" class="form-control" placeholder="Last name*" aria-label="Last name" name="lname"></div></div><div class="row mt-3"><div class="col-lg-4 mt-2"><input type="text" class="form-control" placeholder="Suffix" aria-label="Suffix" name="suffix"></div><div class="col-lg-4 mt-2"><input type="date" class="form-control"   placeholder="Date of Birth*" aria-label="Middle name" name="dob"></div></div></div> <div class="row mt-4"><div class="col-12"><div class="number"><p style="color: #747479;display:inline-block;">Checked Bags</p><span class="minus ms-3">-</span><input type="text" class="bag" value="1"/><span class="plus">+</span></div></div> </div> </form><button class="btn pull-right " type="button" onclick="remove_education_fields('+ room +');"> <i class="fa fa-minus-circle" aria-hidden="true" style="color:red;font-size:29px"></i> </button>';
+           
+           objTo.appendChild(divtest)
+           room++;
+       }
+          function remove_education_fields(rid) {
+            $('.removeclass'+rid).remove();
+          }
+         </script>
+         <script>
+          	$(document).ready(function() {
+			$('.minus').click(function () {
+				var $input = $(this).parent().find('input');
+				var count = parseInt($input.val()) - 1;
+				count = count < 1 ? 1 : count;
+				$input.val(count);
+				$input.change();
+				return false;
+			});
+			$('.plus').click(function () {
+				var $input = $(this).parent().find('input');
+				$input.val(parseInt($input.val()) + 1);
+				$input.change();
+				return false;
+			});
+		});
+         </script>
+ 
+ 
   </body>
 </html>

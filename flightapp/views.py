@@ -38,4 +38,10 @@ def signupcreate(request):
 
 def addpassenger(request):
     return render(request,'web/passenger.html')
+
+
+def addform(request):
+    return render(request,'admin/adminform.html')    
+def addform2(request):
+    return render(request,'admin/adminform2.html')    
    
