@@ -14,6 +14,11 @@
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
+<script src="https://pay.google.com/gp/p/js/pay.js"></script>
+<script src="https://js.braintreegateway.com/web/3.69.0/js/client.min.js"></script>
+<script src="https://js.braintreegateway.com/web/3.69.0/js/google-payment.min.js"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD&disable-funding=card&intent=authorize"></script>
+
 
   <link href="{% sass_src 'css/v.scss' %}" rel="stylesheet" type="text/css" />
   <link href="{% static 'css/pass.css' %}" rel="stylesheet" type="text/css" />
@@ -49,7 +54,7 @@
  @media (min-width:1300px) {
 
 .flight{
-  margin-top:100px !important;
+  margin-top:50px !important;
   margin-left:140px !important;
 }
 }
@@ -58,71 +63,30 @@
 .flight{
 }
 }
- .accordion-button{
-    font-size: large;
-    color: #645DEC;
-}
-.accordion-button:hover{
-    color: #ffffff;
-    background-color: #A4A4F4;
-    border: 2px solid #645DEC;
-}
+
 .h5{
   color: #4c43f3;
 
 }
-.para{
-    color: #a1a1a9 !important;
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
-    justify-content: center;
-   
-
+input[type="text"],
+input[type="email"],
+input[type="date"],
+input[type="number"],
+input[type="password"]{
+  height:7vh;
 }
 
-.accordion-item{
-  -webkit-box-shadow: 9px 9px 16px -5px rgba(153,153,153,1);
--moz-box-shadow: 9px 9px 16px -5px rgba(153,153,153,1);
-box-shadow: 9px 9px 16px -5px rgba(153,153,153,1);
-
-}
 input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="date"]:focus,
-input[type="number"]:focus{
+input[type="number"]:focus,
+input[type="password"]:focus{
   border-color: 2px solid rgba(62, 102, 232, 0.8);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(104, 126, 239, 0.6);
   outline: 0 none;
 }
-input[type="checkbox"]{
-  margin: 0;
-  font: inherit;
-  color: currentColor;
-  width: 1.15em;
-  height: 1.15em;
-  border: 0.15em solid currentColor;
-  border-radius: 0.15em;
-  transform: translateY(-0.075em);
-}
-.add-more{
-  border-radius: 25px;
-  background-color:#645DEC;
-  border: none;
 
-}
-.add-more:hover{
-  background-color:#020030 ;
-  color: #ffffff;
 
-}
-span {cursor:pointer; }
-	  
-		.minus, .plus{
-      font-size:30px;
-			padding:8px 5px 8px 5px;
-      vertical-align: middle;
-      text-align: center;
-      color:#645DEC ;
-		}
 	.bag{
 			height:34px;
       width:30px;
@@ -165,6 +129,97 @@ span {cursor:pointer; }
   background-color:  #645DEC;
   color: #ffffff;
  }
+ .button-row{
+border: 1px solid #605DEC;
+border-radius: 4px;
+height:7vh;
+ }
+ .bt:hover{
+    background-color: #605DEC !important;
+  
+    color: #ffffff !important;
+    
+    transform: translateY(4px);
+ }
+ .bt{
+    color: #605DEC !important;
+    border-radius: 0;
+    background-color: #ffffff !important;
+    border: none;
+ }
+ #b1{
+    background-color: #605DEC !important;
+    border-radius: 0 ;
+    color: #ffffff !important;
+ }
+ .fs-5{
+  color: #6d6d8d;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+    font-weight: bold;
+ }
+ .addr{
+  color: #6d6d8d;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+    font-size: 1.2rem;
+  
+ }
+.or{
+   width: 100%; 
+   text-align: center; 
+   border-bottom: 0.6px solid #a4a2a2; 
+   line-height: 0.1em;
+} 
+
+.or span { 
+    background:#fff; 
+    padding:0 10px; 
+    color: #b0aaaa;
+}
+
+.login-with-google-btn,.login-with-google-btn1,.login-with-google-btn2{
+  transition: background-color .3s, box-shadow .3s;
+    
+  padding: 12px 16px 12px 42px;
+  border:1px solid #645DEC;
+  border-radius: 3px;
+  box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 1px 1px rgba(0, 0, 0, .25);
+  
+  color:#645DEC;
+  font-size: 1.1rem;
+  font-weight: 500;
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
+  
+  background-color: white;
+  background-repeat: no-repeat;
+  background-position: 20px 20px;
+}
+.login-with-google-btn{
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBkPSJNMTcuNiA5LjJsLS4xLTEuOEg5djMuNGg0LjhDMTMuNiAxMiAxMyAxMyAxMiAxMy42djIuMmgzYTguOCA4LjggMCAwIDAgMi42LTYuNnoiIGZpbGw9IiM0Mjg1RjQiIGZpbGwtcnVsZT0ibm9uemVybyIvPjxwYXRoIGQ9Ik05IDE4YzIuNCAwIDQuNS0uOCA2LTIuMmwtMy0yLjJhNS40IDUuNCAwIDAgMS04LTIuOUgxVjEzYTkgOSAwIDAgMCA4IDV6IiBmaWxsPSIjMzRBODUzIiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNNCAxMC43YTUuNCA1LjQgMCAwIDEgMC0zLjRWNUgxYTkgOSAwIDAgMCAwIDhsMy0yLjN6IiBmaWxsPSIjRkJCQzA1IiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNOSAzLjZjMS4zIDAgMi41LjQgMy40IDEuM0wxNSAyLjNBOSA5IDAgMCAwIDEgNWwzIDIuNGE1LjQgNS40IDAgMCAxIDUtMy43eiIgZmlsbD0iI0VBNDMzNSIgZmlsbC1ydWxlPSJub256ZXJvIi8+PHBhdGggZD0iTTAgMGgxOHYxOEgweiIvPjwvZz48L3N2Zz4=);
+}
+.login-with-google-btn1,.login-with-google-btn2{
+ 
+}
+.login-with-google-btn:hover,.login-with-google-btn1:hover,.login-with-google-btn2:hover {
+    box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 2px 4px rgba(0, 0, 0, .25);
+    background-color: #ffffff;
+    border: 3px solid #645DEC;
+  }
+  
+.login-with-google-btn:active,.login-with-google-btn1:active,.login-with-google-btn2:active {
+    background-color:#ffffff;
+  }
+  
+.login-with-google-btn:focus,.login-with-google-btn1:focus,.login-with-google-btn2:focus {
+    outline: none;
+    box-shadow: 
+      0 -1px 0 rgba(0, 0, 0, .04),
+      0 2px 4px rgba(0, 0, 0, .25),
+      0 0 0 3px #c8dafc;
+  }
+
+
+
+
 </style>
 </head>
 
@@ -232,260 +287,123 @@ span {cursor:pointer; }
 		</div>
 	  </div>
 	</nav>
-  <div class="container-fluid">
+  <div class="container-fluid ps-xxl-4">
     <div class="col-12 mt-5 ps-5">
-      <h3 class="head1">Passenger Information</h3>
+      <h3 class="head1">Payment Method</h3>
     </div>
     <div class="col-xxl-6 col-sm-12 mt-4 ps-5">
-      <p class="h5 para">Enter the required information for each traveler and be sure that it exactly matches
-        the government-issued ID presented at the passport. </p>
+      <p class="h5 para">Select a payment method below.Tripma processes your paymant securely with end-to-end encryption.</p>
     </div>
     <div class="row">
-      <div class="col-lg-6 p-2 ps-5 mt-4 order-lg-first" >
-        <div class="accordion" id="accordionExample" >
+      <div class="col-lg-6 ps-5 mt-4 order-lg-first ">
+        <div class="col-12 button-row d-flex justify-content-start ">
+            
+               
+                    <button type="button" class=" w-100 h-100 bt active" id="b1">
+                    <i class="fa fa-credit-card" aria-hidden="true"></i>
+                    Credit Card</button>
+              
+                    <button type="button" class="w-100 h-100 google-pay bt" title="Google pay" onclick="onGooglePaymentButtonClicked()">
+                        <i class="fa fa-google" aria-hidden="true"></i>
+                        Google Pay</button>
+                
+                    <button type="button" class="w-100 h-100 bt button3">
+                        <i class="fa fa-apple" aria-hidden="true"></i>
+                        Apply Pay</button>
+            
+                    <button type="button" class="w-100 h-100 bt button4">
+                        <i class="fa fa-paypal " aria-hidden="true"></i>
+                        Pay Pal
+                    </button>
+            
+                    <button type="button" class="w-100 h-100 bt button5">
+                        <i class="fa fa-btc" aria-hidden="true"></i></i>
+                        Crypto
+                    </button>
+           
+        </div>
+        <div class="col-12 mt-5">
+          <p class="fs-5 ps-2">Credit card details</p>
+          <div class="col-12 mt-4 ps-2">
+            <label class="addr " style="color: #747479;">
+              <input type="checkbox" class="me-2 form-check-input" /> Billing Address is same as Passenger 1(Adult)
+            </label>
+          </div>
+          <div class="col-xl-9 ps-2 col-sm-12">
+            <form method="post" action="#">
+                <div class=" mt-4">
+                  <input type="text" class="form-control"  placeholder="Name on card" aria-label="First name" name="fname">
+                </div>
+              
+                <div class=" mt-4">
+                  <input type="text" class="form-control" placeholder="Card number" aria-label="Last name" name="lname">
+                </div>
+                
+                <div class="row">
+                <div class=" col-6 mt-4">
+                  <input type="text" onfocus="(this.type='date')" class="form-control"  placeholder="Expiration date" aria-label="First name" name="fname">
+                  <small style="color: #747479;">MM/YY</small>
+                </div>
+              
+                <div class=" col-6 mt-4">
+                  <input type="text" class="form-control" placeholder="CCV                                     &#9432" aria-label="Last name" name="lname">
+                </div>
+              </div>
+           
+            </form> 
 
-          <div class="accordion-item">
-            <h2 class="accordion-header " id="headingOne">
-                       
-              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-              <img src="{% static 'image/profile-user.PNG' %}" alt="passenger" width="25px" height="25px" class="me-3">
-                ADULT(12yrs+)
-              </button>
-            </h2>
-            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-              <div class="accordion-body" id="text"  >
-                <p class="h5">Passenger 1 (Adult)</p>
-                
-                <form method="post" action="#">
-                  <div class="row">
-                    <div class="col-lg-4 mt-2">
-                      <input type="text" class="form-control"  placeholder="First name*" aria-label="First name" name="fname">
-                    </div>
-                    <div class="col-lg-4 mt-2">
-                      <input type="text" class="form-control" placeholder="Middle name" aria-label="Middle name" name="mname">
-                    </div>
-                    <div class="col-lg-4 mt-2">
-                      <input type="text" class="form-control" placeholder="Last name*" aria-label="Last name" name="lname">
-                    </div>
-                  </div>
-                  <div class="row mt-3">
-                    <div class="col-lg-4 mt-2">
-                      <input type="text" class="form-control" placeholder="Suffix" aria-label="Suffix" name="suffix">
-                    </div>
-                    <div class="col-lg-4 mt-2">
-                      <input type="text" class="form-control"   onfocus="(this.type='date')" placeholder="Date of Birth*" aria-label="Middle name" name="dob">
-                    </div>
-                  </div>
-                  <div class="row mt-3">
-                    <div class="col-lg-6 mt-2">
-                      <input type="email" class="form-control" placeholder="Email Id*" aria-label="Email Id" name="email">
-                    </div>
-                    <div class="col-lg-6 mt-2">
-                      <input type="tel" class="form-control" placeholder="Phone Number*" aria-label="Phone Number" name="phone">
-                    </div>
-                    
-                  </div>
-                  <div class="row mt-3">
-                    <div class="col-lg-6 mt-2">
-                      <input type="number" class="form-control" placeholder="Redress Number*" aria-label="rnum" name="rnum">
-                    </div>
-                    <div class="col-lg-6 mt-2">
-                      <input type="number" class="form-control" placeholder="Known Traveller Number*" aria-label="Known Travelletr Number" name="ktnum">
-                    </div>
-                  </div>
-                  <div class="row mt-4">
-                  <div class="col-12">
-                  <div class="number">
-                    <p style="color: #747479;display:inline-block;">Checked Bags</p>
-                    <span class="minus ps-3">-</span>
-                    <input type="text" class="bag" value="1"/>
-                    <span class="plus">+</span>
-                  </div>
-                </div>
-                </div>
- 
-                </form>
-                <div id="education_fields">
-          
-                </div>
-              </div>
-             
-              <button class="btn-small add-more m-3" onclick="education_fields();" type="button">
-               
-                <i class="fa fa-plus" style="color:white"></i></button>
-             
-           
           </div>
+        </div>
+        <div class="col-12 mt-5">
+          <p class="fs-5 ps-2">Create Account</p>
+          <div class="col-12 mt-4 ps-2">
+            <p class="h5 para">Select a payment method below.Tripma processes your paymant securely with end-to-end encryption.</p>
           </div>
-          
-          <div class="accordion" id="accordionExample" >
-          <div class="accordion-item mt-5">
-            <h2 class="accordion-header" id="headingTwo">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-              <img src="{% static 'image/profile-user.PNG' %}" alt="passenger" width="25px" height="25px" class="me-3">
-                
-                CHILD (2-12Yrs)
-              </button>
-            </h2>
-            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-              <div class="accordion-body">
-                <p class="h5">Passenger 1 (Child)</p>
-                <form method="post" action="#">
-                  <div class="row">
-                    <div class="col-lg-4 mt-2">
-                      <input type="text" class="form-control"  placeholder="First name*" aria-label="First name" name="fname">
-                    </div>
-                    <div class="col-lg-4 mt-2">
-                      <input type="text" class="form-control" placeholder="Middle name" aria-label="Middle name" name="mname">
-                    </div>
-                    <div class="col-lg-4 mt-2">
-                      <input type="text" class="form-control" placeholder="Last name*" aria-label="Last name" name="lname">
-                    </div>
-                  </div>
-                  <div class="row mt-3">
-                    <div class="col-lg-4 mt-2">
-                      <input type="text" class="form-control" placeholder="Suffix" aria-label="Suffix" name="suffix">
-                    </div>
-                    <div class="col-lg-4 mt-2">
-                      <input type="text" class="form-control"   onfocus="(this.type='date')" placeholder="Date of Birth*" aria-label="Middle name" name="dob">
-                    </div>
-                  </div>
-                  </div>
-                  
-                    <div class="col-12 ps-4">
-                    <div class="number">
-                      <p style="color: #747479;display:inline-block;">Checked Bags</p>
-                      <span class="minus ps-3">-</span>
-                      <input type="text" class="bag" value="1"/>
-                      <span class="plus">+</span>
-                    </div>
-               
-                  </div>
-                </form>
-                <div id="education_fields1" class="p-4">
-          
+          <div class="col-12 mt-4 ps-2">
+            <label class="addr " style="color: #747479;">
+              <input type="checkbox" class="me-2 form-check-input" />Save card and create account for later
+            </label>
+          </div>
+          <div class="col-xl-9 ps-2 col-sm-12">
+            <form method="post" action="#">
+                <div class=" mt-4">
+                  <input type="text" class="form-control"  placeholder="Email address or phone number " aria-label="First name" name="fname">
                 </div>
-                
-              <button class="btn-small add-more m-3" onclick="education_fields1();" type="button">
-               
-                <i class="fa fa-plus" style="color:white"></i></button>
-              </div>
-             
-           </div>   
-          </div>
-          </div>
-          <div class="accordion" id="accordionExample" >
-          <div class="accordion-item mt-5">
-            <h2 class="accordion-header" id="headingThree">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-              <img src="{% static 'image/profile-user.PNG' %}" alt="passenger" width="25px" height="25px" class="me-3">
-               
-                INFANT (15days-12Yrs)
-              </button>
-            </h2>
-            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-              <div class="accordion-body">
-                <p class="h5">Passenger 1 (Infant)</p>
-                <form method="post" action="#">
-                  <div class="row">
-                    <div class="col-lg-4 mt-2">
-                      <input type="text" class="form-control"  placeholder="First name*" aria-label="First name" name="fname">
-                    </div>
-                    <div class="col-lg-4 mt-2">
-                      <input type="text" class="form-control" placeholder="Middle name" aria-label="Middle name" name="mname">
-                    </div>
-                    <div class="col-lg-4 mt-2">
-                      <input type="text" class="form-control" placeholder="Last name*" aria-label="Last name" name="lname">
-                    </div>
-                  </div>
-                  <div class="row mt-3">
-                    <div class="col-lg-4 mt-2">
-                      <input type="text" class="form-control" placeholder="Suffix" aria-label="Suffix" name="suffix">
-                    </div>
-                    <div class="col-lg-4 mt-2">
-                      <input type="text" class="form-control"   onfocus="(this.type='date')" placeholder="Date of Birth*" aria-label="Middle name" name="dob">
-                    </div>
-                  </div>
-                  </div>
-                 
-                    <div class="col-12 ps-4">
-                    <div class="number">
-                      <p style="color: #747479;display:inline-block;">Checked Bags</p>
-                      <span class="minus ps-3">-</span>
-                      <input type="text" class="bag" value="1"/>
-                      <span class="plus">+</span>
-                    </div>
-                 
-                  </div>
-   
-                </form>
-                <div id="education_fields2" class="p-4">
-          
+              
+                <div class=" mt-4">
+                  <input type="password" class="form-control" placeholder="Password" aria-label="Last name" name="lname">
                 </div>
-                
-              <button class="btn-small add-more m-3" onclick="education_fields2();" type="button">
-               
-                <i class="fa fa-plus" style="color:white"></i></button>
-              </div>
-             
-            </div>
-            </div>
-          
-      
-    
-    <div class="col-lg-12 ps-3 pt-5 order-lg-3">
-      <h2 class="h5">Emergency contact information</h2>
-       <div class="col-12 mt-4">
-         <label style="color: #747479;">
-           <input type="checkbox" class="me-2" /> Same as Passenger1(Adult)
-         </label>
-       </div>
-       <div class="col-11 mt-4 p-1">
-         <form method="post" action="#">
-           <div class="row">
-             <div class="col-lg-6 mt-2">
-               <input type="text" class="form-control"  placeholder="First name*" aria-label="First name" name="fname">
-             </div>
-           
-             <div class="col-lg-6 mt-2">
-               <input type="text" class="form-control" placeholder="Last name*" aria-label="Last name" name="lname">
-             </div>
-           </div>
-           <div class="row mt-3">
-             <div class="col-lg-6 mt-2">
-               <input type="email" class="form-control"  placeholder="Email Id*" aria-label="First name" name="fname">
-             </div>
-           
-             <div class="col-lg-6 mt-2">
-               <input type="text" class="form-control " placeholder="Phone Number*" aria-label="Last name" name="lname">
-             </div>
-           </div>
-        
-         </form>  
-        
-       </div>
-    
-   </div>
-   
-    <div class="col-lg-12 pt-5 ps-3 order-lg-5 ">
-      <h2 class="h5">Bag Information</h2>
-      <div class="col-xxl-12 col-sm-12 mt-4 ">
-        <p class="h5 para">Each person is allowed to one free carry-on bag and one personal items.First
-          checked bag for each passenger is also free.Second bag check fees are wavied for loyalty  program
-          members.<br>See the <a href="#" style="color:#645DEC;text-decoration: none;">full bag policy</a>
-        </p>
+            </form> 
+            
+         </div>
+         <div class="lines col-xl-9 mt-5">
+          <p class="or"><span>or</span></p>
       </div>
-      <div class="col-12 mt-5">
-        <button type="submit" class="btn btn-outline-primary button1 p-2 me-3">Save and Close</button>
-        <button type="submit" class="btn btn-outline-primary button1 p-2">Select Seats</button>
+      <div class="col-xl-9 mt-5">
+        <button type="button " class="login-with-google-btn w-100" >
+          
+          Sign in with Google
+        </button>
+        <button type="button"  class="login-with-google-btn1 w-100  mt-4" >
+          <svg width="20" height="20" viewBox="0 0 12 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="pull-left">
+            <path d="M2.99463 15.0305C2.70717 14.8381 2.45191 14.6024 2.23859 14.3302C2.00582 14.0482 1.79007 13.7516 1.59195 13.4446C1.12641 12.7625 0.762367 12.0165 0.510151 11.2302C0.206277 10.3155 0.0585938 9.43972 0.0585938 8.58283C0.0585938 7.62667 0.265229 6.79231 0.667559 6.09194C0.965356 5.54382 1.40901 5.08523 1.94383 4.76306C2.46042 4.44028 3.06209 4.26366 3.66984 4.25148C3.88255 4.25148 4.1135 4.28193 4.3566 4.34284C4.53284 4.39156 4.74556 4.47073 5.00689 4.56817C5.34115 4.69607 5.52348 4.77524 5.58425 4.79351C5.77873 4.86659 5.94282 4.89704 6.07045 4.89704C6.16769 4.89704 6.30747 4.86659 6.46245 4.81787C6.55057 4.78742 6.7177 4.73261 6.95472 4.62908C7.18932 4.54381 7.37529 4.47073 7.52297 4.41592C7.74784 4.34893 7.96541 4.28802 8.16111 4.25757C8.39813 4.22103 8.63333 4.20885 8.8588 4.22712C9.29031 4.25757 9.68534 4.34893 10.0378 4.48291C10.6577 4.73261 11.1579 5.12238 11.5311 5.67659C11.3731 5.77403 11.2272 5.88731 11.0905 6.01155C10.7945 6.27343 10.5435 6.58403 10.3429 6.92813C10.0816 7.39707 9.94789 7.92692 9.95154 8.46286C9.96065 9.12242 10.1278 9.70221 10.462 10.2047C10.6972 10.5701 11.0115 10.8831 11.3943 11.1401C11.5827 11.268 11.748 11.3563 11.9048 11.4142C11.8319 11.6425 11.7517 11.8648 11.6587 12.0841C11.4478 12.5756 11.1968 13.0463 10.899 13.4909C10.6365 13.8746 10.4298 14.1608 10.273 14.3496C10.0287 14.642 9.79291 14.8612 9.55589 15.0177C9.29456 15.1913 8.98765 15.2833 8.67344 15.2833C8.46073 15.2924 8.24802 15.265 8.04503 15.2059C7.86878 15.1481 7.69496 15.0829 7.52479 15.0092C7.34672 14.9276 7.16258 14.8582 6.97478 14.8021C6.74384 14.7412 6.50681 14.712 6.26736 14.7126C6.02426 14.7126 5.78724 14.7431 5.56237 14.8009C5.37397 14.8545 5.19164 14.9203 5.01114 14.9989C4.75589 15.1054 4.58876 15.1755 4.49152 15.2059C4.29461 15.2644 4.09283 15.2997 3.88984 15.3125C3.57382 15.3125 3.27966 15.2211 2.98673 15.0384L2.99463 15.0305ZM7.16014 3.78802C6.74687 3.99509 6.35427 4.08278 5.96105 4.05355C5.90028 3.66013 5.96105 3.25574 6.12515 2.81298C6.27101 2.43539 6.46549 2.09434 6.7329 1.78983C7.01246 1.47314 7.34672 1.21126 7.72353 1.02246C8.12464 0.815394 8.50752 0.705771 8.87217 0.6875C8.92079 1.10163 8.87217 1.50968 8.72024 1.94817C8.58167 2.33794 8.37503 2.69727 8.11249 3.02005C7.84812 3.33674 7.51993 3.59861 7.1486 3.78741L7.16014 3.78802Z" fill="#27273F"/>
+          </svg>
+            
+          Contiune with Apple
+        </button>
+        <button type="button" class="login-with-google-btn2 w-100 mt-4" >
+
+          <svg width="20" height="20" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M13.0393 0.25H0.960735C0.776336 0.262452 0.602704 0.341331 0.472017 0.472017C0.341331 0.602704 0.262452 0.776336 0.25 0.960735V13.0393C0.251043 13.2274 0.326258 13.4076 0.459322 13.5407C0.592385 13.6737 0.772558 13.749 0.960735 13.75H7.42644V8.49215H5.72068V6.50288H7.49712V5.01074C7.45883 4.65289 7.49993 4.291 7.6175 3.95086C7.73506 3.61071 7.9262 3.30068 8.17728 3.04284C8.42836 2.78501 8.73322 2.58572 9.07013 2.45918C9.40703 2.33264 9.7677 2.28195 10.1264 2.31074C10.8372 2.31074 11.4764 2.38141 11.6893 2.38141V4.22932H10.6236C9.77068 4.22932 9.62853 4.65576 9.62853 5.22435V6.50288H11.6178L11.3335 8.56362H9.55785V13.75H13.0393C13.2274 13.749 13.4076 13.6737 13.5407 13.5407C13.6737 13.4076 13.749 13.2274 13.75 13.0393V0.960735C13.7375 0.776336 13.6587 0.602704 13.528 0.472017C13.3973 0.341331 13.2237 0.262452 13.0393 0.25V0.25Z" fill="#407AEA"/>
+          </svg>
+            
+          Contiune with Facebook
+        </button>
       </div>
-   </div>
-   </div>
-   <div class="col-lg-6 order-lg-2 ">
+        
+        </div></div>
+   <div class="col-lg-6 order-lg-2 mt-5">
     <div class="row">
-    <div class="col-lg-12 order-lg-3 mb-3 mt-5">
-      <img src="{% static 'image/laggage.jpg' %}" class="img-fluid  float-xl-end" alt="...">
-    </div>
     <div class="col-lg-12 order-lg-1">
     <div class="card m-lg-5 flight">
       <aside class="user-card">
@@ -624,6 +542,55 @@ function stateHandle() {
     }
 }
 </script>  
+<script>
+    const allowedPaymentMethods = ['CARD', 'TOKENIZED_CARD'];
+const allowedCardNetworks = ['AMEX', 'DISCOVER', 'MASTERCARD', 'VISA'];
+
+const paymentsClient = new google.payments.api.PaymentsClient({environment: 'TEST'});
+
+function onGooglePaymentButtonClicked() {
+  paymentsClient.loadPaymentData(getGooglePaymentDataConfiguration())
+  .then( paymentData => console.log(paymentData) )
+  .catch( err => console.log(err) );
+}
+
+function getGatewayConfiguration() {
+  return {
+    gateway: 'example',
+    gatewayMerchantId: 'abc123'
+  };
+}
+
+function getGoogleTransactionInfo() {
+  return {
+    currencyCode: 'USD',
+    totalPriceStatus: 'FINAL',
+    totalPrice: '2.50'
+  };
+}
+
+function getGooglePaymentDataConfiguration() {
+  return {
+    allowedPaymentMethods: allowedPaymentMethods,
+    cardRequirements: {allowedCardNetworks: allowedCardNetworks},
+    paymentMethodTokenizationParameters: {
+      tokenizationType: 'PAYMENT_GATEWAY',
+      parameters: getGatewayConfiguration()
+    },
+    transactionInfo: getGoogleTransactionInfo()
+  };
+}
+</script>
+<script>
+    $('.google-pay').click(function() {
+    $('#b1').css({
+        'background-color': 'red',
+        'color': 'red',
+    });
+});
+
+ 
+</script>
  
  
   </body>

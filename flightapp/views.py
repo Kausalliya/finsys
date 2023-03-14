@@ -44,4 +44,6 @@ def addform(request):
     return render(request,'admin/adminform.html')    
 def addform2(request):
     return render(request,'admin/adminform2.html')    
+def addpayment(request):
+    return render(request,'web/payment.html')        
    
