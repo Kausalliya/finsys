@@ -25,11 +25,11 @@ html {
 }
 .ledger{
     height: 50 vh;
-    width: 60 vw;
-    position: absolute;
+    width: 11vw!important;;
     margin-top:-1900px ;
     margin-left:30px ;
     padding: 15px;
+    position: fixed;
 }
 .square {
   height: 20px;
@@ -500,24 +500,7 @@ ul{
     font-weight: bold;
     background: #26ebd0;
 }
-.passenger table{
-  margin: 0%;
-  padding: 0%;
-}
-.passenger th{
-  color: #696b76;
-  font-family:Garamond (serif);
-  
-}
-.passenger td{
-  color: #696b76;
-  font-family:Garamond (serif);
-  font-size: 1em;
-  text-align: center;
-}
-.passenger tr {
-    display:block;
-} 
+
  
 @media (min-width:380px) {
   .pass {
@@ -531,19 +514,79 @@ ul{
 }
 }
 
-.passenger tbody::-webkit-scrollbar {
-    width: 10px;
+
+@media screen and (min-width:350px) and (max-width:730px) {
+
+  .ledger{
+    margin-top: 10px;
+    background-color: #ffffff !important;
+    position: relative;
+    width: 150px!important;
+    margin-bottom: 10px;
+  }
+}
+@media screen and (min-width:731px) and (max-width:995px) {
+  .ledger{
+    margin-top:-1900px;
+    background-color: #ffffff !important;
+    position: relative;
+    width: 150px!important;
+    margin-bottom: 10px;
+  }
+  
+ 
+
+}
+@media screen and (min-width:996px) and (max-width:1450px) {
+  .ledger{
+    margin-top:10px;
+    background-color: #ffffff !important;
+    position: relative;
+    width: 150px!important;
+    margin-bottom: 10px;
+  }
+ 
+  .col1{
+    height:80em !important;
+  }
+  
+
+}
+.fixTableHead {
+      overflow-y: auto;
+      height: 115px;
+    }
+.fixTableHead::-webkit-scrollbar {
+    	width:5px;
+	background-color: #F5F5F5;
 }
                     
-.passenger tbody::-webkit-scrollbar-track {
-    border-radius: 10px;
-    background: #f1f1f1; 
+.fixTableHead::-webkit-scrollbar-track {
+  border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #ffffff;
 }
                     
-.passenger tbody::-webkit-scrollbar-thumb {
+.fixTableHead::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    background: #888; 
+    background-color: #6c49ea;
 }
+    .fixTableHead thead th {
+      position: sticky;
+      top: 0;
+      background-color: white;
+      color:#3a5b5e;
+    }
+    .fixTableHead   table {       
+      width: 100%;
+      border: none;
+    }
+    .fixTableHead th,
+    .fixTableHead  td {
+      padding: 8px 15px;
+      text-align: center;
+    }
+  
 </style>
 </head>
    
@@ -671,43 +714,44 @@ and multi-course meal service</pre>
               </div>
             </div>
         </div>
-        <div class="container-fluid mt-5 " >
+        <div class="container-fluid mt-5 p-0">
         <div class="row">
-        <div class="col-lg-7 passenger ">
-          <table class="table-wrap">
+        <div class="col-xxl-6 ps-0 fixTableHead" >
+          <table class="table table-borderless">
             <thead>
-              <th class="pass">Passenger</th>
-              <th class="pass">Seat Number</th>
+              <tr>
+                <th>Col 1</th>
+                <th>Col 2</th>
+              </tr>
             </thead>
-            <tbody class="mt-2"  style="height: 80px; display:block; overflow-y: auto;">
-              <tr class="pass">
-              <td class="pass">kavi</td>
-              <td class="pass">--</td>
+        
+            <tbody>
+              <tr>
+                <td>1.1</td>
+                <td>2.1</td>
               </tr>
-              <tr class="pass">
-              <td class="pass">kavi</td>
-              <td class="pass">--</td>
+              <tr>
+                <td>1.2</td>
+                <td>2.2</td>
               </tr>
-              <tr class="pass">
-                <td class="pass">kavi</td>
-                <td class="pass">--</td>
-                </tr>
-                <tr class="pass">
-                  <td class="pass">kavi</td>
-                  <td class="pass">--</td>
-                  </tr>
-                  <tr>
-                    
-                      <tr class="pass">
-                        <td class="pass">kavi</td>
-                        <td class="pass">--</td>
-                        </tr>
-                       
-             
+              <tr>
+                <td>1.3</td>
+                <td>2.3</td>
+              </tr>
+              <tr>
+                <td>1.4</td>
+                <td>2.4</td>
+              </tr>
+              <tr>
+                <td>1.5</td>
+                <td>2.5</td>
+              </tr>
             </tbody>
-          </table>  
+              
+          </table>
+          
          </div>
-        <div class="col-lg-5 pt-3 mt-3 mb-5">
+        <div class="col-xxl-6 pt-3 mt-3 mb-5 mt-sm-5 ps-5 ">
           <button type="submit" class="btn btn-outline-primary">Save and Close</button>
           
           <button type="submit" class="btn btn-outline-primary">Next flight</button>
@@ -1812,13 +1856,11 @@ and multi-course meal service</pre>
 
         </ol>
         <div class="exit exit--back fuselage">
-    </div>
+      </div>
     
     <div><span class="bgProperties iconflTail" style="background-image: url(&quot;//jsak.mmtcdn.com/flights/assets/media/ic_flightSmallTail.aa15f774.png&quot;);"></span></div>
    </div> 
-   <div class="ledger" style="background-color: #ffffff;">
-    <div class="row">
-      <div class="col-12">
+      <div class="ledger" style="background-color: #ffffff;font-size: 0.8rem;">
         <table>
           <tr>
             <td>
@@ -1845,8 +1887,8 @@ and multi-course meal service</pre>
             <td>Unavailable</td>
           </tr>
         </table>
-      </div>
-    </div>
+    
+  
    </div>
    
   </div> 
@@ -1855,11 +1897,20 @@ and multi-course meal service</pre>
 </div>
 </div>
 <script>
+  $(document).ready(function () {
+  $('#dtDynamicVerticalScrollExample').DataTable({
+    "scrollY": "50vh",
+    "scrollCollapse": true,
+  });
+  $('.dataTables_length').addClass('bs-select');
+});
+
 
   </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
 </body>
 </html>
 
