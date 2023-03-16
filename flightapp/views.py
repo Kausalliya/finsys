@@ -1,6 +1,8 @@
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.contrib.auth.models import User,auth
+from django.contrib.auth.decorators import login_required
+
 
 # Create your views here.
 def dashboard(request):
@@ -15,15 +17,26 @@ def base(request):
     return render(request,'base.html')
 
 def flight_signin(request):
-
     return render(request,'flight_signin.html')
 
+def signin(request):
+    print("hai")
+    if request.method=='POST':
+        username=request.POST['uname']
+        password=request.POST['password']
+        user=auth.authenticate(username=username,password=password)
+        if user is not None:
+            auth.login(request,user)
+            return redirect('base')
+            
+        else:
+            messages.info(request, 'Invalid Username or Password. Try Again.')
+            return redirect('flight_signin') 
+        
 def flight_signup(request):
-
     return render(request,'flight_signup.html')
 
 def signupcreate(request):
-    print("hhhhhhhh")
     if request.method=="POST":
         unam=request.POST["uname"]
         mail=request.POST["email"]
@@ -36,6 +49,7 @@ def signupcreate(request):
             user.save()
         return redirect('flight_signin')
 
+@login_required(login_url='/flight_signin')      
 def addpassenger(request):
     return render(request,'web/passenger.html')
 
@@ -43,7 +57,9 @@ def addpassenger(request):
 def addform(request):
     return render(request,'admin/adminform.html')    
 def addform2(request):
-    return render(request,'admin/adminform2.html')    
+    return render(request,'admin/adminform2.html')  
+
+@login_required(login_url='flight_signin')    
 def addpayment(request):
     return render(request,'web/payment.html')        
    

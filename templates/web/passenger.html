@@ -62,6 +62,10 @@
     font-size: large;
     color: #645DEC;
 }
+.accordion-button:focus,.accordion-button:active{
+  border: none;
+  background-color: rgb(255, 255, 255);
+}
 .accordion-button:hover{
     color: #ffffff;
     background-color: #A4A4F4;
@@ -93,16 +97,7 @@ input[type="number"]:focus{
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(104, 126, 239, 0.6);
   outline: 0 none;
 }
-input[type="checkbox"]{
-  margin: 0;
-  font: inherit;
-  color: currentColor;
-  width: 1.15em;
-  height: 1.15em;
-  border: 0.15em solid currentColor;
-  border-radius: 0.15em;
-  transform: translateY(-0.075em);
-}
+
 .add-more{
   border-radius: 25px;
   background-color:#645DEC;
@@ -170,6 +165,12 @@ span {cursor:pointer; }
   font-weight: 700;
   font-family: Nunito Sans;
   font-size: 18px;
+}
+.head2{
+    color: #645DEC;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bold;
+
 }
 .link{
   color: #7C8DB0;
@@ -250,7 +251,7 @@ text-decoration: none;
 	</nav>
   <div class="container-fluid">
     <div class="col-12 mt-5 ps-5">
-      <h3 class="head1">Passenger Information</h3>
+      <h3 class="head2">Passenger Information</h3>
     </div>
     <div class="col-xxl-6 col-sm-12 mt-4 ps-5">
       <p class="h5 para">Enter the required information for each traveler and be sure that it exactly matches
@@ -275,29 +276,29 @@ text-decoration: none;
                 <form method="post" action="#">
                   <div class="row">
                     <div class="col-lg-4 mt-2">
-                      <input type="text" class="form-control"  placeholder="First name*" aria-label="First name" name="fname">
+                      <input type="text" class="form-control"  placeholder="First name*" name="afname" id="afname">
                     </div>
                     <div class="col-lg-4 mt-2">
-                      <input type="text" class="form-control" placeholder="Middle name" aria-label="Middle name" name="mname">
+                      <input type="text" class="form-control" placeholder="Middle name" name="amname">
                     </div>
                     <div class="col-lg-4 mt-2">
-                      <input type="text" class="form-control" placeholder="Last name*" aria-label="Last name" name="lname">
+                      <input type="text" class="form-control" placeholder="Last name*" name="alname" id="alname">
                     </div>
                   </div>
                   <div class="row mt-3">
                     <div class="col-lg-4 mt-2">
-                      <input type="text" class="form-control" placeholder="Suffix" aria-label="Suffix" name="suffix">
+                      <input type="text" class="form-control" placeholder="Suffix" name="asuffix" >
                     </div>
                     <div class="col-lg-4 mt-2">
-                      <input type="text" class="form-control"   onfocus="(this.type='date')" placeholder="Date of Birth*" aria-label="Middle name" name="dob">
+                      <input type="text" class="form-control"   onfocus="(this.type='date')" placeholder="Date of Birth*" name="dob">
                     </div>
                   </div>
                   <div class="row mt-3">
                     <div class="col-lg-6 mt-2">
-                      <input type="email" class="form-control" placeholder="Email Id*" aria-label="Email Id" name="email">
+                      <input type="email" class="form-control" placeholder="Email Id*" name="aemail" id="aemail">
                     </div>
                     <div class="col-lg-6 mt-2">
-                      <input type="tel" class="form-control" placeholder="Phone Number*" aria-label="Phone Number" name="phone">
+                      <input type="tel" class="form-control" placeholder="Phone Number*" name="aphone" id="aphone">
                     </div>
                     
                   </div>
@@ -453,27 +454,27 @@ text-decoration: none;
       <h2 class="h5">Emergency contact information</h2>
        <div class="col-12 mt-4">
          <label style="color: #747479;">
-           <input type="checkbox" class="me-2" /> Same as Passenger1(Adult)
+           <input type="checkbox" class="me-2 form-check-input" onclick="poppins()" id="okay" name="okay"/> Same as Passenger1(Adult)
          </label>
        </div>
        <div class="col-11 mt-4 p-1">
          <form method="post" action="#">
            <div class="row">
              <div class="col-lg-6 mt-2">
-               <input type="text" class="form-control"  placeholder="First name*" aria-label="First name" name="fname">
+               <input type="text" class="form-control"  placeholder="First name*"  name="efname" id="efname">
              </div>
            
              <div class="col-lg-6 mt-2">
-               <input type="text" class="form-control" placeholder="Last name*" aria-label="Last name" name="lname">
+               <input type="text" class="form-control" placeholder="Last name*"  name="elname" id="elname">
              </div>
            </div>
            <div class="row mt-3">
              <div class="col-lg-6 mt-2">
-               <input type="email" class="form-control"  placeholder="Email Id*" aria-label="First name" name="fname">
+               <input type="email" class="form-control"  placeholder="Email Id*" name="eemail" id="eemail">
              </div>
            
              <div class="col-lg-6 mt-2">
-               <input type="text" class="form-control " placeholder="Phone Number*" aria-label="Last name" name="lname">
+               <input type="text" class="form-control " placeholder="Phone Number*"  name="emobile" id="emobile">
              </div>
            </div>
         
@@ -818,7 +819,28 @@ function stateHandle() {
         button.disabled = false; //button is enabled
     }
 }
+
 </script>  
+<script>
+    function poppins() {
+     
+        var chkbtn = document.getElementById('okay');
+        if (chkbtn.checked == true) {
+            console.log("Hello world!");
+            document.getElementById('efname').value = document.getElementById('afname').value;
+            document.getElementById('elname').value = document.getElementById('alname').value;
+            document.getElementById('eemail').value = document.getElementById('aemail').value;
+            document.getElementById('emobile').value = document.getElementById('aphone').value;
+        } else {
+            document.getElementById('efname').value = '';
+            document.getElementById('elname').value = '';
+            document.getElementById('eemail').value = '';
+            document.getElementById('emobile').value = '';
+        }
+    }
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
  
  
   </body>

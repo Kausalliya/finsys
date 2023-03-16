@@ -29,18 +29,18 @@
                             <p>Welcome Back!</p>
                         </div>
                         
-                        <form action="" method="post">
+                        <form action="{% url 'signin' %}" method="post">
                             {% csrf_token %}
                             <div class="p-4">
                                 <div class="input-group mb-3">
                                     <span class="input-group-text bgclr"><i
                                             class="bi bi-person-plus-fill text-white"></i></span>
-                                    <input type="text" class="form-control" placeholder="Username">
+                                    <input type="text" class="form-control" placeholder="Username" name="uname">
                                 </div>
                                 <div class="input-group mb-3">
                                     <span class="input-group-text bgclr"><i
                                             class="bi bi-key-fill text-white"></i></span>
-                                    <input type="password" class="form-control" placeholder="password">
+                                    <input type="password" class="form-control" placeholder="password" name="password">
                                 </div>
                                
                                 <p class="text-center mt-5">Don't have an account?
@@ -49,7 +49,7 @@
                                 <p class="text-center clr">Forgot your password?</p>
 
                                 <div class="d-grid gap-2">
-                                  <button class="btn bgclr text-white" type="button">Sign in</button>
+                                  <button class="btn bgclr text-white" type="submit">Sign in</button>
                                 </div>
                             </div>
                         </form>
@@ -57,3 +57,42 @@
                 </div>
             </div>
         </div>
+        {% for message in messages %}
+        {% if message.tags == 'success' %}
+          <!-- sweetalert js -->
+          <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+          <script>
+            var m = "{{ message }}";
+            Swal.fire({
+              icon: 'success',
+              text: m,
+              confirmButtonColor: '#FF0063',
+              color: 'white',
+              background: '#302c2ce8',
+              allowEscapeKey: false,
+              showClass: {
+                popup: 'my-icon'                     // disable popup animation css
+              },
+            });
+          </script>
+        {% else %}
+        <!-- sweetalert js -->
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+          var m = "{{ message }}";
+          Swal.fire({
+            icon: 'error',
+         text: m,
+         confirmButtonColor: '#AC011C',
+         color: 'white',
+         background: '#302c2ce8',
+         allowEscapeKey: false,
+         showClass: {
+           popup: 'my-icon'                     // disable popup animation css
+         },
+        });
+        </script>
+        {% endif %}
+      {% endfor %}
+    </body>
+</html>      

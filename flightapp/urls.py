@@ -11,6 +11,8 @@ urlpatterns = [
     path('addform',views.addform,name='addform'),
     path('addform2',views.addform2,name='addform2'),
     path('addpayment',views.addpayment,name='addpayment'),
+    path('signin',views.signin,name='signin'),
+
 
 
 
