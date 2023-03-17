@@ -8,8 +8,9 @@ from django.contrib.auth.decorators import login_required
 def dashboard(request):
     
     return render(request,'admin/admindashboard.html')
+
+@login_required(login_url='flight_signin') 
 def seatbooking(request):
-    
     return render(request,'web/seatbooking.html')
 
 def base(request):
@@ -63,3 +64,9 @@ def addform2(request):
 def addpayment(request):
     return render(request,'web/payment.html')        
    
+def logout(request):
+    auth.logout(request)
+    return redirect('flight_signin')
+
+def afterpayment(request):
+    return render(request,'web/afterpayment.html')

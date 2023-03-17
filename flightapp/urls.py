@@ -12,6 +12,10 @@ urlpatterns = [
     path('addform2',views.addform2,name='addform2'),
     path('addpayment',views.addpayment,name='addpayment'),
     path('signin',views.signin,name='signin'),
+    path('logout',views.logout,name='logout'),
+    path('afterpayment',views.afterpayment,name='afterpayment'),
+
+
 
 
 

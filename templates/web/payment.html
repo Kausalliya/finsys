@@ -239,6 +239,63 @@ font-size: 16px;
 line-height: 22px;
 text-decoration: none;
 }
+.dropbtn {
+  color:#645DEC;
+  font-size: 16px;
+  border: none;
+  background-color: white;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color:#645DEC;
+  min-width: 130px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  border-radius: 20px;
+  left: auto !important;
+  right: 0 !important;
+  
+}
+
+.dropdown-content a {
+  color: rgb(255, 255, 255);
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content .log:hover {
+  text-decoration:underline;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+}
+
+.dropdown-content .log {
+  color: rgb(255, 255, 255);
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;}
+
+
+#profileImage ,#profileImage1{
+  background-image: linear-gradient(rgb(111, 51, 201), rgb(114, 82, 255));
+  font-size: 30px;
+  padding: 6px 15px;
+  color: #fff;
+  border-radius: 50%;
+}
+
 
 </style>
 </head>
@@ -278,30 +335,48 @@ text-decoration: none;
 
       </div>
     </label>
-  
+    <div class="dropdown pull-right mt-4">
+      <button class="dropbtn"> 
+        <span id="profileImage1"></span>
+      </button>
+      <div class="dropdown-content">
+        <a href="#">Hi <span id="profile1" >{{request.user.username}}</span></a>
+
+        <a href="{% url 'logout' %}" class="log">Logout</a>
+      </div>
+    </div>
   </div>  
 	<nav class="navbar navbar-expand-sm  bg-white">
 	  <div class="container-fluid ">
-		<a class="navbar-brand nav"  href="#">
+		<a class="navbar-brand nav mt-2"  href="#">
       <img data-v-7a06245d="" src="https://res.cloudinary.com/codiini/image/upload/v1616765127/tripma-blue_mausgl.svg" alt="Tripma Logo"></a>
 	
 		<div class="collapse navbar-collapse  nav topnav " id="navbarSupportedContent" >
 		  <ul class="navbar-nav ms-auto justify-content-between w-50">
-			<li class="nav-item ">
-			  <a class="nav-link " aria-current="page" href="#">Flights</a>
+			<li class="nav-item">
+			  <a class="nav-link mt-3" aria-current="page" href="#">Flights</a>
 			</li>
 			<li class="nav-item ">
-			  <a class="nav-link " href="#">Hotels</a>
+			  <a class="nav-link mt-3" href="#">Hotels</a>
 			</li>	
 			<li class="nav-item ">
-          <a class="nav-link " href="#">Packages</a>
-        </li>			
-        <li class="nav-item ">
-          <a class="nav-link  active" href="{% url 'flight_signin' %}">Sign in</a>
-        </li>			
-        <li class="nav-item ">
-          <a class="nav-link " href="{% url 'flight_signup' %}">Sign up</a>
-        </li>			
+          <a class="nav-link mt-3" href="#">Packages</a>
+        </li>	
+      <li class="nav-item">
+          <a class="nav-link mt-3" href="#">My Trips</a>
+      </li>			
+      <li class="nav-item mt-2">
+          <div class="dropdown">
+            <button class="dropbtn"> 
+              <span id="profileImage"></span>
+            </button>
+            <div class="dropdown-content">
+              <a href="#">Hi <span id="profile" >{{request.user.username}}</span></a>
+
+              <a href="{% url 'logout' %}" class="log">Logout</a>
+            </div>
+          </div>
+      </li>			
       
 		  </ul>		  
 		</div>
@@ -803,6 +878,18 @@ function getGooglePaymentDataConfiguration() {
 });
 
  
+</script>
+<script>
+  $(document).ready(function(){
+  var firstName = $('#profile').text();
+  var intials = firstName.charAt(0)
+  var profileImage = $('#profileImage').text(intials);
+});
+$(document).ready(function(){
+  var firstName = $('#profile1').text();
+  var intials = firstName.charAt(0)
+  var profileImage = $('#profileImage1').text(intials);
+});
 </script>
  
  
