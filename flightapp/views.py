@@ -70,3 +70,6 @@ def logout(request):
 
 def afterpayment(request):
     return render(request,'web/afterpayment.html')
+
+def addhotel(request):
+    return render(request,'admin/addhotel.html')

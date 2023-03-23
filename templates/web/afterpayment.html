@@ -10,9 +10,17 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+  <link href='https://fonts.googleapis.com/css?family=Nunito Sans' rel='stylesheet'>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/map.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/geodata/worldLow.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/geodata/usaLow.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/geodata/worldTimeZonesLow.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/geodata/worldTimeZoneAreasLow.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
 
 
   <link href="{% sass_src 'css/v.scss' %}" rel="stylesheet" type="text/css" />
@@ -144,79 +152,235 @@ text-decoration: none;
     color:#645DEC;
 }
 
+.user-card__avatar img
+  {width: 50px;
+  height: 50px;
+  border-radius: 50%;
+    margin-right: 2rem;
+    border-radius:25px;
+  }
 .flight-card-test  {
-  padding: 16px;
+  padding:15px 16px 4px 16px;
   background-color: white;
   border-radius: 3px;
   background-color: #fff;
-  font-size: 16px;
   display: flex;
-  border: 1px solid #645DEC;
+  border: 1px solid #CBD4E6;
 }
-  .flight-card-test   .bold {
-    font-weight: 700;
-  }
+.cardline2
+{
+  color: #7C8DB0;
+  font-size: 16px;
+  font-family: Nunito Sans;
+  font-weight: 400;
+  line-height: 21.82px;
+} 
+.cardline1
+{
+  color: #27273F;
+  font-size: 16px;
+  font-family: Nunito Sans;
+  font-weight: 400;
+  line-height: 21.82px;
+} 
+.subhead{
+  color: #6E7491;
+  font-size: 18px;
+  font-family: Nunito Sans;
+  font-weight: 600;
+  line-height: 25px;
+} 
+.sub{
+  color: #7C8DB0;
+  font-size: 16px;
+  font-family: Nunito Sans;
+  font-weight: 400;
+  line-height: 21.82px;
+} 
+.price{
+  color: #6E7491;
+  font-size: 18px;
+  font-family: Nunito Sans;
+  font-weight: 400;
+  line-height:25px;
+} 
+.price1{
+  color: #36374A;
+  font-size: 18px;
+  font-family: Nunito Sans;
+  font-weight: 600;
+  line-height:5px;
+} 
+.card{
+width: 320px;
+height: 190px;
+-webkit-perspective: 600px;
+-moz-perspective: 600px;
+perspective:600px;
+  
+}
 
-  p {
-    margin: 0;
-  }
+.card__part{
+  box-shadow: 1px 1px #aaa3a3;
+  top: 0;
+  position: absolute;
+  z-index: 1000;
+  left: 0;
+  display: inline-block;
+    width: 330px;
+    height: 190px;
+    background-image: linear-gradient(180deg, #EB568C 0%, #ED5E76 100%); /*linear-gradient(to right bottom, #fd8369, #fc7870, #f96e78, #f56581, #ee5d8a)*/
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 8px;
+   
+    -webkit-transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    -moz-transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    -ms-transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    -o-transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+}
 
-  .flight-info {
-    display: flex;
-    flex-direction: column;
-    font-size: 12px;
-    line-height: 1.5;
-    color: #666666;
-  }
+.card__front{
+  padding: 18px;
+-webkit-transform: rotateY(0);
+-moz-transform: rotateY(0);
+}
 
-  .flight-info-upper,.flight-airport-upper,.flight-airline-upper {
-    margin-bottom: 8px;
-    font-size: 16px;
-    line-height: 1.5;
-    color: #333333;
-  } 
-  
-  .flight-info {
-    display: flex;
-  }
+.card__back {
+  padding: 18px 0;
+-webkit-transform: rotateY(-180deg);
+-moz-transform: rotateY(-180deg);
+}
 
-  .outbound-flight, .inbound-flight {
-    display: flex;
-    padding-right: 16px;
-    position: relative;
-  }
-  
-  .outbound-flight {
-    margin-bottom: 16px;
-  }
-  
-  .inbound-flight {
-    display: flex;
-  }
-  
-  .flight-airport-outbound {
-    text-align: right;
-  }
+.card__black-line {
+    margin-top: 5px;
+    height: 38px;
+    background-color: #303030;
+}
 
-  .flight-travel {
-    margin: 0 16px;
-    text-align: center;
-  }
-  
-  .flight-airline {
-    margin-left: 32px;
-    font-size: 12px;
-    line-height: 1.5;
-  }
-  
-  .airline-logo {
+.card__logo {
     height: 16px;
-    width: 16px;
-    background-color: #333333;
-    display: inline-block;
-    vertical-align: text-top;
-  }
-  
+}
+
+.card__front-logo{
+      position: absolute;
+    top: 18px;
+    right: 18px;
+}
+.card__square {
+    border-radius: 5px;
+    height: 30px;
+}
+
+.card_numer {
+    display: block;
+    width: 100%;
+    word-spacing: 4px;
+    font-size: 20px;
+    letter-spacing: 2px;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.card__space-75 {
+    width: 75%;
+    float: left;
+}
+
+.card__space-25 {
+    width: 25%;
+    float: left;
+}
+
+.card__label {
+    font-size: 18px;
+    color: #F6F6FE;
+    letter-spacing: 1px;
+}
+
+.card__info {
+    margin-bottom: 0;
+    margin-top: 5px;
+    font-size: 16px;
+    line-height: 18px;
+    color: #fff;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.button1{
+  background-color: #645DEC;
+  color: white;
+  border-radius:5px;
+  border: none;
+  font-size: 18px;
+  font-family:Nunito Sans;
+  padding: 12px 20px;
+}
+.button2{
+  background-color: #fcfcfc;
+  color: #645DEC;
+  border-radius:5px;
+  border: none;
+  font-size: 18px;
+  font-family:Nunito Sans;
+  padding: 12px 20px;
+}
+.button1:hover{
+  background-color: #0f0d50;
+  color: white;
+}
+.button2:hover{
+  background-color: #edeaea;
+  color: #645DEC;
+}
+#chartdiv {
+  width: 100%;
+  height: 400px;
+}
+body{
+  height: 100%;
+  width: 100%;
+}
+.card-title{
+  color: #6E7491;
+  font-size: 18px;
+  font-family:Nunito Sans;
+  font-weight:600 ;
+
+}
+.card-text{
+  color:#7C8DB0;
+  font-size: 16px;
+  font-family:Nunito Sans;
+  font-weight:400 ;
+
+}
+.cardimg{
+  -webkit-box-shadow: 7px 9px 12px -4px rgba(0,0,0,0.31);
+-moz-box-shadow: 7px 9px 12px -4px rgba(0,0,0,0.31);
+box-shadow: 7px 9px 12px -4px rgba(0,0,0,0.31);
+}
+
+.button3{
+  background-color: #fcfcfc;
+  color: #645DEC;
+  border-radius: 5px;
+  border: 2px solid #645DEC;
+  font-size: 18px;
+  font-family:Nunito Sans;
+  padding: 12px 20px;
+}
+.button3:hover{
+  background-color: #e6e5fb;
+}
 </style>
 </head>
 <body class="d-flex flex-column min-vh-100">  
@@ -303,9 +467,9 @@ text-decoration: none;
         </div>
       </nav>
       <div class="container-fluid ps-lg-5 mt-5">
-        <div class="row">
+        <div class="row ps-lg-3 mt-5">
             <div class="col-lg-7"> 
-                <div class="alert alert-info alert-dismissible fade show" role="alert" style="background-color: #bcefc7;color:#2b7136">
+                <div class="alert alert-info alert-dismissible fade show col-11" role="alert" style="background-color: #bcefc7;color:#2b7136">
                     Your flight has been booked sucessfully! Your confirmation number is #2324567777
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
@@ -322,50 +486,270 @@ text-decoration: none;
                    </div>
                 </div>
                 <div class="col-lg-12 mt-5 pt-3">
-                    <p class="fs-5 mainhead" style="color: #6E7491;">
+                    <p class="fs-4 mainhead" style="color: #6E7491;">
                         Flight Summary 
                     </p>
+                    <p class="subhead pt-3" >
+                      Departing February 25th,2021
+                  </p>
                     <div class="flight-card-test mt-4" >
-                        <div class="flight-info" style="background-color: #bcefc7;">
-                          <div class="outbound-flight" style="background-color: #fd6c33;">
-                            <div class="flight-airport flight-info flight-airport-outbound">
-                              <p class="flight-info-upper">
-                                <span class="bold">LGW</span>
-                                18:30
-                              </p>
-                              <p>London Gatwick</p>
-                            </div>
-                      
-                            <div class="flight-travel flight-info">
-                              <p class="flight-info-upper">2h00</p>
-                              
-                              <p>Stop</p>
-                            </div>
-                      
-                            <div class="flight-airport flight-info flight-airport-inbound">
-                              <p class="flight-airport-upper">
-                                21:00
-                                <span class="bold">AGP</span>
-                              </p>
-                              <p>Malaga</p>
-                            </div>
-                      
-                            <div class="flight-airline flight-info">
-                              <p class="flight-airline-upper">
-                                <span class="airline-logo"></span> <span class="">Easyjet</span>
-                              </p>
-                              <p>
-                              
-                               <span class="">Cabin bag included</span></p>
-                            </div>
+                      <figure class="user-card__avatar" style="margin: auto;">
+                        <img src="//picsum.photos/50/50" alt="">
+                      </figure>
+                      <div class="col-lg-12">
+                        <div class="row">
+                          <div class="col-lg-3 col-6">
+                            <p class="cardline1">16h 45m</p>
+                            <p class="cardline2">Hawaiian Airlines</p>
                           </div>
+                          <div class="col-lg-3 col-6">
+                            <p class="cardline1">7:15am-4:24pm</p>
+                            <p class="cardline2">Value</p>
+                          </div>
+                          <div class="col-lg-3 col-6">
+                            <p class="cardline1">1 stop</p>
+                            <p class="cardline2">2h 45m in HNL</p>
+                          </div>
+                          <div class="col-lg-3 col-6">
+                            <p class="cardline1">654</p>
+                            <p class="cardline2">round trip</p>
+                          </div>
+
                         </div>
+                     </div>  
+                     
                     </div>
+                    <p class="sub pt-3" >
+                      Seat 9F (economy, window), 1 checked bag
+                    </p>
+
+                    <p class="subhead pt-5" >
+                      Arriving February 28th,2021
+                  </p>
+                    <div class="flight-card-test mt-4" >
+                      <figure class="user-card__avatar" style="margin: auto;">
+                        <img src="//picsum.photos/50/50" alt="">
+                      </figure>
+                      <div class="col-lg-12">
+                        <div class="row">
+                          <div class="col-lg-3 col-6">
+                            <p class="cardline1">16h 45m</p>
+                            <p class="cardline2">Hawaiian Airlines</p>
+                          </div>
+                          <div class="col-lg-3 col-6">
+                            <p class="cardline1">7:15am-4:24pm</p>
+                            <p class="cardline2">Value</p>
+                          </div>
+                          <div class="col-lg-3 col-6">
+                            <p class="cardline1">1 stop</p>
+                            <p class="cardline2">2h 45m in HNL</p>
+                          </div>
+                          <div class="col-lg-3 col-6">
+                            <p class="cardline1">654</p>
+                            <p class="cardline2">round trip</p>
+                          </div>
+
+                        </div>
+                     </div>  
+                     
+                    </div>
+                    <p class="sub pt-3" >
+                      Seat 4D (economy, window), 1 checked bag
+                    </p>
                 </div>
+                <div class="col-lg-12 mt-5 pt-2">
+                  <p class="fs-4 mainhead" style="color: #6E7491;">
+                      Price Breakdown
+                  </p>
+                    <div class="col-lg-5 col-md-6 col-8 d-flex justify-content-between pt-4">
+                      <p class="price">Departing Flight</p>
+                      <p class="price">856</p>
+                    </div>
+                    <div class="col-lg-5 col-md-6 col-8 d-flex justify-content-between">
+                      <p class="price">Arriving Flight</p>
+                      <p class="price">856</p>
+                    </div>
+                    <div class="col-lg-5 col-md-6 col-8 d-flex justify-content-between">
+                      <p class="price">Baggage fees</p>
+                      <p class="price">85</p>
+                    </div>
+                    <div class="col-lg-5 col-md-6 col-8 d-flex justify-content-between">
+                      <p class="price">Seat upgrade (business)</p>
+                      <p class="price">0</p>
+                    </div>
+                    <div class="col-lg-5 col-md-6 col-8 d-flex justify-content-between">
+                      <p class="price">Subtotal</p>
+                      <p class="price">1520</p>
+                    </div>
+                    <div class="col-lg-5 col-md-6 col-8 d-flex justify-content-between">
+                      <p class="price">Taxes (9.4%)</p>
+                      <p class="price">50</p>
+                    </div>
+                    <div class="col-lg-5 col-md-6 col-8">
+                      <hr style="color: #62656c;height: 1px;">
+                    </div>
+                    <div class="col-lg-5 col-md-6 col-8 d-flex justify-content-between pt-2">
+                      <p class="price1">Amount</p>
+                      <p class="price1">50</p>
+                    </div>
+                    <div class="col-lg-5 col-md-6 col-8">
+                      <hr style="color: #62656c;height: 1px;">
+                    </div>
+                 
+                </div>
+                <div class="col-lg-12 mt-5 pt-2">
+                  <p class="fs-4 mainhead" style="color: #6E7491;">
+                    Payment Method
+                  </p>
+                  <div class="card pt-3">
+                    <div class="card__front card__part">
+                      <img class="card__front-square card__square pt-2" src="{% static 'image/Visa.png' %}">
+                      <p class=""></p>
+                      <div class="card__space-75 mt-5">
+                        <span class="card__label">name name</span>
+                        <p class="card__info pt-1">************6258</p>
+                      </div>
+                      <div class="card__space-25 mt-5 pt-4">
+                        <p class="card__info">10/25</p>
+                      </div>
+                    </div>
+                  </div>
+                </div> 
+                <div class="col-lg-12 mt-5 pt-2">
+                  <p class="fs-4 mainhead" style="color: #6E7491;">
+                    Share your travel itinerary
+                  </p>
+                  <p class="para1"> You can email your itinerary to anyone by entering their email address here.
+                </p>
+                <form name="FormData" method="post" action="" >
+                  {% csrf_token %}
+                  <div class="wrapper">
+                    <div class="col-7 pt-3"> 
+                      <input type="email"  class="form-control py-2"  name="input_array_name[]" placeholder="Email Address" />
+                    </div>
+                    <div class="col-7 pt-3">
+                      <input type="email" class="form-control py-2"   name="input_array_name[]" placeholder="Email Address" />
+                    </div>
+                    <div class="col-7 pt-3">
+                      <input type="email"  class="form-control py-2"  name="input_array_name[]" placeholder="Email Address" />
+                    </div>
+                  </div>
+                <div class="col mt-5">
+                <button type="submit" class="button1">Email itinerary</button>
+                <button id="Array_name" class="add_fields button2">Add another</button>
+                </div>
+                </form>
+                </div>  
+                <div class="col-lg-12 mt-5 pt-2">
+                  <p class="fs-4 mainhead" style="color: #6E7491;">
+                    Flight route
+                  </p>
+                  <div class="col-lg-11 mb-5">
+                  <div class="card card-bordered h-auto w-100 p-0 m-0" style="background-color: #d8d9e2;">
+                    
+                        <div id="kt_amcharts_2" style="height:400px;"></div>
+               
+                </div>
+                </div>
+                </div>  
             </div>
-            <div class="col-lg-5 ps-lg-3 " style="background-color: rgb(255, 238, 0);">
-            <p>jdskjsdjk</p>
-            </div>
+            <div class="col-lg-1 "></div>
+            <div class="col-lg-4 pe-5 ">
+              <div class="col-12 pt-3">
+                <p class="fs-4 mainhead" style="color: #6E7491;">
+                    Shop <span style="color: #645DEC;">Hotels</span>
+                </p>
+                <p class="para1"> 
+                  Tripma partners with thousands of hotels to get you the best deal.
+                   Save up to 30% when you add a hotel to your trip.
+                </p>
+                <div class="col-12 mt-2">
+                  <div class="card h-auto w-100 cardimg ">
+                    <img src="{% static 'image/download.jpg' %}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <div class="col d-flex justify-content-between">
+                      <h5 class="card-title">Rojayn japan</h5>
+                      <h5 class="card-title">856</h5>
+                      </div>
+                      <p class="card-text">Enjoy views of the garden from your room</p>
+                    </div>
+                  </div>
+
+                  <div class="card h-auto w-100 cardimg mt-5">
+                    <img src="{% static 'image/download.jpg' %}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <div class="col d-flex justify-content-between">
+                      <h5 class="card-title">Rojayn japan</h5>
+                      <h5 class="card-title">856</h5>
+                      </div>
+                      <p class="card-text">Enjoy views of the garden from your room</p>
+                    </div>
+                  </div>
+
+                  <div class="card h-auto w-100 cardimg mt-5">
+                    <img src="{% static 'image/download.jpg' %}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <div class="col d-flex justify-content-between">
+                      <h5 class="card-title">Rojayn japan</h5>
+                      <h5 class="card-title">856</h5>
+                      </div>
+                      <p class="card-text">Enjoy views of the garden from your room</p>
+                    </div>
+                  </div>
+
+                  <div class="card h-auto w-100 cardimg mt-5">
+                    <img src="{% static 'image/download.jpg' %}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <div class="col d-flex justify-content-between">
+                      <h5 class="card-title">Rojayn japan</h5>
+                      <h5 class="card-title">856</h5>
+                      </div>
+                      <p class="card-text">Enjoy views of the garden from your room</p>
+                    </div>
+                  </div>
+                  <div class="col-12 text-center mt-5">
+                   <button type="submit" class="button3">Shop all hotel</button>
+
+                  </div>
+
+                </div>
+              </div> 
+            <div class="col-12 pt-5">
+              <p class="fs-4 mainhead pt-1" style="color: #6E7491;">
+                Find unique <span style="color: #645DEC;">experiences</span>
+              </p>
+              <p class="para1"> 
+                Find events and authentic cultrual experiences available exclusively to Tripma users.
+              </p>
+              <div class="col-12 pt-2">
+                <div class="card h-auto w-100 cardimg ">
+                  <img src="{% static 'image/ht.jpg' %}" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <div class="col d-flex justify-content-between">
+                    <h5 class="card-title">Nihon Kimono</h5>
+                    <h5 class="card-title">856</h5>
+                    </div>
+                    <p class="card-text">Wear the national dress of Japan around the city</p>
+                  </div>
+                </div>
+
+                <div class="card h-auto w-100 cardimg mt-5 ">
+                  <img src="{% static 'image/ht.jpg' %}" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <div class="col d-flex justify-content-between">
+                    <h5 class="card-title">Nihon Kimono</h5>
+                    <h5 class="card-title">856</h5>
+                    </div>
+                    <p class="card-text">Wear the national dress of Japan around the city</p>
+                  </div>
+                </div>
+                <div class="col-12 text-center mt-5 mb-5">
+                  <button type="submit" class="button3">View all experiences</button>
+
+                 </div>
+
+              </div>
+            </div>  
         </div>
 
       </div>
@@ -561,5 +945,220 @@ text-decoration: none;
         var profileImage = $('#profileImage1').text(intials);
       });
       </script>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+      <script>
+     
+
+//Add Input Fields
+$(document).ready(function() {
+    var max_fields = 10; //Maximum allowed input fields 
+    var wrapper    = $(".wrapper"); //Input fields wrapper
+    var add_button = $(".add_fields"); //Add button class or ID
+    var x = 1; //Initial input field is set to 1
+  
+ //When user click on add input button
+ $(add_button).click(function(e){
+        e.preventDefault();
+ //Check maximum allowed input fields
+        if(x < max_fields){ 
+            x++; //input field increment
+ //add input field
+            $(wrapper).append('<div class="col-7 pt-3 d-flex justify-content-between"><input type="email"  class="form-control py-2"  name="input_array_name[]" placeholder="Email Address"><a href="javascript:void(0);" class="remove_field ps-2"><i class="fa fa-minus-circle" aria-hidden="true" style="color:red;font-size:29px"></i></a></div>');
+        }
+    });
  
+    //when user click on remove button
+    $(wrapper).on("click",".remove_field", function(e){ 
+        e.preventDefault();
+ $(this).parent('div').remove(); //remove inout field
+ x--; //inout field decrement
+    })
+});
+</script>
+<script>
+am5.ready(function () {
+
+// Create root element
+// https://www.amcharts.com/docs/v5/getting-started/#Root_element
+var root = am5.Root.new("kt_amcharts_2");
+root._logo.dispose();
+// Set themes
+// https://www.amcharts.com/docs/v5/concepts/themes/
+root.setThemes([
+    am5themes_Animated.new(root)
+]);
+
+// Create the map chart
+// https://www.amcharts.com/docs/v5/charts/map-chart/
+var chart = root.container.children.push(am5map.MapChart.new(root, {
+    panX: "rotateX",
+    panY: "translateY",
+    projection: am5map.geoMercator(),
+    homeGeoPoint: { latitude: 2, longitude: 2 }
+}));
+
+var cont = chart.children.push(am5.Container.new(root, {
+    layout: root.horizontalLayout,
+    x: 20,
+    y: 40
+}));
+
+// Add labels and controls
+cont.children.push(am5.Label.new(root, {
+    centerY: am5.p50,
+    text: "Map"
+}));
+
+var switchButton = cont.children.push(am5.Button.new(root, {
+    themeTags: ["switch"],
+    centerY: am5.p50,
+    icon: am5.Circle.new(root, {
+        themeTags: ["icon"]
+    })
+}));
+
+switchButton.on("active", function () {
+    if (!switchButton.get("active")) {
+        chart.set("projection", am5map.geoMercator());
+        chart.set("panY", "translateY");
+        chart.set("rotationY", 0);
+        backgroundSeries.mapPolygons.template.set("fillOpacity", 0);
+    } else {
+        chart.set("projection", am5map.geoOrthographic());
+        chart.set("panY", "rotateY")
+
+        backgroundSeries.mapPolygons.template.set("fillOpacity", 0.1);
+    }
+});
+
+cont.children.push(
+    am5.Label.new(root, {
+        centerY: am5.p50,
+        text: "Globe"
+    })
+);
+
+// Create series for background fill
+// https://www.amcharts.com/docs/v5/charts/map-chart/map-polygon-series/#Background_polygon
+var backgroundSeries = chart.series.push(am5map.MapPolygonSeries.new(root, {}));
+backgroundSeries.mapPolygons.template.setAll({
+    fill: root.interfaceColors.get("alternativeBackground"),
+    fillOpacity: 0,
+    strokeOpacity: 0
+});
+
+// Add background polygon
+// https://www.amcharts.com/docs/v5/charts/map-chart/map-polygon-series/#Background_polygon
+backgroundSeries.data.push({
+    geometry: am5map.getGeoRectangle(90, 180, -90, -180)
+});
+
+// Create main polygon series for countries
+// https://www.amcharts.com/docs/v5/charts/map-chart/map-polygon-series/
+var polygonSeries = chart.series.push(am5map.MapPolygonSeries.new(root, {
+    geoJSON: am5geodata_worldLow
+}));
+
+// Create line series for trajectory lines
+// https://www.amcharts.com/docs/v5/charts/map-chart/map-line-series/
+var lineSeries = chart.series.push(am5map.MapLineSeries.new(root, {}));
+lineSeries.mapLines.template.setAll({
+    stroke: root.interfaceColors.get("alternativeBackground"),
+    strokeOpacity: 0.3
+});
+
+// Create point series for markers
+// https://www.amcharts.com/docs/v5/charts/map-chart/map-point-series/
+var pointSeries = chart.series.push(am5map.MapPointSeries.new(root, {}));
+
+pointSeries.bullets.push(function () {
+    var circle = am5.Circle.new(root, {
+        radius: 7,
+        tooltipText: "Drag me!",
+        cursorOverStyle: "pointer",
+        tooltipY: 0,
+        fill: am5.color(0xffba00),
+        stroke: root.interfaceColors.get("background"),
+        strokeWidth: 2,
+        draggable: true
+    });
+
+    circle.events.on("dragged", function (event) {
+        var dataItem = event.target.dataItem;
+        var projection = chart.get("projection");
+        var geoPoint = chart.invert({ x: circle.x(), y: circle.y() });
+
+        dataItem.setAll({
+            longitude: geoPoint.longitude,
+            latitude: geoPoint.latitude
+        });
+    });
+
+    return am5.Bullet.new(root, {
+        sprite: circle
+    });
+});
+
+var paris = addCity({ latitude: 48.8567, longitude: 2.351 }, "Paris");
+var toronto = addCity({ latitude: 43.8163, longitude: -79.4287 }, "Toronto");
+var la = addCity({ latitude: 34.3, longitude: -118.15 }, "Los Angeles");
+var havana = addCity({ latitude: 23, longitude: -82 }, "Havana");
+
+var lineDataItem = lineSeries.pushDataItem({
+    pointsToConnect: [paris, toronto, la, havana]
+});
+
+var planeSeries = chart.series.push(am5map.MapPointSeries.new(root, {}));
+
+var plane = am5.Graphics.new(root, {
+    svgPath:
+        "m2,106h28l24,30h72l-44,-133h35l80,132h98c21,0 21,34 0,34l-98,0 -80,134h-35l43,-133h-71l-24,30h-28l15,-47",
+    scale: 0.06,
+    centerY: am5.p50,
+    centerX: am5.p50,
+    fill: am5.color(0x000000)
+});
+
+planeSeries.bullets.push(function () {
+    var container = am5.Container.new(root, {});
+    container.children.push(plane);
+    return am5.Bullet.new(root, { sprite: container });
+});
+
+var planeDataItem = planeSeries.pushDataItem({
+    lineDataItem: lineDataItem,
+    positionOnLine: 0,
+    autoRotate: true
+});
+
+planeDataItem.animate({
+    key: "positionOnLine",
+    to: 1,
+    duration: 10000,
+    loops: Infinity,
+    easing: am5.ease.yoyo(am5.ease.linear)
+});
+
+planeDataItem.on("positionOnLine", function (value) {
+    if (value >= 0.99) {
+        plane.set("rotation", 180);
+    } else if (value <= 0.01) {
+        plane.set("rotation", 0);
+    }
+});
+
+function addCity(coords, title) {
+    return pointSeries.pushDataItem({
+        latitude: coords.latitude,
+        longitude: coords.longitude
+    });
+}
+
+// Make stuff animate on load
+chart.appear(1000, 100);
+
+}); // end am5.ready()
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="//cdn.amcharts.com/lib/4/core.js"></script>
+<script src="//cdn.amcharts.com/lib/4/maps.js"></script>
+<script src="//cdn.amcharts.com/lib/4/geodata/worldLow.js"></script>
