@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 def dashboard(request):
     
-    return render(request,'admin/admindashboard.html')
+    return render(request,'admin/adminbase.html')
 
 @login_required(login_url='flight_signin') 
 def seatbooking(request):
