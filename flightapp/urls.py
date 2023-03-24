@@ -15,10 +15,14 @@ urlpatterns = [
     path('logout',views.logout,name='logout'),
     path('afterpayment',views.afterpayment,name='afterpayment'),
     path('addhotel',views.addhotel,name='addhotel'),
+    path('savehotel',views.savehotel,name='savehotel'),
+    path('deletehotel/<int:id>', views.deletehotel, name='deletehotel'),
+    path('addexperience',views.addexp,name='addexp'),
+    path('saveexp',views.saveexp,name='saveexp'),
+    path('deleteexp/<int:id>', views.deleteexp, name='deleteexp'),
+    path('resetpass/<int:user_id>', views.resetpass, name='resetpass'),
 
-
-
-
+    path('resetpassword', views.resetpassword, name='resetpassword'),
 
 
 

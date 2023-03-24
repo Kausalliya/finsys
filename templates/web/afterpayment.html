@@ -664,49 +664,24 @@ box-shadow: 7px 9px 12px -4px rgba(0,0,0,0.31);
                    Save up to 30% when you add a hotel to your trip.
                 </p>
                 <div class="col-12 mt-2">
-                  <div class="card h-auto w-100 cardimg ">
-                    <img src="{% static 'image/download.jpg' %}" class="card-img-top" alt="...">
+                  {% if hotel %}
+                  {% for p in hotel %}
+                  <div class="col-12 mt-5">
+                  <div class="card h-100 w-100 cardimg ">
+                    <img src="{{ p.image.url }}" class="card-img-top " alt="..." height="250px">
                     <div class="card-body">
                       <div class="col d-flex justify-content-between">
-                      <h5 class="card-title">Rojayn japan</h5>
-                      <h5 class="card-title">856</h5>
+                      <h5 class="card-title">{{p.name}}</h5>
+                      <h5 class="card-title">{{p.price}}</h5>
                       </div>
-                      <p class="card-text">Enjoy views of the garden from your room</p>
+                      <p class="card-text">{{p.description}}</p>
+                    
                     </div>
                   </div>
-
-                  <div class="card h-auto w-100 cardimg mt-5">
-                    <img src="{% static 'image/download.jpg' %}" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <div class="col d-flex justify-content-between">
-                      <h5 class="card-title">Rojayn japan</h5>
-                      <h5 class="card-title">856</h5>
-                      </div>
-                      <p class="card-text">Enjoy views of the garden from your room</p>
-                    </div>
                   </div>
-
-                  <div class="card h-auto w-100 cardimg mt-5">
-                    <img src="{% static 'image/download.jpg' %}" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <div class="col d-flex justify-content-between">
-                      <h5 class="card-title">Rojayn japan</h5>
-                      <h5 class="card-title">856</h5>
-                      </div>
-                      <p class="card-text">Enjoy views of the garden from your room</p>
-                    </div>
-                  </div>
-
-                  <div class="card h-auto w-100 cardimg mt-5">
-                    <img src="{% static 'image/download.jpg' %}" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <div class="col d-flex justify-content-between">
-                      <h5 class="card-title">Rojayn japan</h5>
-                      <h5 class="card-title">856</h5>
-                      </div>
-                      <p class="card-text">Enjoy views of the garden from your room</p>
-                    </div>
-                  </div>
+                  {% endfor %}
+                  {% endif %}
+                 
                   <div class="col-12 text-center mt-5">
                    <button type="submit" class="button3">Shop all hotel</button>
 
@@ -722,27 +697,25 @@ box-shadow: 7px 9px 12px -4px rgba(0,0,0,0.31);
                 Find events and authentic cultrual experiences available exclusively to Tripma users.
               </p>
               <div class="col-12 pt-2">
-                <div class="card h-auto w-100 cardimg ">
-                  <img src="{% static 'image/ht.jpg' %}" class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <div class="col d-flex justify-content-between">
-                    <h5 class="card-title">Nihon Kimono</h5>
-                    <h5 class="card-title">856</h5>
+                {% if exp %}
+                  {% for p in exp %}
+                  <div class="col-12 mt-5">
+                  <div class="card h-100 w-100 cardimg ">
+                    <img src="{{ p.image.url }}" class="card-img-top " alt="..." height="250px">
+                    <div class="card-body">
+                      <div class="col d-flex justify-content-between">
+                      <h5 class="card-title">{{p.name}}</h5>
+                      <h5 class="card-title">{{p.price}}</h5>
+                      </div>
+                      <p class="card-text">{{p.description}}</p>
+                    
                     </div>
-                    <p class="card-text">Wear the national dress of Japan around the city</p>
                   </div>
-                </div>
+                  </div>
+                  {% endfor %}
+                  {% endif %}
+                
 
-                <div class="card h-auto w-100 cardimg mt-5 ">
-                  <img src="{% static 'image/ht.jpg' %}" class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <div class="col d-flex justify-content-between">
-                    <h5 class="card-title">Nihon Kimono</h5>
-                    <h5 class="card-title">856</h5>
-                    </div>
-                    <p class="card-text">Wear the national dress of Japan around the city</p>
-                  </div>
-                </div>
                 <div class="col-12 text-center mt-5 mb-5">
                   <button type="submit" class="button3">View all experiences</button>
 

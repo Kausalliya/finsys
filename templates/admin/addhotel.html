@@ -130,6 +130,11 @@
   background-color: #de0328;
   border-color: #de0328;
 }
+.dropdown-item.active, .dropdown-item:active {
+  color: #FFF;
+  text-decoration: none;
+  background-color: #857eff;
+}
 </style>  
 
 </head>
@@ -154,35 +159,10 @@
             <div class="app-notification__content">
               <li><a class="app-notification__item" href="javascript:;"><span class="app-notification__icon"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-primary"></i><i class="fa fa-envelope fa-stack-1x fa-inverse"></i></span></span>
                   <div>
-                    <p class="app-notification__message">Lisa sent you a mail</p>
-                    <p class="app-notification__meta">2 min ago</p>
+                    <p class="app-notification__message"></p>
+                    <p class="app-notification__meta"></p>
                   </div></a></li>
-              <li><a class="app-notification__item" href="javascript:;"><span class="app-notification__icon"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-danger"></i><i class="fa fa-hdd-o fa-stack-1x fa-inverse"></i></span></span>
-                  <div>
-                    <p class="app-notification__message">Mail server not working</p>
-                    <p class="app-notification__meta">5 min ago</p>
-                  </div></a></li>
-              <li><a class="app-notification__item" href="javascript:;"><span class="app-notification__icon"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-success"></i><i class="fa fa-money fa-stack-1x fa-inverse"></i></span></span>
-                  <div>
-                    <p class="app-notification__message">Transaction complete</p>
-                    <p class="app-notification__meta">2 days ago</p>
-                  </div></a></li>
-              <div class="app-notification__content">
-                <li><a class="app-notification__item" href="javascript:;"><span class="app-notification__icon"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-primary"></i><i class="fa fa-envelope fa-stack-1x fa-inverse"></i></span></span>
-                    <div>
-                      <p class="app-notification__message">Lisa sent you a mail</p>
-                      <p class="app-notification__meta">2 min ago</p>
-                    </div></a></li>
-                <li><a class="app-notification__item" href="javascript:;"><span class="app-notification__icon"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-danger"></i><i class="fa fa-hdd-o fa-stack-1x fa-inverse"></i></span></span>
-                    <div>
-                      <p class="app-notification__message">Mail server not working</p>
-                      <p class="app-notification__meta">5 min ago</p>
-                    </div></a></li>
-                <li><a class="app-notification__item" href="javascript:;"><span class="app-notification__icon"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-success"></i><i class="fa fa-money fa-stack-1x fa-inverse"></i></span></span>
-                    <div>
-                      <p class="app-notification__message">Transaction complete</p>
-                      <p class="app-notification__meta">2 days ago</p>
-                    </div></a></li>
+            
               </div>
             </div>
             <li class="app-notification__footer"><a href="#">See all notifications.</a></li>
@@ -191,7 +171,7 @@
         <!-- User Menu-->
         <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"></i></a>
           <ul class="dropdown-menu settings-menu dropdown-menu-right">
-            <li><a class="dropdown-item" href="page-user.html"><i class="fa fa-cog fa-lg"></i> Settings</a></li>
+            <li><a class="dropdown-item" href="{% url 'resetpassword' %}"><i class="fa fa-key" aria-hidden="true"></i>Reset password</a></li>
             <li><a class="dropdown-item" href="page-user.html"><i class="fa fa-user fa-lg"></i> Profile</a></li>
             <li><a class="dropdown-item" href="page-login.html"><i class="fa fa-sign-out fa-lg"></i> Logout</a></li>
           </ul>
@@ -201,6 +181,12 @@
     <!-- Sidebar menu-->
     <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
     <aside class="app-sidebar" id="sidebar">
+      <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="{% static 'image/admin-icon.jpg' %}" alt="User Image" width="40px" height="40px">
+        <div>
+          <p class="app-sidebar__user-name">{{request.user.username}}</p>
+          <p class="app-sidebar__user-designation">Site administrator</p>
+        </div>
+      </div>
       
       <ul class="app-menu">
         <li><a class="app-menu__item"  href="{% url 'dashboard' %}"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
@@ -231,7 +217,7 @@
           <ul class="treeview-menu">
             <li><a class="treeview-item active" href="{% url 'addhotel' %}"><i class="icon fa fa-fighter-jet"></i>Hotel</a></li>
             <li><a class="treeview-item tab" href="page-login.html"><i class="icon fa fa-fighter-jet"></i>City</a></li>
-            <li><a class="treeview-item tab" href="page-lockscreen.html"><i class="icon fa fa-fighter-jet"></i>Experience</a></li>
+            <li><a class="treeview-item tab" href="{% url 'addexp' %}"><i class="icon fa fa-fighter-jet"></i>Experience</a></li>
           </ul>
         </li>
       </ul>
@@ -242,34 +228,46 @@
           <h1><i class="fa fa-hotel"></i> Hotel Details</h1>
         </div>
       </div>
+      {% for message in messages %}
+        <div class="container-fluid p-0">
+          <div class="alert {{ message.tags }} alert-success alert-dismissible fade show" role="alert" >
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="True">&times;</span>
+            </button>
+            {{ message }}
+          </div>
+        </div>
+        {% endfor %}
+    
       <div class="row mt-5" >
         <div class="col-md-4">
 
           <div class="tile">
             <h3 class="tile-title">Add hotel Detail</h3>
             <div class="tile-body">
-              <form>
+              <form action="{% url 'savehotel' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
                 <div class="form-group">
                   <label class="control-label">Hotel Name</label>
-                  <input class="form-control" type="text" placeholder="Enter Hotel name">
+                  <input class="form-control" type="text" placeholder="Enter Hotel name" name="name">
                 </div>
                 <div class="form-group">
                   <label class="control-label">City</label>
-                  <input class="form-control" type="text" placeholder="Enter city">
+                  <input class="form-control" type="text" placeholder="Enter city" name="city">
                 </div>
                 <div class="form-group">
                   <label class="control-label">Price</label>
-                  <input class="form-control" type="number" placeholder="Enter price">
+                  <input class="form-control" type="number" placeholder="Enter price" name="price">
                 </div>
                 <div class="form-group">
                   <label class="control-label">Description</label>
-                  <textarea class="form-control" rows="4" placeholder="Enter description"></textarea>
+                  <textarea class="form-control" rows="4" placeholder="Enter description" name="des"></textarea>
                 </div>
                 <div class="form-group">
                   <label class="control-label">Hotel image</label>
-                  <input class="form-control" type="file">
+                  <input class="form-control" type="file" name="file" accept="image/*">
                 </div>
-              <button class="btn btn-primary" type="button"><i class="fa fa-fw fa-lg fa-check-circle"></i>Add</button>
+              <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Add</button>
                 
               </form>
             </div>
@@ -292,43 +290,20 @@
                   </tr>
                 </thead>
                 <tbody>
+                  {% for p in hotel %}
                   <tr>
-                    <td>Tiger Nixon</td>
-                    <td>System Architect</td>
-                    <td>Edinburgh</td>
-                    <td>61</td>
-                    <td>61</td>
-                    <td><i class="fa fa-trash" style="color:red"></i></td>
+                    <td>{{p.name}}</td>
+                    <td>{{p.description}}</td>
+                    <td>{{p.price}}</td>
+                    <td>{{p.city}}</td>
+                    <td>
+                      <img src="{{ p.image.url }}" alt="hotelphoto" class="rounded" width="50">
+                    </td>
+                    <td>
+                      <a href="{% url 'deletehotel' p.id %}"><i class="fa fa-trash" style="color:red"></i></a>
+                      </td>
                   </tr>
-                  <tr>
-                    <td>Garrett Winters</td>
-                    <td>Accountant</td>
-                    <td>Tokyo</td>
-                    <td>63</td>
-                    <td>61</td>
-                    <td><i class="fa fa-trash" style="color:red"></i></td>
-
-                  </tr>
-                  
-                  <tr>
-                    <td>Rhona Davidson</td>
-                    <td>Integration Specialist</td>
-                    <td>Tokyo</td>
-                    <td>55</td>
-                    <td>61</td>
-                    <td><i class="fa fa-trash" style="color:red"></i></td>
-
-                  </tr>
-                  <tr>
-                    <td>Colleen Hurst</td>
-                    <td>Javascript Developer</td>
-                    <td>San Francisco</td>
-                    <td>39</td>
-                    <td>61</td>
-                    <td><i class="fa fa-trash" style="color:red"></i></td>
-
-                  </tr>
-               
+                  {% endfor %}
                 </tbody>
               </table>
             </div>

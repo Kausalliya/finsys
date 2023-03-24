@@ -31,3 +31,16 @@ class flight(models.Model):
     depart_time=models.CharField(max_length=30)
     reach_time=models.CharField(max_length=30)
     plane=models.ForeignKey(flightdetails,on_delete=models.CASCADE)
+class hotel(models.Model):
+    name=models.CharField(max_length=30)  
+    city=models.CharField(max_length=30)
+    description=models.CharField(max_length=100)
+    price=models.CharField(max_length=100)
+    image=models.ImageField( upload_to="hotel",null=True,blank=True)
+
+class experiences(models.Model):
+    name=models.CharField(max_length=30)  
+    city=models.CharField(max_length=30)
+    description=models.CharField(max_length=100)
+    price=models.CharField(max_length=100)
+    image=models.ImageField( upload_to="experiences",null=True,blank=True)    
