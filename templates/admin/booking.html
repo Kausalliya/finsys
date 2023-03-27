@@ -190,12 +190,13 @@
       
       <ul class="app-menu">
         <li><a class="app-menu__item"  href="{% url 'dashboard' %}"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
-        
-        <li class="treeview"><a class="app-menu__item" href="{% url 'adminbooking' %}"><i class="app-menu__icon fa fa-ticket" ></i><span class="app-menu__label">Booking</span></a>
+       
+        <li class="treeview"><a class="app-menu__item active" href="{% url 'adminbooking' %}"><i class="app-menu__icon fa fa-ticket" ></i><span class="app-menu__label">Booking</span></a>
 
-        <li class="treeview is-expanded"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-list-alt"></i><span class="app-menu__label">Other</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+        </li>
+        <li class="treeview "><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-list-alt"></i><span class="app-menu__label">Other</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
-            <li><a class="treeview-item active" href="{% url 'addhotel' %}"><i class="icon fa fa-fighter-jet"></i>Hotel</a></li>
+            <li><a class="treeview-item " href="{% url 'addhotel' %}"><i class="icon fa fa-fighter-jet"></i>Hotel</a></li>
             <li><a class="treeview-item tab" href="page-login.html"><i class="icon fa fa-fighter-jet"></i>City</a></li>
             <li><a class="treeview-item tab" href="{% url 'addexp' %}"><i class="icon fa fa-fighter-jet"></i>Experience</a></li>
           </ul>
@@ -205,7 +206,7 @@
     <main class="app-content" style="background-color: rgb(255, 255, 255);">
       <div class="app-title" style="background-color:#ffffff">
         <div class="mt-5" style="color:#5871ff">
-          <h1><i class="fa fa-hotel"></i> Hotel Details</h1>
+          <h1><i class="fa fa-ticket"></i>Booking</h1>
         </div>
       </div>
       {% for message in messages %}
@@ -220,70 +221,59 @@
         {% endfor %}
     
       <div class="row mt-5" >
-        <div class="col-md-4">
-
-          <div class="tile">
-            <h3 class="tile-title">Add hotel Detail</h3>
-            <div class="tile-body">
-              <form action="{% url 'savehotel' %}" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                <div class="form-group">
-                  <label class="control-label">Hotel Name</label>
-                  <input class="form-control" type="text" placeholder="Enter Hotel name" name="name">
-                </div>
-                <div class="form-group">
-                  <label class="control-label">City</label>
-                  <input class="form-control" type="text" placeholder="Enter city" name="city">
-                </div>
-                <div class="form-group">
-                  <label class="control-label">Price</label>
-                  <input class="form-control" type="number" placeholder="Enter price" name="price">
-                </div>
-                <div class="form-group">
-                  <label class="control-label">Description</label>
-                  <textarea class="form-control" rows="4" placeholder="Enter description" name="des"></textarea>
-                </div>
-                <div class="form-group">
-                  <label class="control-label">Hotel image</label>
-                  <input class="form-control" type="file" name="file" accept="image/*">
-                </div>
-              <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Add</button>
-                
-              </form>
-            </div>
-        </div>
-
-        </div>
-        <div class="col-md-8">
+       
+        <div class="col-md-12">
           <div class="tile">
             <h3 class="tile-title">Show hotels</h3>
             <div class="tile-body">
               <table class="table table-hover table-bordered" id="sampleTable">
                 <thead>
                   <tr>
-                    <th>Hotel name</th>
-                    <th>Description</th>
-                    <th>Price</th>
-                    <th>City</th>
-                    <th>Image</th>
-                    <th>Action</th>
+                    <th>Passenger</th>
+                    <th>Date of birth</th>
+                    <th>Cheched bag</th>
+                    <th>Seatno</th>
+                    <th>Seat type</th>
+                    <th>Amount</th>
+                    <th>flight</th>
+                    <th>Trip</th>
+                    <th>Trip Date</th>
+                    <th>Payment</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {% for p in hotel %}
                   <tr>
-                    <td>{{p.name}}</td>
-                    <td>{{p.description}}</td>
-                    <td>{{p.price}}</td>
-                    <td>{{p.city}}</td>
-                    <td>
-                      <img src="{{ p.image.url }}" alt="hotelphoto" class="rounded" width="50">
+                    <td>manju</td>
+                    <td>12-09-1997</td>
+                    <td>2</td>
+                    <td>1A</td>
+                    <td>economy</td>
+                    <td>1560</td>
+                    <td>hawiian Airline</td>
+                    <td>inv to del</td>
+                    <td>19-04-2023</td>
+                    <td> 
+                    <span style="background-color: #fac917;">   
+                    warning
+                    <i class='fa fa-exclamation-circle'></i></span> 
                     </td>
-                    <td>
-                      <a href="{% url 'deletehotel' p.id %}"><i class="fa fa-trash" style="color:red"></i></a>
-                      </td>
                   </tr>
-                  {% endfor %}
+                  <tr>
+                    <td>manju</td>
+                    <td>12-09-1997</td>
+                    <td>2</td>
+                    <td>1A</td>
+                    <td>economy</td>
+                    <td>1560</td>
+                    <td>hawiian Airline</td>
+                    <td>inv to del</td>
+                    <td>19-04-2023</td>
+                    <td> 
+                    <span style="background-color: #22d558;">   
+                    success
+                    <i class="fa fa-check-circle"></i></span> 
+                    </td>
+                  </tr>
                 </tbody>
               </table>
             </div>

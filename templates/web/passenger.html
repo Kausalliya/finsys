@@ -339,7 +339,7 @@ text-decoration: none;
             <h2 class="accordion-header " id="headingOne">
                        
               <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-              <img src="{% static 'image/profile-user.PNG' %}" alt="passenger" width="25px" height="25px" class="me-3">
+                <i class='fa fa-user me-2' ></i>
                 ADULT(12yrs+)
               </button>
             </h2>
@@ -413,14 +413,12 @@ text-decoration: none;
           <div class="accordion-item mt-5">
             <h2 class="accordion-header" id="headingTwo">
               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-              <img src="{% static 'image/profile-user.PNG' %}" alt="passenger" width="25px" height="25px" class="me-3">
-                
-                CHILD (2-12Yrs)
+                <i class='fa fa-user me-2' ></i> MINORS (12Yrs-)
               </button>
             </h2>
             <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
               <div class="accordion-body">
-                <p class="h5">Passenger 1 (Child)</p>
+                <p class="h5">Passenger 1 (Minor)</p>
                 <form method="post" action="#">
                   <div class="row">
                     <div class="col-lg-4 mt-2">
@@ -465,6 +463,7 @@ text-decoration: none;
            </div>   
           </div>
           </div>
+          <!--
           <div class="accordion" id="accordionExample" >
           <div class="accordion-item mt-5">
             <h2 class="accordion-header" id="headingThree">
@@ -520,7 +519,7 @@ text-decoration: none;
               </div>
              
             </div>
-            </div>
+            </div>-->
           
       
     
@@ -608,6 +607,7 @@ text-decoration: none;
       </aside>
       </div>
       <div class="col-12 pe-5 me-3 pt-3 fw-bold fs-5" style="text-align: right;">
+        <p>Seat Upgrade <span class="ps-4">$300</span></p>
         <p>Subtotal <span class="ps-4">$300</span></p>
         <p>Taxes and Fees <span class="ps-4">$500</span></p>
         <p>Total <span class="ps-4">$800</span></p>
@@ -833,7 +833,7 @@ function education_fields() {
        var divtest = document.createElement("div");
      divtest.setAttribute("class", "form-group removeclass"+room);
      var rdiv = 'removeclass'+room;
-       divtest.innerHTML = '<p class="h5 mt-4">Passenger ' + room +' (Child)</p><form method="post" action="#"><div class="row"> <div class="col-lg-4 mt-2"> <input type="text" class="form-control"  placeholder="First name*" aria-label="First name" name="fname"></div><div class="col-lg-4 mt-2"><input type="text" class="form-control" placeholder="Middle name" aria-label="Middle name" name="mname"></div><div class="col-lg-4 mt-2"><input type="text" class="form-control" placeholder="Last name*" aria-label="Last name" name="lname"></div></div><div class="row mt-3"><div class="col-lg-4 mt-2"><input type="text" class="form-control" placeholder="Suffix" aria-label="Suffix" name="suffix"></div><div class="col-lg-4 mt-2"><input type="date" class="form-control"   placeholder="Date of Birth*" aria-label="Middle name" name="dob"></div></div></div> <div class="row mt-4"><div class="col-12"><div class="number"><p style="color: #747479;display:inline-block;">Checked Bags</p><span class="minus ms-3">-</span><input type="text" class="bag" value="1"/><span class="plus">+</span></div></div> </div> </form><button class="btn pull-right " type="button" onclick="remove_education_fields('+ room +');"> <i class="fa fa-minus-circle" aria-hidden="true" style="color:red;font-size:29px"></i> </button>';
+       divtest.innerHTML = '<p class="h5 mt-4">Passenger ' + room +' (Minor)</p><form method="post" action="#"><div class="row"> <div class="col-lg-4 mt-2"> <input type="text" class="form-control"  placeholder="First name*" aria-label="First name" name="fname"></div><div class="col-lg-4 mt-2"><input type="text" class="form-control" placeholder="Middle name" aria-label="Middle name" name="mname"></div><div class="col-lg-4 mt-2"><input type="text" class="form-control" placeholder="Last name*" aria-label="Last name" name="lname"></div></div><div class="row mt-3"><div class="col-lg-4 mt-2"><input type="text" class="form-control" placeholder="Suffix" aria-label="Suffix" name="suffix"></div><div class="col-lg-4 mt-2"><input type="date" class="form-control"   placeholder="Date of Birth*" aria-label="Middle name" name="dob"></div></div></div> <div class="row mt-4"><div class="col-12"><div class="number"><p style="color: #747479;display:inline-block;">Checked Bags</p><span class="minus ms-3">-</span><input type="text" class="bag" value="1"/><span class="plus">+</span></div></div> </div> </form><button class="btn pull-right " type="button" onclick="remove_education_fields('+ room +');"> <i class="fa fa-minus-circle" aria-hidden="true" style="color:red;font-size:29px"></i> </button>';
        
        objTo.appendChild(divtest)
        room++;

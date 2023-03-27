@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.contrib.auth.models import User,auth
@@ -21,6 +22,7 @@ def flight_signin(request):
 
 def signin(request):
     print("hai")
+    
     if request.method=='POST':
         username=request.POST['uname']
         password=request.POST['password']
@@ -28,6 +30,7 @@ def signin(request):
         if user is not None:
             if user.is_staff:
                 auth.login(request,user)
+                request.session["uid"]=user.id
                 return redirect('dashboard')
             
             else:
@@ -88,23 +91,31 @@ def dashboard(request):
 
 
 def resetpassword(request):
-    current_user = request.user
-    data=User.objects.get(id=current_user.id)
+    if 'uid' in request.session:
+        if request.session.has_key('uid'):
+            uid = request.session['uid']
+        else:
+            return redirect('/')
+    data=User.objects.get(id=uid)
     return render(request,'admin/adminpassword.html',{'data':data})
-
+   
 def resetpass(request,user_id):
-    data=User.objects.get(id=request.user.id)
-    if request.user.is_authenticated:
-        user = User.objects.get(pk=user_id) 
+    if 'uid' in request.session:
+        if request.session.has_key('uid'):
+            uid = request.session['uid']
+        else:
+            return redirect('/')
+        user = User.objects.get(pk=user_id)
         user.username= request.POST.get('name')
         password = request.POST.get('password')
         user.set_password(password)
         user.save()
-        messages.success(request,'Your password Changed sucessfully')
+        data=User.objects.get(id=uid)
+        messages.success(request, 'Password updated sucessfully!')
         return render(request,'admin/adminpassword.html',{'data':data})
     else:
         return redirect('flight_signin')
-
+    
 @login_required(login_url='/flight_signin') 
 def addhotel(request):
     hotel1=hotel.objects.all()
@@ -152,3 +163,13 @@ def deleteexp(request,id):
     member1.delete()
     messages.error(request, 'one experience details deleted sucessfully!')
     return redirect('addexp')    
+
+def adminbooking(request):
+    exp1=experiences.objects.all()
+    return render(request,'admin/booking.html')
+
+@login_required(login_url='/flight_signin') 
+def logout(request):
+    auth.logout(request)
+    return redirect('base')
+

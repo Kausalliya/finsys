@@ -23,6 +23,10 @@ urlpatterns = [
     path('resetpass/<int:user_id>', views.resetpass, name='resetpass'),
 
     path('resetpassword', views.resetpassword, name='resetpassword'),
+    path('adminbooking', views.adminbooking, name='adminbooking'),
+    path('logout', views.logout, name='logout'),
+
+
 
 
 
