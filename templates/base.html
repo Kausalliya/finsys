@@ -7,15 +7,34 @@
   <title>tripma</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href='https://fonts.googleapis.com/css?family=Nunito Sans' rel='stylesheet'>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"> 
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
   <link href="{% sass_src 'css/v.scss' %}" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"></script>
+  <link href="static/css/mobiscroll.javascript.min.css" rel="stylesheet" />
+  <script src="static/js/mobiscroll.javascript.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+
+
+
+  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
 
   <style>
+    *{
+        font-family: Nunito Sans;
+    }
+    main{
+      background-image: url("{% static 'image/world-map.e77df6ab.png' %}");
+    }
     .nav{
         color: rgb(99, 4, 188)
     }
@@ -43,17 +62,280 @@
   font-family: Nunito Sans;
   font-size: 18px;
 }
+.nav-link{
+  color:  #7C8DB0;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  text-decoration: none;
+}
+.nav-link:hover{
+  color:#605DEC;
+}
+.hero_text_gradient[data-v-57b06d44] {
+    margin: 50px auto 0px auto;
+    width: 756px;
+    text-align: center;
+}
 .link{
-  color: #7C8DB0;
-  font-family: 'Nunito Sans';
-font-style: normal;
-font-weight: 400;
-font-size: 16px;
-line-height: 22px;
-text-decoration: none;
+  color:  #7C8DB0;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  text-decoration: none;
+}
+h1[data-v-57b06d44] {
+    font-size: 96px;
+    font-weight:1000 !important;
+    background: -webkit-linear-gradient(30deg,#82a2f3,#5250b8,#6e45bb,#8e8cf4);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-align: center;
+}
+.leading-none {
+    line-height: 1;
+}
+@media screen and (min-width: 800px) and (max-width: 1023px){
+.hero_bg[data-v-57b06d44] {
+    
+}}
+  
+.hero_bg[data-v-57b06d44] {
+    padding: 8px 0 160px;
+}
+.hai{
+  background-image: url("{% static 'image/world-map.e77df6ab.png' %}");
+}
+@media screen and (max-width: 800px){
+.hero_text_gradient[data-v-57b06d44] {
+    width: 95vw;
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+}
+@media screen and (max-width: 800px){
+h1[data-v-57b06d44] {
+    font-size: 53px;
+    padding: 0 30px;
+}
+}
+.searchbox{
+    border-radius:10px;
+    border: 1px solid #CBD4E6;
+    box-shadow: 0px 23px 26px -11px rgba(0,0,0,0.1);
+}
+.inner{
+  height: 7vh;
+  border-right:1px solid #a7a6a8
+}
+.form-control{
+    border: none;
+    font-size: 17px;
+    color: #7C8DB0;
+    background-color:transparent;
+}
+.form-control:focus{
+    border: none;
+    font-size: 17px;
+    color: #7C8DB0;
 }
 
- 
+.form-control:focus{
+    box-shadow: inset 0 -1px 0 #ffffff;
+}
+
+.inner:hover{
+  border: 3px solid #6e2edd;
+  border-right:3px solid #6523d8 ;
+  border-radius: 5px;
+}
+@media screen and (max-width: 1000px){
+  .inner{
+    border: 1px solid #7C8DB0;
+    font-size: 17px;
+    color: #7C8DB0;
+    margin-top: 15px;
+    border-radius: 6px;
+}
+.inner1{
+  margin-top: 20px;
+}
+.searchbox{
+    border-radius:10px;
+    border:none;
+    box-shadow:none;
+}
+}
+.trav_engine {
+    position: relative;
+}
+
+.trav_toggle {
+    width: 210px;
+    box-sizing: border-box;
+    line-height: 32px;
+    font-size: 0;
+    position: absolute;
+    top: 0;
+}
+.trav_form {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    width: 220px;
+    box-sizing: border-box;
+    float: left;
+    position:absolute;
+    background-color: white;
+    margin-top:8px;
+}
+.trav_item {
+    border-bottom: 1px solid #eaeaea;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    float: left;
+}
+.trav_inner1 {
+    width: 40%;
+    float: left;
+    font-size: 15px;
+    line-height: 17px;
+    color: #333333;
+    box-sizing: border-box;
+}
+.trav_inner1 span {
+    font-size: 11px;
+    display: block;
+    color: #888888;
+}
+.trav_inner2 {
+    width: 60%;
+    float: left;
+    font-size: 13px;
+    line-height: 30px;
+    color: #666;
+    box-sizing: border-box;
+    display: flex;
+}
+.minus, .plus {
+    text-decoration: none;
+    font-size: 20px;
+    height: 34px;
+    text-align: center;
+    box-sizing: border-box;
+    float: left;
+    color: #605DEC;
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=0);
+}
+.minus {
+    border-radius: 50% 0 0 50%;
+}
+.plus {
+    border-radius: 0 50% 50% 0;
+}
+.txt_trav {
+    outline:none;
+    text-align: center;
+    box-sizing: border-box;
+    border-left: 0;
+    border-right: 0;
+    font-size: 16px;
+    color: #444;
+    background-color: rgb(255, 255, 255);
+}
+.txt_Traveler {
+    box-sizing: border-box;
+    padding: 10px;
+    outline: none;
+}
+
+.trav_done {
+    padding: 6px;
+    display: block;
+    border-radius: 2px;
+    background: #ffffff;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    color: #444;
+    width: 70px;
+    margin: 0 auto;
+    text-align: center;
+    cursor: default;
+}
+
+.trav_toggle.open {
+    background-size: 20px;
+}
+.trav_toggle.close {
+    background-size: 20px;
+}
+.button{
+  background-color: #605DEC;
+  color: white;
+  border: none;
+  height: 7vh;
+  border-radius: 5px;
+  font-size: 18px;
+}
+.button:hover{
+  background-color: #211f7d;
+}
+.heading,.sub{
+  font-weight: 700;
+  color:#6E7491;
+}
+
+.cardimg{
+  border-radius: 25px;
+  box-shadow: 3px 3px 28px 0px rgba(0,0,0,0.1);
+  border: none;
+}
+.card-img-top{
+  border-radius: 25px 25px 0px 0px;
+
+}
+.testimonial{
+    padding: 20px 50px 20px 90px;
+    margin: 10px 20px 50px 55px;
+    position: relative;
+}
+
+.testimonial .pic{
+    width:60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: absolute;
+    top: 5px;
+    left: -5px;
+}
+.testimonial .pic img{
+    width: 100%;
+    height: auto;
+}
+.testimonial .title{
+    font-size: 22px;
+    font-weight: 600;
+    color: #71334a;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0 0 7px 0;
+}
+.testimonial .post{
+    display: block;
+    font-size: 15px;
+    color: #ae483a;
+    text-transform: capitalize;
+}
+.testimonial .description{
+    font-size: 15px;
+    color: #ab9c99;
+    line-height: 28px;
+}
 </style>
 </head>
 
@@ -111,7 +393,7 @@ text-decoration: none;
           <a class="nav-link " href="#">Packages</a>
         </li>			
         <li class="nav-item ">
-          <a class="nav-link  active" href="{% url 'flight_signin' %}">Sign in</a>
+          <a class="nav-link" href="{% url 'flight_signin' %}">Sign in</a>
         </li>			
         <li class="nav-item ">
           <a class="nav-link " href="{% url 'flight_signup' %}">Sign up</a>
@@ -121,6 +403,254 @@ text-decoration: none;
 		</div>
 	  </div>
 	</nav>
+  <main >
+
+    <div class="hai">
+    <div data-v-57b06d44 class="hero_bg mt-5">
+    <div data-v-57b06d44 class="hero_text_gradient">
+      <h1 data-v-57b06d44 class="leading-none">It's more than just a trip</h1>
+   </div>
+
+   
+    <div class="container mt-4">
+    <div class="row searchbox d-flex justify-content-between pe-0 me-0 ">
+        <div class="col-lg-3 col-12 inner d-flex align-items-center ">
+            <img data-v-2caec5eb="" width="24" height="24" src="{% static 'image/flight.svg' %}" width="90px">
+            <input class="form-control" placeholder="From where?">
+        </div>
+
+        <div class="col-lg-3 col-12 inner d-flex align-items-center ">
+            <img  data-v-2caec5eb="" width="24" height="24" src="{% static 'image/arrive.svg' %}">
+
+            <input class="form-control" placeholder="where to?">
+        </div>
+
+        <div class="col-lg-3 col-12 inner d-flex align-items-center " >
+            <img data-v-2caec5eb="" width="24" height="24" src="{% static 'image/cal.svg' %}">
+            <!--<div class="ui calendar" id="example2">
+                <input type="text" placeholder="Date" class="form-control dat" >
+       
+            </div>
+
+            <div class="ui calendar" id="example3">
+              <input type="text" placeholder="reteun" class="form-control dat" >
+     
+          </div>-->
+         
+            <input id="picker"  placeholder="Depart-Return" class="form-control w-100" style="border: none;"/>
+     
+            
+        </div>
+
+        <div class="col-lg-2 col-12 inner d-flex align-items-center trav_engine" >
+            <img data-v-2caec5eb="" width="24" height="24" src="{% static 'image/user.svg' %}">
+            <div class="trav_engine w-100">
+              <input type="text" id="txtTotalTravelers" class=" form-control " value="1 Traveler(s)" />
+              <div class="trav_toggle open">
+                  <a href="#">Open</a>
+              </div>
+              <div class="trav_form" style="display:none;">
+                  <div class="trav_item">
+                      <div class="trav_inner1">
+                          Adults
+                          <span>12+ yrs</span>
+                      </div>
+                      <div class="trav_inner2">
+                          <a href="javascript:void(0)" class="minus" onclick="javascript:process(-1)">-</a>
+                          <input type="text" value="1" id="ddlAdult" class="form-control txt_trav" onkeypress="return false;">
+                          <a href="javascript:void(0)" class="plus" onclick="javascript:process(1)">+</a>
+                      </div>
+                  </div>
+                  <div class="trav_item">
+                      <div class="trav_inner1">
+                          Children
+                          <span>12- yrs</span>
+                      </div>
+                      <div class="trav_inner2">
+                          <a href="javascript:void(0)" class="minus" onclick="javascript:process2(-1)">-</a>
+                          <input type="text" value="0" id="ddlChild" class="form-control txt_trav" onkeypress="return false;">
+                          <a href="javascript:void(0)" class="plus" onclick="javascript:process2(1)">+</a>
+                      </div>
+                  </div>
+                  <div class="trav_item">
+                      <span class="trav_done">Done</span>
+                  </div>
+              </div>
+          </div>
+          </div>
+            <div class="col-lg-1 col-12 inner1 d-flex p-0 align-items-center justify-content-lg-end justify-content-center">
+            <button  type='submit' class="m-0 w-100 button" >search</button>
+          </div>
+       
+     
+    </div>
+    </div>
+   </div>
+  </main>
+  <div class="container-fluid px-5">
+  <div class="row px-2">
+    <div class="col-12 d-flex justify-content-between">
+      <p class="h4 heading">Find your next adventure with these <span style="color:#605DEC">flight deals</span> </p>
+      <p class="h5 sub">ALL<i class='fa fa-arrow-right'></i>
+      </p>
+    </div>
+    </div>
+    <div class="row px-2 mt-4">
+      <div class="col-lg-4 col-12">
+      <div class="card  cardimg ">
+        <img src="{% static 'image/ht.jpg' %}" class="card-img-top " alt="..." height="300px">
+        <div class="card-body">
+          <div class="col d-flex justify-content-between">
+          <h5 class="card-title">4561</h5>
+          <h5 class="card-title">255</h5>
+          </div>
+          <p class="card-text">kjjkj</p>
+        
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-lg-4">
+      <div class="card  cardimg ">
+        <img src="{% static 'image/ht.jpg' %}" class="card-img-top " alt="..." height="300px">
+        <div class="card-body">
+          <div class="col d-flex justify-content-between">
+          <h5 class="card-title">4561</h5>
+          <h5 class="card-title">255</h5>
+          </div>
+          <p class="card-text">kjjkj</p>
+        
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-lg-4">
+      <div class="card  cardimg ">
+        <img src="{% static 'image/ht.jpg' %}" class="card-img-top " alt="..." height="300px">
+        <div class="card-body">
+          <div class="col d-flex justify-content-between">
+          <h5 class="card-title">4561</h5>
+          <h5 class="card-title">255</h5>
+          </div>
+          <p class="card-text">kjjkj</p>
+        
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="row px-2 mt-5 pt-5">
+    <div class="col-12 d-flex justify-content-between pt-3">
+      <p class="h4 heading">Explore unique <span style="color:#5CD6C0">places to stay</span> </p>
+      <p class="h5 sub">ALL<i class='fa fa-arrow-right'></i>
+      </p>
+    </div>
+    </div>
+    <div class="row px-2 mt-4">
+      <div class="col-12 col-lg-4">
+      <div class="card  cardimg ">
+        <img src="{% static 'image/ht.jpg' %}" class="card-img-top " alt="..." height="300px">
+        <div class="card-body">
+          <div class="col d-flex justify-content-between">
+          <h5 class="card-title">4561</h5>
+          <h5 class="card-title">255</h5>
+          </div>
+          <p class="card-text">kjjkj</p>
+        
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-lg-4">
+      <div class="card  cardimg ">
+        <img src="{% static 'image/ht.jpg' %}" class="card-img-top " alt="..." height="300px">
+        <div class="card-body">
+          <div class="col d-flex justify-content-between">
+          <h5 class="card-title">4561</h5>
+          <h5 class="card-title">255</h5>
+          </div>
+          <p class="card-text">kjjkj</p>
+        
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-lg-4">
+      <div class="card  cardimg ">
+        <img src="{% static 'image/ht.jpg' %}" class="card-img-top " alt="..." height="300px">
+        <div class="card-body">
+          <div class="col d-flex justify-content-between">
+          <h5 class="card-title">4561</h5>
+          <h5 class="card-title">255</h5>
+          </div>
+          <p class="card-text">kjjkj</p>
+        
+        </div>
+      </div>
+    </div>
+    <div class="col-12 text-center mt-5 pt-5">
+      <button  type='submit' class="button px-4" >Explore more stay</button>
+    </div>
+    <div class="col-12 text-center mt-5 pt-5">
+      <p class="heading h4">What <span style="color: #6523d8;">Tripma</span> users are saying</p>
+    </div>
+    <div class="home-demo mt-5 pt-3">
+      <div class="owl-carousel owl-theme row" id="testimonial-slider">
+        <div class="item col-lg-4 col-12 testimonial w-100">
+        
+            <div class="pic">
+                <img src="{% static 'image/img-1.jpg' %}">
+            </div>
+            <h3 class="title">Williamson</h3>
+            <span class="post">Web Developer</span>
+            <p class="description">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras suscipit arcu sed scelerisque auctor. Vestibulum justo enim, dapibus sed magna sed, consequat accumsan nunc. Vivamus.
+            </p>
+        </div>
+        <div class="item col-lg-4 col-12 testimonial w-100">
+          <div class="pic">
+              <img src="{% static 'image/img-1.jpg' %}">
+          </div>
+          <h3 class="title">Williamson</h3>
+          <span class="post">Web Developer</span>
+          <p class="description">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras suscipit arcu sed scelerisque auctor. Vestibulum justo enim, dapibus sed magna sed, consequat accumsan nunc. Vivamus.
+          </p>
+      </div>
+      <div class="item col-lg-4 col-12 testimonial w-100">
+        
+        <div class="pic">
+            <img src="{% static 'image/img-1.jpg' %}">
+        </div>
+        <h3 class="title">ppamson</h3>
+        <span class="post">Web Developer</span>
+        <p class="description">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras suscipit arcu sed scelerisque auctor. Vestibulum justo enim, dapibus sed magna sed, consequat accumsan nunc. Vivamus.
+        </p>
+    </div>
+    <div class="item col-lg-4 col-12 testimonial w-100">
+        
+      <div class="pic">
+          <img src="{% static 'image/img-1.jpg' %}">
+      </div>
+      <h3 class="title">oon</h3>
+      <span class="post">Web Developer</span>
+      <p class="description">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras suscipit arcu sed scelerisque auctor. Vestibulum justo enim, dapibus sed magna sed, consequat accumsan nunc. Vivamus.
+      </p>
+  </div>
+        
+        
+      </div>
+    </div>
+    
+    
+
+  </div>
+</div>
+
     <!-- Footer -->
     <footer class="text-center text-grey text-lg-start footer mt-auto" style="background-color: #ffffff;">
       <!-- Grid container -->
@@ -302,6 +832,183 @@ text-decoration: none;
     </footer>
     <!-- Footer -->
   </div>
+  <script>
+    $('#example2').calendar({
+  type: 'date'
+});
+$('#example3').calendar({
+  type: 'date'
+});
+</script>
+<script>
+  var calendar = mobiscroll.datepicker('#picker', {
+    controls: ['calendar'],
+    select: 'range',
+    buttons: ['set', 'cancel', {
+        text: 'One way only',
+        disabled: true,
+        handler: function () {
+            var start = calendar.getTempVal()[0];
 
+            calendar.setVal([start, null]);
+            calendar.close();
+        }
+    }],
+    onTempChange: function (event, inst) {
+        inst.setOptions({
+            buttons: [
+                'cancel',
+                {
+                    text: 'One way only',
+                    disabled: !inst.getTempVal()[0],
+                    handler: function () {
+                        var start = calendar.getTempVal()[0];
+
+                        calendar.setVal([start, null]);
+                        calendar.close();
+                    }
+                },
+                'set'
+            ]
+        });
+    }
+});
+</script>
+<script>
+  mobiscroll.setOptions({
+    theme: 'ios',
+    themeVariant: 'light'
+});
+
+mobiscroll.datepicker('#demo-one-input', {
+    controls: ['calendar'],
+    showRangeLabels: true,
+    display: 'anchored'
+});
+
+mobiscroll.datepicker('#demo-init-inline', {
+    controls: ['calendar'],
+    showRangeLabels: true,
+    display: 'inline'
+});
+</script>
+<script>
+          function process(v) {
+            var Adult = parseInt(document.getElementById("ddlAdult").value);
+            var Child = parseInt(document.getElementById("ddlChild").value);
+            Adult += v;
+            var total = Adult + Child;
+            if (total <= 9 && Adult >= 1) {
+                document.getElementById("ddlAdult").value = Adult;
+                
+                var TotTravelers = Adult + Child ;
+                document.getElementById("txtTotalTravelers").value = (TotTravelers + " Traveler(s)");
+            }
+        }
+
+
+        function process2(s) {
+            var Adult = parseInt(document.getElementById("ddlAdult").value);
+            var Child = parseInt(document.getElementById("ddlChild").value);
+            Child += s;
+            var total = Adult + Child;
+            if (total <= 9 && Child >= 0) {
+                document.getElementById("ddlChild").value = Child;
+                var TotTravelers = Adult + Child ;
+                document.getElementById("txtTotalTravelers").value = (TotTravelers + " Traveler(s)");
+            }
+        }
+
+
+        function process3(sh) {
+            var Adult = parseInt(document.getElementById("ddlAdult").value);
+            var Child = parseInt(document.getElementById("ddlChild").value);
+            Infant += sh;
+            if (Infant <= Adult && Infant >= 0) {
+                var TotTravelers = Adult + Child;
+                document.getElementById("txtTotalTravelers").value = (TotTravelers + " Traveler(s)");
+            }
+        }
+
+
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+          <script>
+              $(document).ready(function () {
+                  if ($('div.trav_toggle').length > 0) {
+                      $('div.trav_toggle').click(function () {
+                          if ($(this).hasClass('open')) {
+                              $(this).removeClass('open');
+                              $(this).addClass('close');
+                              $(this).next().slideDown(100);
+                              return false;
+                          } else {
+                              $(this).removeClass('close');
+                              $(this).addClass('open');
+                              $(this).next().slideUp(100);
+                              return false;
+                          }
+                      });
+                  }
+                  $('.trav_done').click(function () {
+                      if ($('div.trav_toggle').hasClass('close')) {
+                          $('div.trav_toggle').removeClass('close');
+                          $('div.trav_toggle').addClass('open');
+                          $('div.trav_toggle').next().slideUp(100);
+                      }
+                  });
+              });
+          </script>
+
+<script>
+
+const mediaQuery = window.matchMedia('(max-width:940px)')
+// Check if the media query is true
+if (mediaQuery.matches) {
+  // Then trigger an alert
+  $(document).ready(function(){
+  // Owl Carousel
+  $("#testimonial-slider").owlCarousel({
+    items: 1,
+    margin: 10,
+    loop: true,
+    nav: true
+  });
+});
+}
+const mediaQuery1 = window.matchMedia('(max-width:1100px)')
+if (mediaQuery1.matches){
+  // Then trigger an alert
+  $(document).ready(function(){
+  // Owl Carousel
+  $("#testimonial-slider").owlCarousel({
+    items: 2,
+    margin: 10,
+    loop: true,
+    nav: true
+  });
+});
+}
+const mediaQuery3 = window.matchMedia('(min-width:1100px)')
+if (mediaQuery3.matches){
+  // Then trigger an alert
+  $(document).ready(function(){
+  // Owl Carousel
+  $("#testimonial-slider").owlCarousel({
+    items: 3,
+    margin: 10,
+    loop: true,
+    nav: true
+  });
+});
+}
+ 
+ 
+
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 </body>
+
 </html>

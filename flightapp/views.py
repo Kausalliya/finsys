@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User,auth
 from django.contrib.auth.decorators import login_required
 
-from flightapp.models import experiences, hotel
+from flightapp.models import city, experiences, flight, flightdetails, hotel
 
 
 # Create your views here.
@@ -16,6 +16,11 @@ def seatbooking(request):
 
 def base(request):
     return render(request,'base.html')
+
+def home(request):
+    city_view=city.objects.all()
+    details=flight.objects.all()
+    return render(request,'home.html',{'city_view':city_view})
 
 def flight_signin(request):
     return render(request,'flight_signin.html')
@@ -81,6 +86,9 @@ def afterpayment(request):
     hotel1=hotel.objects.all().order_by('-id')[:4]
     exp1=experiences.objects.all().order_by('-id')[:2]
     return render(request,'web/afterpayment.html',{'hotel':hotel1,'exp':exp1})
+
+
+
 #------------------------admin section---------------------------
 
 
@@ -172,4 +180,47 @@ def adminbooking(request):
 def logout(request):
     auth.logout(request)
     return redirect('base')
+
+
+def admin_city(request):
+    
+    return render(request,'admin/admin_city.html')
+
+def admin_city_add(request):
+    if request.method=='POST':
+        name=request.POST.get('name')
+        city_name=request.POST.get('city_name')
+        description=request.POST.get('description')
+        price=request.POST.get('price')
+        image=request.FILES.get('image')
+        city_details=city(name=name,city=city_name,description=description,price=price,image=image)
+        city_details.save()
+    return render(request,'admin/admin_city.html')
+
+def admin_flightdetails(request):
+
+    return render(request,'admin/admin_flightdetails.html')
+
+def admin_flight_add(request):
+    if request.method=='POST':
+        name=request.POST.get('name')
+        logo=request.FILES.get('logo')
+        flight_details=flightdetails(name=name,logo=logo)
+        flight_details.save()
+        plane=flightdetails.objects.get(id=flight_details.id)
+        depart_time=request.POST.get('dptime')
+        reach_time=request.POST.get('rtime')
+        from_place=request.POST.get('frmplace')
+        from_code=request.POST.get('frm_code')
+        to_place=request.POST.get('toplace')
+        to_code=request.POST.get('to_code')
+        time_taken=request.POST.get('timetaken')
+        ticket_rate=request.POST.get('rate')
+        no_of_stops=request.POST.get('stop')
+        depart_day=request.POST.get('day')
+        flight_timing=flight(depart_time=depart_time,reach_time=reach_time,from_place=from_place,to_place=to_place,plane=plane,time_taken=time_taken,ticket_rate=ticket_rate,depart_day=depart_day,no_of_stops=no_of_stops,from_code=from_code,to_code=to_code)
+        flight_timing.save()     
+
+    return render(request,'admin/admin_flightdetails.html')
+
 

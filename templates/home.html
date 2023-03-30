@@ -1,0 +1,321 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+  <!-- <link rel="stylesheet" href="{% static 'css/search.css' %}"> -->
+<style>
+  .form {
+    background: #fff;
+    padding: 10px;
+    margin: 0;
+    border-radius: 5px;
+    display: flex;
+  }
+  .form input {
+    outline: none;
+    border: 0;
+  }
+
+  .btn-form {
+    padding: 10px 40px;
+    outline: none;
+    border: 0;
+    color: #fff;
+    background:  #645DEC;
+    /*float: right;
+      clear: both*/
+  }
+  .form-control {
+    display: block;
+    width: 100%;
+    /* height: calc(2.25rem + 2px); */
+    /* padding: .375rem .75rem; */
+    /* font-size: 1rem; */
+    /* line-height: 1.5; */
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    /* border-radius: .25rem; */
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+  .label{
+    color: #6e7491;
+    font-weight: 700;
+    font-size: 1.5rem;
+    font-family: Nunito Sans,sans-serif;
+  }
+
+  .table tbody td .img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+.img {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+*, *::before, *::after {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+user agent stylesheet
+div {
+    display: block;
+}
+.table tbody th, .table tbody td {
+    border: none;
+    padding: 30px;
+    font-size: 14px;
+    background: #fff;
+    vertical-align: middle;
+}
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+}
+table {
+    border-collapse: collapse;
+}
+
+
+
+table {
+    border-collapse: separate;
+    text-indent: initial;
+    border-spacing: 4px;
+}
+body {
+    font-family: "Poppins", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.8;
+    font-weight: normal;
+    background: #f8f9fd;
+    color: gray;
+}
+body {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    text-align: left;
+    background-color: #fff;
+}
+
+
+</style>
+  <div class="container">
+    <!-- <div class="row "> -->
+      <div class="container   ">
+        <div class="row pt-5 hero_text_gradiant">
+          <h1 class="leading-none">It's more than just a trip</h1>
+        </div>
+      </div>
+      <!-- <div class="container"> -->
+        <!-- <div class="row col-sm-2">
+          <div class="row col-sm-4 col-sm-8">        
+            <div class="form">
+               
+              <span><img src="{% static 'images/icons8-airplane-take-off-26.png' %}"></span>
+              <input type="text" placeholder='Select Origin' style="width: 150px;">
+  
+          
+              <span><img src="{% static 'images/icons8-airplane-landing-30.png' %}"></span>
+              <input type="text" placeholder='Select Destination'style="width: 150px;">
+           
+              <span><img src="{% static 'images/icons8-tear-off-calendar-24.png' %}"></span>
+              <input type="text" placeholder="Travel Date" onfocus="(this.type='date')" id="travelDate" onchange="flight.validateEnteredDate(event)" style="width: 150px;">
+            
+              <span><img src="{% static 'images/icons8-tear-off-calendar-24.png' %}"></span>
+              <input type="text" placeholder="Travel Date" onfocus="(this.type='date')" id="travelDate" onchange="flight.validateEnteredDate(event)"style="width: 150px;">
+           
+              <span><img src="{% static 'images/icons8-person-24.png' %}"></span>
+              <input type="text" placeholder='No.of traveller' style="width: 150px;">
+            
+              <button class="btn-form">search</button>
+            </div>
+          </div>
+        </div>
+ -->
+ <div class="row">
+  <div class="col-sm-2">
+    <div class="row">
+      <div class="col-sm-4">
+        <img src="{% static 'images/icons8-airplane-take-off-26.png' %}">
+      </div>
+      <div class="col-sm-8"style="margin-left: -35px;">
+        <select type="text" placeholder='From Where' style="width: 150px;">
+          {% for i in details %}
+            <option>{i.from_where}</option>
+          {% endfor %}  
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-2">
+    <div class="row">
+      <div class="col-sm-4">
+        <img src="{% static 'images/icons8-airplane-landing-30.png' %}">      </div>
+      <div class="col-sm-8"style="margin-left: -35px;">
+        <input type="text" placeholder='To Where' style="width: 150px;">
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-2">
+    <div class="row">
+      <div class="col-sm-4">
+        <img src="{% static 'images/icons8-tear-off-calendar-24.png' %}">      </div>
+      <div class="col-sm-8"style="margin-left: -35px;">
+        <input type="date" placeholder='Select Origin' style="width: 150px;">
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-sm-2">
+    <div class="row">
+      <div class="col-sm-4">
+        <img src="{% static 'images/icons8-tear-off-calendar-24.png' %}">      </div>
+      <div class="col-sm-8" style="margin-left: -35px;">
+        <input type="date" placeholder='Select Origin' style="width: 150px;">
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-sm-2">
+    <div class="row">
+      <div class="col-sm-4">
+        <img src="{% static 'images/icons8-person-24.png' %}">      </div>
+      <div class="col-sm-8" style="margin-left: -35px;">
+        <input type="text" placeholder='Select Origin' style="width: 150px;">
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-2">
+    <div class="row">
+      <div class="col-sm-4">
+        <button class="btn-form">search</button>
+      </div>
+    </div>
+  </div>
+</div>
+<br><br><br>
+
+<section class="ftco-section">
+  <div class="container">
+      <div class="card">
+          <div class="row justify-content-center">
+              <!-- <div class="col-md-6 text-center mb-5"> -->
+              <div class="row">
+              <div class="col-md-12">
+              <div class="table-wrap">
+              <table class="table table-responsive-xl">
+              <tbody>
+              <td class="d-flex align-items-center">
+              <div class="img"><img class="img" src="{% static 'images/card3.png' %}" alt="....">
+              </div></td>
+              <td>
+              <div class="pl-3 email">
+              <span>16h 45m</span><br>
+              <span>Air India</span>
+              </div>
+              </td>
+              <td>7.00pm-4.15pm</td>
+              <td><div><span>1 stop</span><br><span>2h 45m in HNL</span></div></td>
+              <td><div><span>$ 534</span><br><span>round trip</span></div></td>
+      
+      </div>
+
+  </tbody>
+  </table>
+  </div>
+  </div>
+  </div>
+  </div>
+  </section>
+
+            <!-- <label style="left: 0px; right: auto; position: absolute;"><img src="{% static 'images/icons8-airplane-take-off-26.png' %}"></label>
+            <input type="text">
+            <span><img src="{% static 'images/icons8-airplane-landing-30.png' %}"></span>
+            <input type="text">
+            <span><img src="{% static 'images/icons8-airplane-take-off-26.png' %}"></span>
+            <input type="text">
+            <span><img src="{% static 'images/icons8-tear-off-calendar-24.png' %}"></span>
+            <input type="text">
+            <span><img src="{% static 'images/icons8-person-24.png' %}"></span>
+            <input type="text">
+ -->
+
+          <!-- </div> -->
+    
+        <!-- </div> -->
+      <!-- </div> -->
+      <br><br><br>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-8">
+          <label class="label">Find your next adventure with these </label><span style="color: #645DEC; font-weight: 700;font-size: 1.5rem;"> flight deals</span>
+          <span class="label" style="color: #1a11bf;float:right;">All<i class="bi bi-arrow-right"></i></span>
+        </div>
+        </div>
+      </div>
+      <br><br><br>
+    
+    <div class="container">
+      <div class="row" >
+        {% for i in city_view %}
+
+          <div class="col-sm-4 col-12">
+            <div class="card m-0 v-card" style="width: 24rem; border-radius: 12px; height: 480px;box-shadow:0px 2px 0px rgb(205, 203, 203)">
+              <img src="{{i.image.url}}" class="card-img-top v-card" alt="..." style="height: 350px; width: 22rem; border-top-right-radius: 12px; border-top-left-radius: 12px;">
+              <div class="card-body">
+                <span  style="color: black; font-size: large; font-weight: 40;"><b>{{i.name}}</b></span>
+                <span style="color: #645DEC; font-size: large;font-weight: 50;"><b>    {{i.city}}</b></span>
+                <span class="a" style="color: #6e7491;font-weight: 400;">${{i.price}}</span>
+                <p class="discription" style="color: rgb(55, 53, 53);">{{i.description}}</p>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+
+      </div>  
+    </div>  
+  <br><br><br>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-8">
+      <label class="label">Explore Unique places </label><span style="color: #22c3a6; font-weight: 700;font-size: 1.5rem;">  to Stay</span>
+      <span class="label" style="color: #1a11bf;float:right;">All<i class="bi bi-arrow-right"></i></span>
+    </div>
+    </div>
+  </div>
+  <br><br><br>
+
+  
+        <div class="container">
+
+          <div class="col-sm-4 col-12">
+            <div class="card m-4 v-card" style="width: 22rem; border-radius: 12px; height: 480px; box-shadow:0px 2px 0px rgb(205, 203, 203)">
+              <img src="{% static 'images/card3.png' %}" class="card-img-top v-card" alt="..." style="height: 350px; width: 22rem; border-top-right-radius: 12px; border-top-left-radius: 12px;">
+              <div class="card-body">
+                <span  style="color: black;font-size: large; font-weight: 40;"><b>Kodaiji Temple, </b></span>
+                <span style="color: #22c3a6; font-size: large;font-weight: 50;"><b>    Kyoto      </b></span>
+                <p class="discription" style="color: rgb(55, 53, 53);">Step back in time in the Gion district</p>
+              </div>
+            </div>
+          </div> 
+  
+        </div>
+
+      </div>
+    
+             
+    
+{% endblock %}

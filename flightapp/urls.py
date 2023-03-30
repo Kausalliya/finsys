@@ -26,6 +26,11 @@ urlpatterns = [
     path('adminbooking', views.adminbooking, name='adminbooking'),
     path('logout', views.logout, name='logout'),
 
+    path('admin_city',views.admin_city,name='admin_city'),
+    path('admin_city_add',views.admin_city_add,name='admin_city_add'),
+    path('admin_flightdetails',views.admin_flightdetails,name='admin_flightdetails'),
+    path('admin_flight_add',views.admin_flight_add,name='admin_flight_add'),
+
 
 
 
