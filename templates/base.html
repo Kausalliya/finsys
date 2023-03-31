@@ -298,9 +298,22 @@ h1[data-v-57b06d44] {
   border-radius: 25px 25px 0px 0px;
 
 }
+.card-title{
+  color: #6E7491;
+  font-size: 18px;
+  font-family:Nunito Sans;
+  font-weight:600 ;
+
+}
+.card-text{
+  color:#7C8DB0;
+  font-size: 16px;
+  font-family:Nunito Sans;
+  font-weight:400 ;
+
+}
 .testimonial{
-    padding: 20px 50px 20px 90px;
-    margin: 10px 20px 50px 55px;
+    padding: 20px 20px 20px 70px;
     position: relative;
 }
 
@@ -318,24 +331,58 @@ h1[data-v-57b06d44] {
     height: auto;
 }
 .testimonial .title{
-    font-size: 22px;
+    font-size: 18px;
     font-weight: 600;
-    color: #71334a;
-    text-transform: uppercase;
+    color: #6E7491;
     letter-spacing: 1px;
     margin: 0 0 7px 0;
 }
 .testimonial .post{
     display: block;
-    font-size: 15px;
-    color: #ae483a;
-    text-transform: capitalize;
+    font-size: 18px;
+    color:#A1B0CC;
+    line-height: 25px;
+}
+.fa-star{
+  line-height: 25px;
+
 }
 .testimonial .description{
-    font-size: 15px;
-    color: #ab9c99;
+    font-size: 18px;
+    color: #27273F;
     line-height: 28px;
+    flex-grow: 0;
+    text-align: justify;
+    
 }
+.star-ratings {
+  unicode-bidi: bidi-override;
+  color: #ccc;
+  font-size: 24px;
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+  .fill-ratings {
+    color: #2e58ef;
+    padding: 0;
+    position: absolute;
+    z-index: 1;
+    display: block;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+  }
+    .star-ratings   span {
+      display: inline-block;
+    }
+  
+  .empty-ratings {
+    padding: 0;
+    display: block;
+    z-index: 0;
+  }
+
 </style>
 </head>
 
@@ -413,7 +460,7 @@ h1[data-v-57b06d44] {
 
    
     <div class="container mt-4">
-    <div class="row searchbox d-flex justify-content-between pe-0 me-0 ">
+    <div class="row searchbox d-flex justify-content-between pe-0 me-0 ps-3 ">
         <div class="col-lg-3 col-12 inner d-flex align-items-center ">
             <img data-v-2caec5eb="" width="24" height="24" src="{% static 'image/flight.svg' %}" width="90px">
             <input class="form-control" placeholder="From where?">
@@ -487,7 +534,7 @@ h1[data-v-57b06d44] {
     </div>
    </div>
   </main>
-  <div class="container-fluid px-5">
+  <div class="container-fluid px-lg-5 px-3">
   <div class="row px-2">
     <div class="col-12 d-flex justify-content-between">
       <p class="h4 heading">Find your next adventure with these <span style="color:#605DEC">flight deals</span> </p>
@@ -496,47 +543,23 @@ h1[data-v-57b06d44] {
     </div>
     </div>
     <div class="row px-2 mt-4">
-      <div class="col-lg-4 col-12">
+      {% if city %}
+        {% for p in city %}
+      <div class="col-lg-4 col-12 mt-4 mt-lg-0">
       <div class="card  cardimg ">
-        <img src="{% static 'image/ht.jpg' %}" class="card-img-top " alt="..." height="300px">
+        <img src="{{ p.image.url }}" class="card-img-top " alt="..." height="300px">
         <div class="card-body">
           <div class="col d-flex justify-content-between">
-          <h5 class="card-title">4561</h5>
-          <h5 class="card-title">255</h5>
+          <h5 class="card-title">{{p.name}} ,<span style="color:#605DEC;">{{p.city}}</h5>
+          <h5 class="card-title">{{p.price}}</h5>
           </div>
-          <p class="card-text">kjjkj</p>
+          <p class="card-text">{{p.description}}</p>
         
         </div>
       </div>
     </div>
-
-    <div class="col-12 col-lg-4">
-      <div class="card  cardimg ">
-        <img src="{% static 'image/ht.jpg' %}" class="card-img-top " alt="..." height="300px">
-        <div class="card-body">
-          <div class="col d-flex justify-content-between">
-          <h5 class="card-title">4561</h5>
-          <h5 class="card-title">255</h5>
-          </div>
-          <p class="card-text">kjjkj</p>
-        
-        </div>
-      </div>
-    </div>
-
-    <div class="col-12 col-lg-4">
-      <div class="card  cardimg ">
-        <img src="{% static 'image/ht.jpg' %}" class="card-img-top " alt="..." height="300px">
-        <div class="card-body">
-          <div class="col d-flex justify-content-between">
-          <h5 class="card-title">4561</h5>
-          <h5 class="card-title">255</h5>
-          </div>
-          <p class="card-text">kjjkj</p>
-        
-        </div>
-      </div>
-    </div>
+    {% endfor %}
+    {% endif %}
 
   </div>
 
@@ -549,46 +572,24 @@ h1[data-v-57b06d44] {
     </div>
     </div>
     <div class="row px-2 mt-4">
-      <div class="col-12 col-lg-4">
+      {% if hotel %}
+        {% for p in hotel %}
+      <div class="col-12 col-lg-4 mt-5 mt-lg-0">
       <div class="card  cardimg ">
-        <img src="{% static 'image/ht.jpg' %}" class="card-img-top " alt="..." height="300px">
+        <img src="{{ p.image.url }}" class="card-img-top " alt="..." height="300px">
         <div class="card-body">
           <div class="col d-flex justify-content-between">
-          <h5 class="card-title">4561</h5>
-          <h5 class="card-title">255</h5>
+          <h5 class="card-title">{{p.name}} in <span style="color: #5CD6C0;">{{p.city}}</span></h5>
+          <!--<h5 class="card-title">{{p.price}}</h5>-->
           </div>
-          <p class="card-text">kjjkj</p>
+          <p class="card-text">{{p.description}}</p>
         
         </div>
       </div>
     </div>
+    {% endfor %}
+    {% endif %}
 
-    <div class="col-12 col-lg-4">
-      <div class="card  cardimg ">
-        <img src="{% static 'image/ht.jpg' %}" class="card-img-top " alt="..." height="300px">
-        <div class="card-body">
-          <div class="col d-flex justify-content-between">
-          <h5 class="card-title">4561</h5>
-          <h5 class="card-title">255</h5>
-          </div>
-          <p class="card-text">kjjkj</p>
-        
-        </div>
-      </div>
-    </div>
-
-    <div class="col-12 col-lg-4">
-      <div class="card  cardimg ">
-        <img src="{% static 'image/ht.jpg' %}" class="card-img-top " alt="..." height="300px">
-        <div class="card-body">
-          <div class="col d-flex justify-content-between">
-          <h5 class="card-title">4561</h5>
-          <h5 class="card-title">255</h5>
-          </div>
-          <p class="card-text">kjjkj</p>
-        
-        </div>
-      </div>
     </div>
     <div class="col-12 text-center mt-5 pt-5">
       <button  type='submit' class="button px-4" >Explore more stay</button>
@@ -596,58 +597,35 @@ h1[data-v-57b06d44] {
     <div class="col-12 text-center mt-5 pt-5">
       <p class="heading h4">What <span style="color: #6523d8;">Tripma</span> users are saying</p>
     </div>
-    <div class="home-demo mt-5 pt-3">
+    <div class="home-demo mt-5 pt-3 pb-5 mb-5">
+     
       <div class="owl-carousel owl-theme row" id="testimonial-slider">
+        {% if test %}
+        {% for p in test%}
         <div class="item col-lg-4 col-12 testimonial w-100">
         
             <div class="pic">
-                <img src="{% static 'image/img-1.jpg' %}">
+                <img src="{{ p.image.url }}">
             </div>
-            <h3 class="title">Williamson</h3>
-            <span class="post">Web Developer</span>
-            <p class="description">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras suscipit arcu sed scelerisque auctor. Vestibulum justo enim, dapibus sed magna sed, consequat accumsan nunc. Vivamus.
+            <h3 class="title">{{p.name}}</h3>
+            <span class="post mb-2">{{p.city}},{{p.country}} |{{p.date}}</span>
+            <div class="star-ratings">
+              <div class="fill-ratings" style="width:{{p.rating}}%;">
+                <span>★★★★★</span>
+              </div>
+              <div class="empty-ratings">
+                <span>★★★★★</span>
+              </div>
+            </div>
+            <p class="description mt-2">
+                {{p.message}}
             </p>
         </div>
-        <div class="item col-lg-4 col-12 testimonial w-100">
-          <div class="pic">
-              <img src="{% static 'image/img-1.jpg' %}">
-          </div>
-          <h3 class="title">Williamson</h3>
-          <span class="post">Web Developer</span>
-          <p class="description">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras suscipit arcu sed scelerisque auctor. Vestibulum justo enim, dapibus sed magna sed, consequat accumsan nunc. Vivamus.
-          </p>
-      </div>
-      <div class="item col-lg-4 col-12 testimonial w-100">
-        
-        <div class="pic">
-            <img src="{% static 'image/img-1.jpg' %}">
-        </div>
-        <h3 class="title">ppamson</h3>
-        <span class="post">Web Developer</span>
-        <p class="description">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras suscipit arcu sed scelerisque auctor. Vestibulum justo enim, dapibus sed magna sed, consequat accumsan nunc. Vivamus.
-        </p>
-    </div>
-    <div class="item col-lg-4 col-12 testimonial w-100">
-        
-      <div class="pic">
-          <img src="{% static 'image/img-1.jpg' %}">
-      </div>
-      <h3 class="title">oon</h3>
-      <span class="post">Web Developer</span>
-      <p class="description">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras suscipit arcu sed scelerisque auctor. Vestibulum justo enim, dapibus sed magna sed, consequat accumsan nunc. Vivamus.
-      </p>
-  </div>
-        
-        
+        {% endfor %}
+    {% endif %}
+    
       </div>
     </div>
-    
-    
-
   </div>
 </div>
 
@@ -1006,6 +984,16 @@ if (mediaQuery3.matches){
  
 
 
+</script>
+<script>
+  $(document).ready(function() {
+  // Gets the span width of the filled-ratings span
+  // this will be the same for each rating
+  var star_rating_width = $('.fill-ratings span').width();
+  // Sets the container of the ratings to span width
+  // thus the percentages in mobile will never be wrong
+  $('.star-ratings').width(star_rating_width);
+});
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>

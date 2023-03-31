@@ -20,9 +20,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Main CSS-->
     <link rel="stylesheet" type="text/css" href="static/admin/css/main.css">
-
-
     <!-- Font-icon css-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
 .app-sidebar__toggle:focus, .app-sidebar__toggle:hover {
@@ -197,8 +196,8 @@
 
         <li class="treeview is-expanded"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-list-alt"></i><span class="app-menu__label">Other</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
-            <li><a class="treeview-item active" href="{% url 'addhotel' %}"><i class="icon fa fa-fighter-jet"></i>Hotel</a></li>
-            <li><a class="treeview-item " href="{% url 'admincity' %}"><i class="icon fa fa-fighter-jet"></i>City</a></li>
+            <li><a class="treeview-item " href="{% url 'addhotel' %}"><i class="icon fa fa-fighter-jet"></i>Hotel</a></li>
+            <li><a class="treeview-item active" href="{% url 'admincity' %}"><i class="icon fa fa-fighter-jet"></i>City</a></li>
             <li><a class="treeview-item tab" href="{% url 'addexp' %}"><i class="icon fa fa-fighter-jet"></i>Experience</a></li>
             <li><a class="treeview-item " href="{% url 'admintestimonial' %}"><i class="icon fa fa-fighter-jet"></i>Testimonial</a></li>
           </ul>
@@ -208,7 +207,7 @@
     <main class="app-content" style="background-color: rgb(255, 255, 255);">
       <div class="app-title" style="background-color:#ffffff">
         <div class="mt-5" style="color:#5871ff">
-          <h1><i class="fa fa-hotel"></i> Hotel Details</h1>
+          <h1><i class="fas fa-city"></i> City Details</h1>
         </div>
       </div>
       {% for message in messages %}
@@ -226,13 +225,13 @@
         <div class="col-md-4">
 
           <div class="tile">
-            <h3 class="tile-title">Add hotel Detail</h3>
+            <h3 class="tile-title">Add city Detail</h3>
             <div class="tile-body">
-              <form action="{% url 'savehotel' %}" method="post" enctype="multipart/form-data">
+              <form action="{% url 'admin_city_add' %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="form-group">
-                  <label class="control-label">Hotel Name</label>
-                  <input class="form-control" type="text" placeholder="Enter Hotel name" name="name">
+                  <label class="control-label">Name</label>
+                  <input class="form-control" type="text" placeholder="Enter name" name="name">
                 </div>
                 <div class="form-group">
                   <label class="control-label">City</label>
@@ -247,8 +246,8 @@
                   <textarea class="form-control" rows="4" placeholder="Enter description" name="des"></textarea>
                 </div>
                 <div class="form-group">
-                  <label class="control-label">Hotel image</label>
-                  <input class="form-control" type="file" name="file" accept="image/*">
+                  <label class="control-label">Image</label>
+                  <input class="form-control" type="file" name="file" >
                 </div>
               <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Add</button>
                 
@@ -259,12 +258,12 @@
         </div>
         <div class="col-md-8">
           <div class="tile">
-            <h3 class="tile-title">Show hotels</h3>
+            <h3 class="tile-title">Show Cities</h3>
             <div class="tile-body table-responsive">
-              <table class="table table-hover table-bordered " id="sampleTable" >
+              <table class="table table-hover table-bordered" id="sampleTable">
                 <thead>
                   <tr>
-                    <th>Hotel name</th>
+                    <th>Name</th>
                     <th>Description</th>
                     <th>Price</th>
                     <th>City</th>
@@ -273,7 +272,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  {% for p in hotel %}
+                  {% for p in city %}
                   <tr>
                     <td>{{p.name}}</td>
                     <td>{{p.description}}</td>
@@ -283,7 +282,7 @@
                       <img src="{{ p.image.url }}" alt="hotelphoto" class="rounded" width="50">
                     </td>
                     <td>
-                      <a href="{% url 'deletehotel' p.id %}"><i class="fa fa-trash" style="color:red"></i></a>
+                      <a href="{% url 'deletecity' p.id %}"><i class="fa fa-trash" style="color:red"></i></a>
                       </td>
                   </tr>
                   {% endfor %}

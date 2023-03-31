@@ -16,7 +16,8 @@ class city(models.Model):
     city=models.CharField(max_length=30)
     description=models.CharField(max_length=100)
     price=models.CharField(max_length=100)
-    image=models.ImageField( upload_to="images/",null=True,blank=True)
+    image=models.ImageField( upload_to="city",null=True,blank=True)
+
 
 class flightdetails(models.Model):
     name=models.CharField(max_length=30)  
@@ -72,6 +73,16 @@ class seat_allotted(models.Model):
     seatnumber=models.CharField(max_length=30)
     userid= models.ForeignKey(User, on_delete=models.CASCADE)
     passengerid= models.ForeignKey(passengerdetails, on_delete=models.CASCADE)    
+
+class testimonial(models.Model):   
+    name=models.CharField(max_length=50)
+    date=models.CharField(max_length=100,null=True,blank=True)
+    city=models.CharField(max_length=100,null=True,blank=True)
+    country=models.CharField(max_length=100,null=True,blank=True)
+    rating=models.IntegerField(null=True,blank=True)
+    image=models.ImageField( upload_to="testimonial",null=True,blank=True)
+    message=models.CharField(max_length=200)   
+
 
 
 class flight_seat(models.Model):  

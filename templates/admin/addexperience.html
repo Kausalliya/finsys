@@ -196,8 +196,9 @@
         <li class="treeview is-expanded"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-list-alt"></i><span class="app-menu__label">Other</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
             <li><a class="treeview-item " href="{% url 'addhotel' %}"><i class="icon fa fa-fighter-jet"></i>Hotel</a></li>
-            <li><a class="treeview-item tab" href="page-login.html"><i class="icon fa fa-fighter-jet"></i>City</a></li>
+            <li><a class="treeview-item " href="{% url 'admincity' %}"><i class="icon fa fa-fighter-jet"></i>City</a></li>
             <li><a class="treeview-item active" href="{% url 'addexp' %}"><i class="icon fa fa-fighter-jet"></i>Experience</a></li>
+            <li><a class="treeview-item " href="{% url 'admintestimonial' %}"><i class="icon fa fa-fighter-jet"></i>Testimonial</a></li>
           </ul>
         </li>
       </ul>
@@ -257,7 +258,7 @@
         <div class="col-md-8">
           <div class="tile">
             <h3 class="tile-title">Show experiences</h3>
-            <div class="tile-body">
+            <div class="tile-body table-responsive">
               <table class="table table-hover table-bordered" id="sampleTable">
                 <thead>
                   <tr>

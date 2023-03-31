@@ -8,8 +8,6 @@ urlpatterns = [
     path('Admin-DashBoard',views.dashboard,name='dashboard'),
     path('seatbooking',views.seatbooking,name='seatbooking'),
     path('addpassenger',views.addpassenger,name='addpassenger'),
-    path('addform',views.addform,name='addform'),
-    path('addform2',views.addform2,name='addform2'),
     path('addpayment',views.addpayment,name='addpayment'),
     path('signin',views.signin,name='signin'),
     path('logout',views.logout,name='logout'),
@@ -26,10 +24,20 @@ urlpatterns = [
     path('adminbooking', views.adminbooking, name='adminbooking'),
     path('logout', views.logout, name='logout'),
 
-    path('admin_city',views.admin_city,name='admin_city'),
+    path('admincity',views.admincity,name='admincity'),
     path('admin_city_add',views.admin_city_add,name='admin_city_add'),
     path('admin_flightdetails',views.admin_flightdetails,name='admin_flightdetails'),
     path('admin_flight_add',views.admin_flight_add,name='admin_flight_add'),
+    path('deletecity/<int:id>', views.deletecity, name='deletecity'),
+
+    path('admintestimonial',views.admintestimonial,name='admintestimonial'),
+    path('addtestimonial',views.addtestimonial,name='addtestimonial'),
+    path('deletetestimonial/<int:id>', views.deletetestimonial, name='deletetestimonial'),
+
+
+
+
+
 
 
 

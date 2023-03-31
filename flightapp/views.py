@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User,auth
 from django.contrib.auth.decorators import login_required
 
-from flightapp.models import city, experiences, flight, flightdetails, hotel
+from flightapp.models import city, experiences, flight, flightdetails, hotel, testimonial
 
 
 # Create your views here.
@@ -15,7 +15,10 @@ def seatbooking(request):
     return render(request,'web/seatbooking.html')
 
 def base(request):
-    return render(request,'base.html')
+    hotel1=hotel.objects.all().order_by('-id')[:3]
+    city1=city.objects.all().order_by('-id')[:3]
+    test=testimonial.objects.all().order_by('-id')[:3]
+    return render(request,'base.html',{'hotel':hotel1,'city':city1,'test':test})
 
 def home(request):
     city_view=city.objects.all()
@@ -65,12 +68,6 @@ def signupcreate(request):
 @login_required(login_url='/flight_signin')      
 def addpassenger(request):
     return render(request,'web/passenger.html')
-
-
-def addform(request):
-    return render(request,'admin/adminform.html')    
-def addform2(request):
-    return render(request,'admin/adminform2.html')  
 
 @login_required(login_url='flight_signin')    
 def addpayment(request):
@@ -182,20 +179,28 @@ def logout(request):
     return redirect('base')
 
 
-def admin_city(request):
-    
-    return render(request,'admin/admin_city.html')
+def admincity(request):
+    city1=city.objects.all()
+    return render(request,'admin/addcity.html',{'city':city1})
 
 def admin_city_add(request):
     if request.method=='POST':
-        name=request.POST.get('name')
-        city_name=request.POST.get('city_name')
-        description=request.POST.get('description')
-        price=request.POST.get('price')
-        image=request.FILES.get('image')
+        name=request.POST['name']
+        city_name=request.POST['city']
+        description=request.POST['des']
+        price=request.POST['price']
+        image=request.FILES['file']
         city_details=city(name=name,city=city_name,description=description,price=price,image=image)
         city_details.save()
-    return render(request,'admin/admin_city.html')
+        messages.success(request, 'City details added sucessfully!')
+    return redirect('admincity')
+
+
+def deletecity(request,id):
+    member1 = city.objects.get(id=id)
+    member1.delete()
+    messages.error(request, 'city details deleted sucessfully!')
+    return redirect('admincity')  
 
 def admin_flightdetails(request):
 
@@ -222,5 +227,31 @@ def admin_flight_add(request):
         flight_timing.save()     
 
     return render(request,'admin/admin_flightdetails.html')
+
+
+def admintestimonial(request):
+    test=testimonial.objects.all()
+    return render(request,'admin/testimonial.html',{'test':test})
+
+def addtestimonial(request):
+    name=request.POST['name']
+    date=request.POST['date']
+    city=request.POST['city']
+    country=request.POST.get('country')
+    message=request.POST['des']
+    rate=request.POST.get('rate')
+    image=request.FILES['file']
+    testi=testimonial(name=name,date=date,city=city,country=country,rating=rate,message=message,image=image)
+    testi.save()
+    messages.success(request, 'testimonial added sucessfully!')
+    return redirect('admintestimonial')
+
+def deletetestimonial(request,id):
+    member1 = testimonial.objects.get(id=id)
+    member1.delete()
+    messages.error(request, 'testimonial details deleted sucessfully!')
+    return redirect('admintestimonial') 
+
+
 
 
