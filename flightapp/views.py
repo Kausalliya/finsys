@@ -1,10 +1,11 @@
+from datetime import datetime
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.contrib.auth.models import User,auth
 from django.contrib.auth.decorators import login_required
 
-from flightapp.models import city, experiences, flight, flightdetails, hotel, testimonial
+from flightapp.models import airportcode, city, experiences, flight, trip, hotel, testimonial
 
 
 # Create your views here.
@@ -202,55 +203,87 @@ def deletecity(request,id):
     messages.error(request, 'city details deleted sucessfully!')
     return redirect('admincity')  
 
-def admin_flightdetails(request):
-
-    return render(request,'admin/admin_flightdetails.html')
-
-def admin_flight_add(request):
-    if request.method=='POST':
-        name=request.POST.get('name')
-        logo=request.FILES.get('logo')
-        flight_details=flightdetails(name=name,logo=logo)
-        flight_details.save()
-        plane=flightdetails.objects.get(id=flight_details.id)
-        depart_time=request.POST.get('dptime')
-        reach_time=request.POST.get('rtime')
-        from_place=request.POST.get('frmplace')
-        from_code=request.POST.get('frm_code')
-        to_place=request.POST.get('toplace')
-        to_code=request.POST.get('to_code')
-        time_taken=request.POST.get('timetaken')
-        ticket_rate=request.POST.get('rate')
-        no_of_stops=request.POST.get('stop')
-        depart_day=request.POST.get('day')
-        flight_timing=flight(depart_time=depart_time,reach_time=reach_time,from_place=from_place,to_place=to_place,plane=plane,time_taken=time_taken,ticket_rate=ticket_rate,depart_day=depart_day,no_of_stops=no_of_stops,from_code=from_code,to_code=to_code)
-        flight_timing.save()     
-
-    return render(request,'admin/admin_flightdetails.html')
-
 
 def admintestimonial(request):
     test=testimonial.objects.all()
     return render(request,'admin/testimonial.html',{'test':test})
 
 def addtestimonial(request):
-    name=request.POST['name']
-    date=request.POST['date']
-    city=request.POST['city']
-    country=request.POST.get('country')
-    message=request.POST['des']
-    rate=request.POST.get('rate')
-    image=request.FILES['file']
-    testi=testimonial(name=name,date=date,city=city,country=country,rating=rate,message=message,image=image)
-    testi.save()
-    messages.success(request, 'testimonial added sucessfully!')
-    return redirect('admintestimonial')
+    if request.method=='POST':
+        name=request.POST['name']
+        date1=request.POST['date']
+        date2=datetime.strptime(date1,'%Y-%m').date()
+        city=request.POST['city']
+        country=request.POST.get('country')
+        message=request.POST['des']
+        rate=request.POST.get('rate')
+        image=request.FILES['file']
+        testi=testimonial(name=name,date=date2,city=city,country=country,rating=rate,message=message,image=image)
+        testi.save()
+        messages.success(request, 'testimonial added sucessfully!')
+        return redirect('admintestimonial')
 
 def deletetestimonial(request,id):
     member1 = testimonial.objects.get(id=id)
     member1.delete()
     messages.error(request, 'testimonial details deleted sucessfully!')
     return redirect('admintestimonial') 
+
+
+def airport(request):
+    test=airportcode.objects.all()
+    return render(request,'admin/airport.html',{'airport':test})
+
+
+def saveairport(request):
+    if request.method=='POST':
+        city=request.POST['city']
+        country=request.POST['con']
+        code=request.POST['code']
+        code1=airportcode(city=city,country=country,code=code)
+        code1.save()
+        messages.success(request, 'details added sucessfully!')
+        return redirect('airport') 
+    else:
+        return redirect('airport') 
+
+
+
+def deleteairport(request,id):
+    member1 =airportcode.objects.get(id=id)
+    member1.delete()
+    messages.error(request, 'details deleted sucessfully!')
+    return redirect('airport') 
+
+
+def adminflight(request):
+    test=flight.objects.all()
+    return render(request,'admin/adminflight.html',{'flight1':test})
+
+def saveflight(request):
+    if request.method=='POST':
+        name=request.POST['name']
+        code=request.POST['code']
+        image=request.FILES['file']
+        code1=flight(flightname=name,code=code,logo=image)
+        code1.save()
+        messages.success(request,'Flight details added sucessfully!')
+        return redirect('adminflight') 
+    else:
+        return redirect('adminflight') 
+    
+def deleteflight(request,id):
+    member1 =flight.objects.get(id=id)
+    member1.delete()
+    messages.error(request, 'details deleted sucessfully!')
+    return redirect('adminflight') 
+    
+def admintrip(request):
+    flight1=flight.objects.all().order_by('flightname')
+    code1=airportcode.objects.all().order_by('code')
+    return render(request,'admin/admintrip.html',{'flight':flight1,'code':code1})    
+
+
 
 
 

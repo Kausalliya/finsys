@@ -460,7 +460,7 @@ h1[data-v-57b06d44] {
 
    
     <div class="container mt-4">
-    <div class="row searchbox d-flex justify-content-between pe-0 me-0 ps-3 ">
+    <div class="row searchbox d-flex justify-content-between pe-0 me-0 ps-lg-0 ps-3">
         <div class="col-lg-3 col-12 inner d-flex align-items-center ">
             <img data-v-2caec5eb="" width="24" height="24" src="{% static 'image/flight.svg' %}" width="90px">
             <input class="form-control" placeholder="From where?">
@@ -608,7 +608,8 @@ h1[data-v-57b06d44] {
                 <img src="{{ p.image.url }}">
             </div>
             <h3 class="title">{{p.name}}</h3>
-            <span class="post mb-2">{{p.city}},{{p.country}} |{{p.date}}</span>
+            <span class="post mb-2">{{p.city}},{{p.country}} |{{p.date|date:'F Y'}}</span>
+         
             <div class="star-ratings">
               <div class="fill-ratings" style="width:{{p.rating}}%;">
                 <span>★★★★★</span>

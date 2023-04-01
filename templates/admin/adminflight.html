@@ -20,6 +20,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Main CSS-->
     <link rel="stylesheet" type="text/css" href="static/admin/css/main.css">
+
+
     <!-- Font-icon css-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
@@ -192,16 +194,16 @@
       
       <ul class="app-menu">
         <li><a class="app-menu__item"  href="{% url 'dashboard' %}"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
-       
-        <li class="treeview"><a class="app-menu__item active" href="{% url 'adminbooking' %}"><i class="app-menu__icon fa fa-ticket" ></i><span class="app-menu__label">Booking</span></a>
+        <li class="treeview" ><a class="app-menu__item  active" href="{% url 'adminflight' %}"><i class="app-menu__icon fa fa-plane" ></i><span class="app-menu__label">Flight</span></a>
 
-        </li>
-        <li class="treeview "><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-list-alt"></i><span class="app-menu__label">Other</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+        <li class="treeview"><a class="app-menu__item" href="{% url 'adminbooking' %}"><i class="app-menu__icon fa fa-ticket" ></i><span class="app-menu__label">Booking</span></a>
+
+        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-list-alt"></i><span class="app-menu__label">Other</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
-            <li><a class="treeview-item " href="{% url 'addhotel' %}"><i class="icon fa fa-fighter-jet"></i>Hotel</a></li>
+            <li><a class="treeview-item" href="{% url 'addhotel' %}"><i class="icon fa fa-fighter-jet"></i>Hotel</a></li>
             <li><a class="treeview-item " href="{% url 'admincity' %}"><i class="icon fa fa-fighter-jet"></i>City</a></li>
             <li><a class="treeview-item tab" href="{% url 'addexp' %}"><i class="icon fa fa-fighter-jet"></i>Experience</a></li>
-            <li><a class="treeview-item" href="{% url 'admintestimonial' %}"><i class="icon fa fa-fighter-jet"></i>Testimonial</a></li>
+            <li><a class="treeview-item " href="{% url 'admintestimonial' %}"><i class="icon fa fa-fighter-jet"></i>Testimonial</a></li>
           </ul>
         </li>
       </ul>
@@ -209,7 +211,7 @@
     <main class="app-content" style="background-color: rgb(255, 255, 255);">
       <div class="app-title" style="background-color:#ffffff">
         <div class="mt-5" style="color:#5871ff">
-          <h1><i class="fa fa-ticket"></i>Booking</h1>
+          <h1><i class="fa fa-plane"></i> Flight Details</h1>
         </div>
       </div>
       {% for message in messages %}
@@ -224,59 +226,58 @@
         {% endfor %}
     
       <div class="row mt-5" >
-       
-        <div class="col-md-12">
+        <div class="col-md-4">
+
           <div class="tile">
-            <h3 class="tile-title">Show hotels</h3>
+            <h3 class="tile-title">Add fligth Detail</h3>
+            <div class="tile-body">
+              <form action="{% url 'saveflight' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                  <label class="control-label">Flight name</label>
+                  <input class="form-control" type="text" placeholder="Enter flight name" name="name">
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Flight number</label>
+                  <input class="form-control" type="text" placeholder="Enter flight number" name="code">
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Flight logo</label>
+                  <input class="form-control" type="file" name="file" accept="image/*">
+                </div>
+              <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Add</button>
+                
+              </form>
+            </div>
+        </div>
+
+        </div>
+        <div class="col-md-8">
+          <div class="tile">
+            <h3 class="tile-title">Show flights</h3>
             <div class="tile-body table-responsive">
-              <table class="table table-hover table-bordered" id="sampleTable">
+              <table class="table table-hover table-bordered " id="sampleTable" >
                 <thead>
                   <tr>
-                    <th>Passenger</th>
-                    <th>Date of birth</th>
-                    <th>Cheched bag</th>
-                    <th>Seatno</th>
-                    <th>Seat type</th>
-                    <th>Amount</th>
-                    <th>flight</th>
-                    <th>Trip</th>
-                    <th>Trip Date</th>
-                    <th>Payment</th>
+                    <th>Flight name</th>
+                    <th>Flight number</th>
+                    <th>Logo</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
+                  {% for p in flight1 %}
                   <tr>
-                    <td>manju</td>
-                    <td>12-09-1997</td>
-                    <td>2</td>
-                    <td>1A</td>
-                    <td>economy</td>
-                    <td>1560</td>
-                    <td>hawiian Airline</td>
-                    <td>inv to del</td>
-                    <td>19-04-2023</td>
-                    <td> 
-                    <span style="background-color: #fac917;">   
-                    warning
-                    <i class='fa fa-exclamation-circle'></i></span> 
+                    <td>{{p.flightname}}</td>
+                    <td>{{p.code}}</td>
+                    <td>
+                      <img src="{{ p.logo.url }}" alt="flightphoto" class="rounded" width="50">
                     </td>
+                    <td>
+                      <a href="{% url 'deleteflight' p.id %}"><i class="fa fa-trash" style="color:red"></i></a>
+                      </td>
                   </tr>
-                  <tr>
-                    <td>manju</td>
-                    <td>12-09-1997</td>
-                    <td>2</td>
-                    <td>1A</td>
-                    <td>economy</td>
-                    <td>1560</td>
-                    <td>hawiian Airline</td>
-                    <td>inv to del</td>
-                    <td>19-04-2023</td>
-                    <td> 
-                    <span style="background-color: #22d558;">   
-                    success
-                    <i class="fa fa-check-circle"></i></span> 
-                    </td>
-                  </tr>
+                  {% endfor %}
                 </tbody>
               </table>
             </div>

@@ -26,17 +26,19 @@ urlpatterns = [
 
     path('admincity',views.admincity,name='admincity'),
     path('admin_city_add',views.admin_city_add,name='admin_city_add'),
-    path('admin_flightdetails',views.admin_flightdetails,name='admin_flightdetails'),
-    path('admin_flight_add',views.admin_flight_add,name='admin_flight_add'),
     path('deletecity/<int:id>', views.deletecity, name='deletecity'),
 
     path('admintestimonial',views.admintestimonial,name='admintestimonial'),
     path('addtestimonial',views.addtestimonial,name='addtestimonial'),
     path('deletetestimonial/<int:id>', views.deletetestimonial, name='deletetestimonial'),
+    path('airport', views.airport, name='airport'),
+    path('saveairport', views.saveairport, name='saveairport'),
+    path('deleteairport/<int:id>', views.deleteairport, name='deleteairport'),
+    path('adminflight', views.adminflight, name='adminflight'),
+    path('saveflight', views.saveflight, name='saveflight'),
+    path('deleteflight/<int:id>', views.deleteflight, name='deleteflight'),
 
-
-
-
+    path('admintrip',views.admintrip,name='admintrip'),
 
 
 

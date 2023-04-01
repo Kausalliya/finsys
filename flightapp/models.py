@@ -19,20 +19,34 @@ class city(models.Model):
     image=models.ImageField( upload_to="city",null=True,blank=True)
 
 
-class flightdetails(models.Model):
-    name=models.CharField(max_length=30)  
-    time_taken=models.CharField(max_length=30)
-    ticket_rate=models.CharField(max_length=100)
-    no_of_stops=models.CharField(max_length=30)
-    logo=models.ImageField( upload_to="images/",null=True,blank=True)
 class flight(models.Model):
-    from_place=models.CharField(max_length=30)
-    from_code=models.CharField(max_length=30,null=True)
-    to_place=models.CharField(max_length=30)
-    to_code=models.CharField(max_length=30,null=True)
+    flightname=models.CharField(max_length=30)
+    code=models.CharField(max_length=30,null=True)
+    logo=models.ImageField( upload_to="flight",null=True,blank=True)
+
+class airportcode(models.Model):
+    city=models.CharField(max_length=100)
+    country=models.CharField(max_length=100,null=True)
+    code=models.CharField(max_length=30,null=True)
+
+class trip(models.Model):
+    from_where=models.CharField(max_length=30)  
+    where_to=models.CharField(max_length=30)
+    depart_date=models.DateField(null=True)
+    duration=models.CharField(max_length=30)
     depart_time=models.CharField(max_length=30)
-    reach_time=models.CharField(max_length=30)
-    plane=models.ForeignKey(flightdetails,on_delete=models.CASCADE)
+    arrive_time=models.CharField(max_length=30)
+    no_stops=models.IntegerField()
+    price=models.IntegerField()
+    flight=models.ForeignKey(flight, on_delete=models.CASCADE)  
+
+
+class stops(models.Model):
+    duration=models.CharField(max_length=100)
+    airport_code=models.CharField(max_length=100,null=True)
+    trip=models.ForeignKey(trip, on_delete=models.CASCADE) 
+
+
 class hotel(models.Model):
     name=models.CharField(max_length=30)  
     city=models.CharField(max_length=30)
@@ -76,7 +90,7 @@ class seat_allotted(models.Model):
 
 class testimonial(models.Model):   
     name=models.CharField(max_length=50)
-    date=models.CharField(max_length=100,null=True,blank=True)
+    date=models.DateField(null=True,blank=True)
     city=models.CharField(max_length=100,null=True,blank=True)
     country=models.CharField(max_length=100,null=True,blank=True)
     rating=models.IntegerField(null=True,blank=True)
