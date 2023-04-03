@@ -193,12 +193,14 @@
       
       <ul class="app-menu">
         <li><a class="app-menu__item"  href="{% url 'dashboard' %}"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
-        
+        <li class="treeview"><a class="app-menu__item" href="{% url 'adminflight' %}"><i class="app-menu__icon fa fa-plane" ></i><span class="app-menu__label">Flight</span></a></li>
+          <li class="treeview"><a class="app-menu__item" href="{% url 'admintrip' %}"><i class="app-menu__icon fas fa-route" ></i><span class="app-menu__label">Trip</span></a></li>
+          
         <li class="treeview"><a class="app-menu__item" href="{% url 'adminbooking' %}"><i class="app-menu__icon fa fa-ticket" ></i><span class="app-menu__label">Booking</span></a>
-        <li class="treeview"><a class="app-menu__item active" href="{% url 'admintrip' %}"><i class="app-menu__icon fas fa-route" ></i><span class="app-menu__label">Trip</span></a>
          
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-list-alt"></i><span class="app-menu__label">Other</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
+            <li><a class="treeview-item " href="{% url 'airport' %}"><i class="icon fa fa-fighter-jet"></i>Airport</a></li>
             <li><a class="treeview-item " href="{% url 'addhotel' %}"><i class="icon fa fa-fighter-jet"></i>Hotel</a></li>
             <li><a class="treeview-item " href="{% url 'admincity' %}"><i class="icon fa fa-fighter-jet"></i>City</a></li>
             <li><a class="treeview-item tab" href="{% url 'addexp' %}"><i class="icon fa fa-fighter-jet"></i>Experience</a></li>
@@ -230,11 +232,11 @@
           <div class="tile">
             <h3 class="tile-title">Add trip Details</h3>
             <div class="tile-body">
-              <form action="{% url 'addtestimonial' %}" method="post" enctype="multipart/form-data" class="row">
+              <form action="{% url 'addtrip' %}" method="post" enctype="multipart/form-data" class="row">
                 {% csrf_token %}
                 <div class="form-group col-lg-6">
                   <label class="">From Where</label>
-                  <select class="form-control control-label" name="from" id="qwerty">
+                  <select class="form-control control-label" name="from" >
                     <option value="">Select departure place</option>
                     {% for i in code %}
                     <option value="{{ i.code}}">{{i.code}}</option>
@@ -251,26 +253,28 @@
                     </select>
                   </div>
                 <div class="form-group col-lg-6">
-                  <label class="control-label">Depart Date</label>
-                  <input class="form-control" type="date" name="date">
+                  <label class="control-label">Depart date & time</label>
+                  <input class="form-control" type="datetime-local" name="ddate">
                 </div>
                 <div class="form-group  col-lg-6">
-                  <label class="control-label">Duration</label>
-                  <input class="form-control" type="time" name="time">
-                  
+                  <label class="control-label">Arrival date & time</label>
+                  <input class="form-control" type="datetime-local" name="adate">
+
                 </div>
-                <div class="form-group col-lg-6">
-                  <label class="control-label">Departure time</label>
-                  <input class="form-control time-pickable" type="text" name="dtime" >
-                </div>
-                <div class="form-group col-lg-6">
-                  <label class="control-label">Arrival Time</label>
-                  <input class="form-control time-pickable" type="text" name="atime">
-                </div>
-                
                 <div class="form-group col-lg-6">
                   <label class="control-label">No of Stops</label>
-                  <input class="form-control" type="number" name="stops" >
+                  <select class="form-control" name="stops">
+                    <option value="Nonstop">Nonstop</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </select>  
+                </div>
+                <div class="form-group col-lg-6">
+                  <label class="control-label">price</label>
+                  <input class="form-control" type="number" name="price" >
                 </div>
                 <div class="form-group col-lg-6">
                   <label class="control-label">Flight</label>
@@ -298,31 +302,45 @@
               <table class="table table-hover table-bordered" id="sampleTable">
                 <thead>
                   <tr>
-                    <th>Name</th>
-                    <th>City</th>
-                    <th>Country</th>
-                    <th>Date</th>
-                    <th>Star Rating</th>
-                    <th>Message</th>
-                    <th>Image</th>
+                    <th>Departure place</th>
+                    <th>Arrival place</th>
+                    <th>Departure date</th>
+                    <th>Departure time</th>
+                    <th>Arrival date</th>
+                    <th>Arrival time</th>
+                    <th>Duration</th>
+                    <th>Flight details</th>
+                    <th>No: of stops</th>
+                    <th>Price</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {% for p in test %}
+                  {% for p in trip %}
                   <tr>
-                    <td>{{p.name}}</td>
-                    <td>{{p.city}}</td>
-                    <td>{{p.country}}</td>
-                    
-                    <td>{{ p.date|date:'F Y'}}</td>
-                    <td>{{p.rating}}%</td>
-                    <td>{{p.message}}</td>
+                    <td>{{p.from_where}}</td>
+                    <td>{{p.where_to}}</td>
+                    <td>{{p.depart_date}}</td>
+                    <td>{{p.depart_time}}</td>
+                    <td>{{ p.arrival_date}}</td>
+                    <td>{{p.arrive_time}}</td>
+                    <td>{{p.duration}}</td>
+                    <td>{{p.flight.code}} ,{{p.flight.flightname}}</td>
                     <td>
-                      <img src="{{ p.image.url }}" alt="hotelphoto" class="rounded" width="50">
+                      
+                      {{p.no_stops}}
+                      {% if p.no_stops == 'Nonstop' %}
+                      {% else %}
+                        <a href="{% url 'addstops' p.id %}"> <i class="fa fa-plus"  style="color:rgb(23, 177, 20)"></i>Add</a>
+                      {% endif%}   
                     </td>
                     <td>
-                      <a href="{% url 'deletetestimonial' p.id %}"><i class="fa fa-trash" style="color:red"></i></a>
+                      {{p.price}}
+                    </td>
+                    <td>
+                      <a href="{% url 'edittrip' p.id %}"><i class="fa fa-edit pe-2"  style="color:rgb(23, 177, 20)"></i> </a>
+
+                      <a href="{% url 'deletetrip' p.id %}" ><i class="fa fa-trash " style="color:red"></i></a>
                       </td>
                   </tr>
                   {% endfor %}
@@ -417,146 +435,7 @@
     // Your code to run since DOM is loaded and ready
     
     </script>
-    <script>
-        function activate() {
-	document.head.insertAdjacentHTML("beforeend", `
-		<style>
-			.time-picker {
-				position: absolute;
-				display: inline-block;
-				padding: 10px;
-				background: #eeeeee;
-				border-radius: 6px;
-                background-color:red;
-			}
-
-			.time-picker__select {
-				-webkit-appearance: none;
-				-moz-appearance: none;
-				appearance: none;
-				outline: none;
-				text-align: center;
-				border: 1px solid #dddddd;
-				border-radius: 6px;
-				padding: 6px 10px;
-				background: #ffffff;
-				cursor: pointer;
-				font-family: 'Heebo', sans-serif;
-			}
-		</style>
-	`);
-
-	document.querySelectorAll(".time-pickable").forEach(timePickable => {
-		let activePicker = null;
-
-		timePickable.addEventListener("focus", () => {
-			if (activePicker) return;
-
-			activePicker = show(timePickable);
-
-			const onClickAway = ({ target }) => {
-				if (
-					target === activePicker
-					|| target === timePickable
-					|| activePicker.contains(target)
-				) {
-					return;
-				}
-
-				document.removeEventListener("mousedown", onClickAway);
-				document.body.removeChild(activePicker);
-				activePicker = null;
-			};
-
-			document.addEventListener("mousedown", onClickAway);
-		});
-	});
-}
-
-function show(timePickable) {
-	const picker = buildPicker(timePickable);
-	const { bottom: top, left } = timePickable.getBoundingClientRect();
-
-	picker.style.top = `${top}px`;
-	picker.style.left = `${left}px`;
-
-	document.body.appendChild(picker);
-
-	return picker;
-}
-
-function buildPicker(timePickable) {
-	const picker = document.createElement("div");
-	const hourOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(numberToOption);
-	const minuteOptions = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55].map(numberToOption);
-
-	picker.classList.add("time-picker");
-	picker.innerHTML = `
-		<select class="time-picker__select">
-			${hourOptions.join("")}
-		</select>
-		:
-		<select class="time-picker__select">
-			${minuteOptions.join("")}
-		</select>
-		<select class="time-picker__select">
-			<option value="am">am</option>
-			<option value="pm">pm</option>
-		</select>
-	`;
-
-	const selects = getSelectsFromPicker(picker);
-
-	selects.hour.addEventListener("change", () => timePickable.value = getTimeStringFromPicker(picker));
-	selects.minute.addEventListener("change", () => timePickable.value = getTimeStringFromPicker(picker));
-	selects.meridiem.addEventListener("change", () => timePickable.value = getTimeStringFromPicker(picker));
-
-	if (timePickable.value) {
-		const { hour, minute, meridiem } = getTimePartsFromPickable(timePickable);
-
-		selects.hour.value = hour;
-		selects.minute.value = minute;
-		selects.meridiem.value = meridiem;
-	}
-
-	return picker;
-}
-
-function getTimePartsFromPickable(timePickable) {
-	const pattern = /^(\d+):(\d+) (am|pm)$/;
-	const [hour, minute, meridiem] = Array.from(timePickable.value.match(pattern)).splice(1);
-
-	return {
-		hour,
-		minute,
-		meridiem
-	};
-}
-
-function getSelectsFromPicker(timePicker) {
-	const [hour, minute, meridiem] = timePicker.querySelectorAll(".time-picker__select");
-
-	return {
-		hour,
-		minute,
-		meridiem
-	};
-}
-
-function getTimeStringFromPicker(timePicker) {
-	const selects = getSelectsFromPicker(timePicker);
-
-	return `${selects.hour.value}:${selects.minute.value} ${selects.meridiem.value}`;
-}
-
-function numberToOption(number) {
-	const padded = number.toString().padStart(2, "0");
-
-	return `<option value="${padded}">${padded}</option>`;
-}
-
-activate();
-    </script>
+    
  
   </body>
 </html>

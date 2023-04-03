@@ -192,11 +192,14 @@
       
       <ul class="app-menu">
         <li><a class="app-menu__item"  href="{% url 'dashboard' %}"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
-       
+        <li class="treeview"><a class="app-menu__item" href="{% url 'adminflight' %}"><i class="app-menu__icon fa fa-plane" ></i><span class="app-menu__label">Flight</span></a></li>
+          <li class="treeview"><a class="app-menu__item" href="{% url 'admintrip' %}"><i class="app-menu__icon fas fa-route" ></i><span class="app-menu__label">Trip</span></a></li>
+          
         <li class="treeview"><a class="app-menu__item" href="{% url 'adminbooking' %}"><i class="app-menu__icon fa fa-ticket" ></i><span class="app-menu__label">Booking</span></a>
-
+         
         <li class="treeview is-expanded"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-list-alt"></i><span class="app-menu__label">Other</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
+            <li><a class="treeview-item " href="{% url 'airport' %}"><i class="icon fa fa-fighter-jet"></i>Airport</a></li>
             <li><a class="treeview-item " href="{% url 'addhotel' %}"><i class="icon fa fa-fighter-jet"></i>Hotel</a></li>
             <li><a class="treeview-item " href="{% url 'admincity' %}"><i class="icon fa fa-fighter-jet"></i>City</a></li>
             <li><a class="treeview-item active" href="{% url 'addexp' %}"><i class="icon fa fa-fighter-jet"></i>Experience</a></li>

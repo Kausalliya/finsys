@@ -19,12 +19,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Main CSS-->
-    <link rel="stylesheet" type="text/css" href="static/admin/css/main.css">
-
-
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/main.css' %}">
     <!-- Font-icon css-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
 .app-sidebar__toggle:focus, .app-sidebar__toggle:hover {
@@ -199,9 +198,9 @@
           
         <li class="treeview"><a class="app-menu__item" href="{% url 'adminbooking' %}"><i class="app-menu__icon fa fa-ticket" ></i><span class="app-menu__label">Booking</span></a>
          
-        <li class="treeview is-expanded"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-list-alt"></i><span class="app-menu__label">Other</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-list-alt"></i><span class="app-menu__label">Other</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
-            <li><a class="treeview-item active" href="{% url 'airport' %}"><i class="icon fa fa-fighter-jet"></i>Airport</a></li>
+            <li><a class="treeview-item " href="{% url 'airport' %}"><i class="icon fa fa-fighter-jet"></i>Airport</a></li>
             <li><a class="treeview-item " href="{% url 'addhotel' %}"><i class="icon fa fa-fighter-jet"></i>Hotel</a></li>
             <li><a class="treeview-item " href="{% url 'admincity' %}"><i class="icon fa fa-fighter-jet"></i>City</a></li>
             <li><a class="treeview-item tab" href="{% url 'addexp' %}"><i class="icon fa fa-fighter-jet"></i>Experience</a></li>
@@ -213,7 +212,7 @@
     <main class="app-content" style="background-color: rgb(255, 255, 255);">
       <div class="app-title" style="background-color:#ffffff">
         <div class="mt-5" style="color:#5871ff">
-            <h1><img src="{% static 'image/airport.svg' %}" width="30px">  Airport Details</h1>
+          <h1><i class="fas fa-route"></i> Edit Trip Details</h1>
         </div>
       </div>
       {% for message in messages %}
@@ -228,77 +227,91 @@
         {% endfor %}
     
       <div class="row mt-5" >
-        <div class="col-md-4">
+        <div class="col-md-12">
 
           <div class="tile">
-            <h3 class="tile-title">Add airport Detail</h3>
+            <h3 class="tile-title">Update trip Details</h3>
             <div class="tile-body">
-              <form action="{% url 'saveairport' %}" method="post" enctype="multipart/form-data">
+              <form action="{% url 'updatetrip' trip.id %}" method="post" enctype="multipart/form-data" class="row">
                 {% csrf_token %}
-                <div class="form-group">
-                    <label class="control-label">Country</label>
-                    <input class="form-control" type="text"  name="con">
+                <div class="form-group col-lg-6">
+                  <label class="">From Where</label>
+                  <select class="form-control control-label" name="from" >
+                    <option value="{{trip.from_where}}" hidden="hidden">{{trip.from_where}}</option>
+                    {% for i in code %}
+                    <option value="{{ i.code}}">{{i.code}}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="form-group col-lg-6">
+                    <label class="control-label">Where to</label>
+                    <select class="form-control control-label" name="to_place" id="qwerty">
+                        <option value="{{trip.where_to}}" hidden="hidden">{{trip.where_to}}</option>
+                        {% for i in code %}
+                        <option value="{{ i.code}}">{{i.code}}</option>
+                        {% endfor %}
+                    </select>
                   </div>
-                <div class="form-group">
-                  <label class="control-label">City</label>
-                  <input class="form-control" type="text" name="city">
+                <div class="form-group col-lg-6">
+                  <label class="control-label">Depart date & time</label>
+                  <input class="form-control" type="text" onfocus="(this.type='datetime-local')" name="ddate" value="{{ddate1}} {{dtime}}">
                 </div>
-                
-                <div class="form-group">
-                  <label class="control-label">Code</label>
-                  <input class="form-control" type="text"  name="code">
+                <div class="form-group  col-lg-6">
+                  <label class="control-label">Arrival date & time</label>
+                  <input class="form-control" type="text" onfocus="(this.type='datetime-local')" name="adate" value="{{adate1}} {{atime}}">
+
+
                 </div>
-              
-              <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Add</button>
-                
+                <div class="form-group col-lg-6">
+                  <label class="control-label">No of Stops</label>
+                  <select class="form-control" name="stops">
+                    <option value="{{trip.no_stops}}" hidden="hidden">{{trip.no_stops}}</option>
+                    <option value="Nonstop">Nonstop</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </select>  
+                </div>
+                <div class="form-group col-lg-6">
+                  <label class="control-label">price</label>
+                  <input class="form-control" type="number" name="price" value="{{trip.price}}">
+                </div>
+                <div class="form-group col-lg-6">
+                  <label class="control-label">Flight</label>
+                  <select class="form-control" name="flight" id="qwerty">
+                    <option value="{{trip.flight.id}}" hidden="hidden">{{trip.flight.code}} , {{trip.flight.flightname}}</option>
+                    {% for i in flight %}
+
+                    <option value="{{ i.id }}">{{i.code}} , {{ i.flightname }}</option>
+
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="col-lg-12 text-centre">
+                 <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Update</button>
+                </div>
               </form>
             </div>
         </div>
 
         </div>
-        <div class="col-md-8">
-          <div class="tile">
-            <h3 class="tile-title">Show airports</h3>
-            <div class="tile-body table-responsive">
-              <table class="table table-hover table-bordered " id="sampleTable" >
-                <thead>
-                  <tr>
-                    <th>City</th>
-                    <th>Country</th>
-                    <th>Code</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {% for p in airport %}
-                  <tr>
-                    <td>{{p.city}}</td>
-                    <td>{{p.country}}</td>
-                    <td>{{p.code}}</td>
-                    <td>
-                      <a href="{% url 'deleteairport' p.id %}"><i class="fa fa-trash" style="color:red"></i></a>
-                      </td>
-                  </tr>
-                  {% endfor %}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
+        
       </div>
     </main>
     <!-- Essential javascripts for application to work-->
-    <script src="static/admin/js/jquery-3.2.1.min.js"></script>
-    <script src="static/admin/js/popper.min.js"></script>
-    <script src="static/admin/js/bootstrap.min.js"></script>
-    <script src="static/admin/js/main.js"></script>
+    <script src="{% static 'admin/js/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'admin/js/popper.min.js' %}"></script>
+    <script src="{% static 'admin/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'admin/js/main.js' %}"></script>
     <!-- The javascript plugin to display page loading on top-->
-    <script src="static/admin/js/plugins/pace.min.js"></script>
+    <script src="{% static 'admin/js/plugins/pace.min.js' %}"></script>
     <!-- Page specific javascripts-->
-    <script  src="static/admin/js/plugins/chart.js"></script>
+    <script  src="{% static 'admin/js/plugins/chart.js' %}"></script>
 
-    <script type="text/javascript" src="static/admin/js/plugins/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="static/admin/js/plugins/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript" src="{% static 'admin/js/plugins/jquery.dataTables.min.js' %}"></script>
+    <script type="text/javascript" src="{%  static 'admin/js/plugins/dataTables.bootstrap.min.js' %}"></script>
     <script type="text/javascript">$('#sampleTable').DataTable();</script>
 
    
@@ -371,6 +384,7 @@
     // Your code to run since DOM is loaded and ready
     
     </script>
+    
  
   </body>
 </html>

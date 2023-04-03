@@ -1,11 +1,13 @@
 from datetime import datetime
+import time
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.contrib.auth.models import User,auth
 from django.contrib.auth.decorators import login_required
+import pandas as pd
 
-from flightapp.models import airportcode, city, experiences, flight, trip, hotel, testimonial
+from flightapp.models import airportcode, city, experiences, flight, stops, trip, hotel, testimonial
 
 
 # Create your views here.
@@ -18,7 +20,7 @@ def seatbooking(request):
 def base(request):
     hotel1=hotel.objects.all().order_by('-id')[:3]
     city1=city.objects.all().order_by('-id')[:3]
-    test=testimonial.objects.all().order_by('-id')[:3]
+    test=testimonial.objects.all().order_by('-id')
     return render(request,'base.html',{'hotel':hotel1,'city':city1,'test':test})
 
 def home(request):
@@ -281,7 +283,175 @@ def deleteflight(request,id):
 def admintrip(request):
     flight1=flight.objects.all().order_by('flightname')
     code1=airportcode.objects.all().order_by('code')
-    return render(request,'admin/admintrip.html',{'flight':flight1,'code':code1})    
+    trip1=trip.objects.all().order_by('id')
+    return render(request,'admin/admintrip.html',{'flight':flight1,'code':code1,'trip':trip1})    
+
+
+def addtrip(request):
+    if request.method=='POST':
+        from_w=request.POST['from']
+        to_w=request.POST['toplace']
+        ddate=request.POST['ddate']
+        ddate1 = datetime.strptime(ddate,'%Y-%m-%dT%H:%M')
+        ddate2=str(ddate1.year)+"-"+str(ddate1.month)+"-"+str(ddate1.day)
+        dtime=str(ddate1.hour)+":"+str(ddate1.minute)
+        dtime1= datetime.strptime(dtime, "%H:%M")
+        dtime2=dtime1.strftime("%I:%M %p")
+        adate=request.POST['adate']
+        adate1 = datetime.strptime(adate,'%Y-%m-%dT%H:%M')
+        adate2=str(adate1.year)+"-"+str(adate1.month)+"-"+str(adate1.day)
+        atime=str(adate1.hour)+":"+str(adate1.minute)
+        atime1= datetime.strptime(atime, "%H:%M")
+        atime2=atime1.strftime("%I:%M %p")
+        duration = adate1-ddate1
+        duration_in_s = duration.total_seconds()  
+        days    = divmod(duration_in_s, 86400) 
+        hours   = divmod(days[1], 3600) 
+        minutes = divmod(hours[1], 60)
+        if days[0]==0 :
+            if minutes[0]==0:
+                    min=0
+            else:
+                min=str(minutes[0]).rstrip('.0')   
+            if hours[0]==0:
+                hours=0
+            else:
+                hours=str(hours[0]).rstrip('.0')   
+            duration=str(hours)+"h "+str(min)+"m"
+            
+        else:
+            if minutes[0]==0:
+                min=0
+            else:
+                min=str(minutes[0]).rstrip('.0')   
+            if hours[0]==0:
+                hours=0
+            else:
+                hours=str(hours[0]).rstrip('.0')          
+            duration=str(days[0]).rstrip('.0')+"days "+str(hours)+"h "+str(min)+"m" 
+        print(duration)  
+        stops=request.POST['stops']
+        price=request.POST['price']
+        flight1=request.POST['flight']
+        flight2=flight.objects.get(id=flight1)
+        data=trip(from_where=from_w,where_to=to_w,depart_date=ddate2,arrival_date=adate2,duration=duration,depart_time=dtime2,arrive_time=atime2,no_stops=stops,price=price,flight=flight2)
+        data.save()
+        messages.success(request,'Flight details added sucessfully!')
+        return redirect('admintrip') 
+    else:
+        return redirect('admintrip') 
+    
+def edittrip(request,id):
+    trip1=trip.objects.get(id=id)
+    flight1=flight.objects.all().order_by('flightname')
+    ddate1 = trip1.depart_date.strftime("%d-%m-%Y")
+    adate1 = trip1.arrival_date.strftime("%d-%m-%Y")
+    code1=airportcode.objects.all().order_by('code')
+    atime1= datetime.strptime(trip1.arrive_time, '%I:%M %p')
+    atime=atime1.strftime('%H:%M')
+    dtime1= datetime.strptime(trip1.depart_time, '%I:%M %p')
+    dtime=dtime1.strftime('%H:%M')
+    return render(request,'admin/edittrip.html',{'flight':flight1,'code':code1,'trip':trip1,'ddate1':ddate1,'adate1':adate1,'atime':atime,'dtime':dtime}) 
+
+def updatetrip(request,id):
+    data = trip.objects.get(id=id)
+    if request.method=='POST':
+        data.from_where=request.POST['from']
+        data.where_to= request.POST['to_place']
+        print(request.POST['ddate'])
+        data.depart_date=request.POST['from']
+        ddate=request.POST['ddate']
+        try:
+            ddate1= datetime.strptime(ddate,'%Y-%m-%dT%H:%M')
+        except:
+            ddate1= datetime.strptime(ddate,"%d-%m-%Y %H:%M")
+        ddate2=str(ddate1.year)+"-"+str(ddate1.month)+"-"+str(ddate1.day)
+        dtime=str(ddate1.hour)+":"+str(ddate1.minute)
+        dtime1= datetime.strptime(dtime, "%H:%M")
+        dtime2=dtime1.strftime("%I:%M %p")
+        adate=request.POST['adate']
+        try:
+            adate1 = datetime.strptime(adate,'%Y-%m-%dT%H:%M')
+        except:
+            adate1 = datetime.strptime(adate,'%d-%m-%Y %H:%M')
+        adate2=str(adate1.year)+"-"+str(adate1.month)+"-"+str(adate1.day)
+        atime=str(adate1.hour)+":"+str(adate1.minute)
+        atime1= datetime.strptime(atime, "%H:%M")
+        atime2=atime1.strftime("%I:%M %p")
+        duration = adate1-ddate1
+        duration_in_s = duration.total_seconds()  
+        days    = divmod(duration_in_s, 86400) 
+        hours   = divmod(days[1], 3600) 
+        minutes = divmod(hours[1], 60)
+        if days[0]==0 :
+            if minutes[0]==0:
+                    min=0
+            else:
+                min=str(minutes[0]).rstrip('.0')   
+            if hours[0]==0:
+                hours=0
+            else:
+                hours=str(hours[0]).rstrip('.0')   
+            duration=str(hours)+"h "+str(min)+"m"
+            
+        else:
+            if minutes[0]==0:
+                min=0
+            else:
+                min=str(minutes[0]).rstrip('.0')   
+            if hours[0]==0:
+                hours=0
+            else:
+                hours=str(hours[0]).rstrip('.0')          
+            duration=str(days[0]).rstrip('.0')+"days "+str(hours)+"h "+str(min)+"m" 
+
+        data.depart_date=ddate2
+        data.depart_time=dtime2
+        data.arrival_date=adate2
+        data.arrive_time=atime2
+        data.duration=duration
+        data.no_stops=request.POST['stops']
+        data.price=request.POST['price']
+        flight1=request.POST['flight']
+        flight2=flight.objects.get(id=flight1)
+        data.flight=flight2
+        data.save()
+        messages.success(request,'Flight details updated sucessfully!')
+        return redirect('admintrip') 
+    
+def deletetrip(request,id):
+    member1 =trip.objects.get(id=id)
+    member1.delete()
+    messages.error(request, 'Trip details deleted sucessfully!')
+    return redirect('admintrip')    
+
+def addstops(request,id):
+    data =trip.objects.get(id=id)
+    code1=airportcode.objects.all().order_by('code')
+    stops1=stops.objects.all().filter(trip=id)
+    return render(request,'admin/addstops.html',{'data':data,'code':code1,'stop':stops1})   
+
+def savestops(request,id):
+    trip1=trip.objects.get(id=id)
+    if request.method=='POST':
+        duration=request.POST['dura']
+        place= request.POST['place']
+        data=stops(duration=duration,airport_code=place,trip=trip1)
+        data.save()
+    messages.error(request, 'Stop details added sucessfully!')
+    return redirect('addstops',id=trip1.id) 
+
+
+def deletestops(request,id):
+    member1 =stops.objects.get(id=id)
+    print(member1.trip_id)
+    member1.delete()
+    messages.error(request, 'Stop details deleted sucessfully!')
+    return redirect('addstops',id=member1.trip_id)  
+
+     
+
+
 
 
 

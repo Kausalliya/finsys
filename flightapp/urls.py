@@ -39,6 +39,20 @@ urlpatterns = [
     path('deleteflight/<int:id>', views.deleteflight, name='deleteflight'),
 
     path('admintrip',views.admintrip,name='admintrip'),
+    path('addtrip',views.addtrip,name='addtrip'),
+    path('edittrip/<int:id>',views.edittrip,name='edittrip'),
+    path('updatetrip/<int:id>',views.updatetrip,name='updatetrip'),
+    path('deletetrip/<int:id>',views.deletetrip,name='deletetrip'),
+    path('addstops/<int:id>',views.addstops,name='addstops'),
+    path('savestops/<int:id>',views.savestops,name='savestops'),
+    path('deletestops/<int:id>',views.deletestops,name='deletestops'),
+
+
+
+
+
+
+
 
 
 

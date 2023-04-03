@@ -19,12 +19,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Main CSS-->
-    <link rel="stylesheet" type="text/css" href="static/admin/css/main.css">
-
-
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/main.css' %}">
     <!-- Font-icon css-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
 .app-sidebar__toggle:focus, .app-sidebar__toggle:hover {
@@ -199,9 +198,9 @@
           
         <li class="treeview"><a class="app-menu__item" href="{% url 'adminbooking' %}"><i class="app-menu__icon fa fa-ticket" ></i><span class="app-menu__label">Booking</span></a>
          
-        <li class="treeview is-expanded"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-list-alt"></i><span class="app-menu__label">Other</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-list-alt"></i><span class="app-menu__label">Other</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
-            <li><a class="treeview-item active" href="{% url 'airport' %}"><i class="icon fa fa-fighter-jet"></i>Airport</a></li>
+            <li><a class="treeview-item " href="{% url 'airport' %}"><i class="icon fa fa-fighter-jet"></i>Airport</a></li>
             <li><a class="treeview-item " href="{% url 'addhotel' %}"><i class="icon fa fa-fighter-jet"></i>Hotel</a></li>
             <li><a class="treeview-item " href="{% url 'admincity' %}"><i class="icon fa fa-fighter-jet"></i>City</a></li>
             <li><a class="treeview-item tab" href="{% url 'addexp' %}"><i class="icon fa fa-fighter-jet"></i>Experience</a></li>
@@ -213,7 +212,9 @@
     <main class="app-content" style="background-color: rgb(255, 255, 255);">
       <div class="app-title" style="background-color:#ffffff">
         <div class="mt-5" style="color:#5871ff">
-            <h1><img src="{% static 'image/airport.svg' %}" width="30px">  Airport Details</h1>
+          <h1><i class="fas fa-route"></i> Stops Details - {{data.from_where}}
+         <i class="fas fa-long-arrow-alt-right"></i> {{data.where_to}}
+        </h1>
         </div>
       </div>
       {% for message in messages %}
@@ -227,78 +228,77 @@
         </div>
         {% endfor %}
     
-      <div class="row mt-5" >
-        <div class="col-md-4">
-
-          <div class="tile">
-            <h3 class="tile-title">Add airport Detail</h3>
-            <div class="tile-body">
-              <form action="{% url 'saveairport' %}" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                <div class="form-group">
-                    <label class="control-label">Country</label>
-                    <input class="form-control" type="text"  name="con">
-                  </div>
-                <div class="form-group">
-                  <label class="control-label">City</label>
-                  <input class="form-control" type="text" name="city">
+        <div class="row mt-5" >
+            <div class="col-md-4">
+    
+              <div class="tile">
+                <h3 class="tile-title">Add stops Detail</h3>
+                <div class="tile-body">
+                  <form action="{% url 'savestops' data.id %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                      <label class="control-label">Duration</label>
+                      <input class="form-control" type="text" name="dura" pattern="[0-9]+h [0-9]+m" value="00h 00m">
+                      <small>Must be in format 14h 10m</small>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label">Airport</label>
+                      <select class="form-control control-label" name="place" >
+                        <option value="">Select</option>
+                        {% for i in code %}
+                        <option value="{{ i.code}}">{{i.code}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                   
+                  <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Add</button>
+                    
+                  </form>
                 </div>
-                
-                <div class="form-group">
-                  <label class="control-label">Code</label>
-                  <input class="form-control" type="text"  name="code">
-                </div>
-              
-              <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Add</button>
-                
-              </form>
             </div>
-        </div>
-
-        </div>
-        <div class="col-md-8">
-          <div class="tile">
-            <h3 class="tile-title">Show airports</h3>
-            <div class="tile-body table-responsive">
-              <table class="table table-hover table-bordered " id="sampleTable" >
-                <thead>
-                  <tr>
-                    <th>City</th>
-                    <th>Country</th>
-                    <th>Code</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {% for p in airport %}
-                  <tr>
-                    <td>{{p.city}}</td>
-                    <td>{{p.country}}</td>
-                    <td>{{p.code}}</td>
-                    <td>
-                      <a href="{% url 'deleteairport' p.id %}"><i class="fa fa-trash" style="color:red"></i></a>
-                      </td>
-                  </tr>
-                  {% endfor %}
-                </tbody>
-              </table>
+    
+            </div>
+            <div class="col-md-8">
+              <div class="tile">
+                <h3 class="tile-title">Show hotels</h3>
+                <div class="tile-body table-responsive">
+                  <table class="table table-hover table-bordered " id="sampleTable" >
+                    <thead>
+                      <tr>
+                        <th>Hotel name</th>
+                        <th>Description</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for p in stop %}
+                      <tr>
+                        <td>{{p.duration}}</td>
+                        <td>{{p.airport_code}}</td>
+                        <td>
+                          <a href="{% url 'deletestops' p.id %}"><i class="fa fa-trash" style="color:red"></i></a>
+                          </td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    </main>
+        </main>
     <!-- Essential javascripts for application to work-->
-    <script src="static/admin/js/jquery-3.2.1.min.js"></script>
-    <script src="static/admin/js/popper.min.js"></script>
-    <script src="static/admin/js/bootstrap.min.js"></script>
-    <script src="static/admin/js/main.js"></script>
+    <script src="{% static 'admin/js/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'admin/js/popper.min.js' %}"></script>
+    <script src="{% static 'admin/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'admin/js/main.js' %}"></script>
     <!-- The javascript plugin to display page loading on top-->
-    <script src="static/admin/js/plugins/pace.min.js"></script>
+    <script src="{% static 'admin/js/plugins/pace.min.js' %}"></script>
     <!-- Page specific javascripts-->
-    <script  src="static/admin/js/plugins/chart.js"></script>
+    <script  src="{% static 'admin/js/plugins/chart.js' %}"></script>
 
-    <script type="text/javascript" src="static/admin/js/plugins/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="static/admin/js/plugins/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript" src="{% static 'admin/js/plugins/jquery.dataTables.min.js' %}"></script>
+    <script type="text/javascript" src="{%  static 'admin/js/plugins/dataTables.bootstrap.min.js' %}"></script>
     <script type="text/javascript">$('#sampleTable').DataTable();</script>
 
    
@@ -371,6 +371,7 @@
     // Your code to run since DOM is loaded and ready
     
     </script>
+    
  
   </body>
 </html>
