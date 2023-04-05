@@ -449,7 +449,8 @@ def deletestops(request,id):
     messages.error(request, 'Stop details deleted sucessfully!')
     return redirect('addstops',id=member1.trip_id)  
 
-     
+def searchcontent(request):
+    return render(request,'web/searchcontent.html')    
 
 
 
