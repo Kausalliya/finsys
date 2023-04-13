@@ -377,6 +377,9 @@ h1[data-v-57b06d44] {
   .modal-backdrop {
    background-color: transparent;
 }
+.option1{
+	background: rgb(230, 14, 14);
+}
 </style>
 </head>
 
@@ -457,13 +460,24 @@ h1[data-v-57b06d44] {
     <div class="row searchbox d-flex justify-content-between pe-0 me-0 ps-lg-0 ps-3">
         <div class="col-lg-3 col-12 inner d-flex align-items-center ">
             <img data-v-2caec5eb="" width="24" height="24" src="{% static 'image/flight.svg' %}" width="90px">
-            <input class="form-control" placeholder="From where?">
+        
+            <select class="selectpicker" >
+              <option value="" hidden class="option1">From where?</option>
+              {% for i in airport %}
+              <option value="{{ i.code}}" class="option1">{{i.code}}</option>
+              {% endfor %}
+            </select>
         </div>
 
         <div class="col-lg-3 col-12 inner d-flex align-items-center ">
             <img  data-v-2caec5eb="" width="24" height="24" src="{% static 'image/arrive.svg' %}">
 
-            <input class="form-control" placeholder="where to?">
+            <select class="select" name="from" id="select1">
+              <option value="" hidden>where to?</option>
+              {% for i in airport %}
+              <option value="{{ i.code}}" class="dropdown-secondary">{{i.code}}</option>
+              {% endfor %}
+            </select>
         </div>
 
         <div class="col-lg-3 col-12 inner d-flex align-items-center " >
@@ -485,7 +499,7 @@ h1[data-v-57b06d44] {
                         <div class="form-check ms-1">
                           <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
                           <label class="form-check-label" for="flexRadioDefault2">
-                            Single trip
+                           One way
                           </label>
                         </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
@@ -997,6 +1011,22 @@ if (mediaQuery3.matches){
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script>
+$('.selectpicker').selectpicker('refresh')
+
+// var $value = $('.dropdown-toggle').attr('title');
+
+
+$('.selectpicker').change(function () {
+  var selected = []
+    selected = $('.selectpicker').val()
+    console.log(selected); //Get the multiple values selected in an array
+    console.log(selected.length); //Length of the array
+    alert(selected + '--' + selected.length);
+});
+
+
+  </script>
 </body>
 
 </html>

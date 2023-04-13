@@ -21,7 +21,8 @@ def base(request):
     hotel1=hotel.objects.all().order_by('-id')[:3]
     city1=city.objects.all().order_by('-id')[:3]
     test=testimonial.objects.all().order_by('-id')
-    return render(request,'base.html',{'hotel':hotel1,'city':city1,'test':test})
+    airport=airportcode.objects.all()
+    return render(request,'base.html',{'hotel':hotel1,'city':city1,'test':test,'airport':airport})
 
 def home(request):
     city_view=city.objects.all()
