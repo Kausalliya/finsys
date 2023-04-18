@@ -451,7 +451,85 @@ def deletestops(request,id):
     return redirect('addstops',id=member1.trip_id)  
 
 def searchcontent(request):
-    return render(request,'web/searchcontent.html')    
+    hotel1=hotel.objects.all().order_by('-id')[:3]
+    city1=city.objects.all().order_by('-id')[:3]
+    test=testimonial.objects.all().order_by('-id')
+    airport=airportcode.objects.all()
+    return render(request,'web/searchcontent.html',{'hotel':hotel1,'city':city1,'test':test,'airport':airport})    
+
+def search(request):
+    if request.method=='POST':
+        from1=request.POST['from']
+        to= request.POST['to']
+        date1= request.POST['date1']
+        traveler= request.POST['traveler']
+        hotel1=hotel.objects.all().order_by('-id')[:3]
+        city1=city.objects.all().order_by('-id')[:3]
+        test=testimonial.objects.all().order_by('-id')
+        airport=airportcode.objects.all()
+        x= date1.split()
+        
+        if len(x) == 3:
+            method="Round Trip"
+            returndate=x[2]
+        else:
+            method="Single Trip"
+              
+        departdate = datetime.strptime(x[0],'%d-%m-%Y')
+        print(departdate)
+        result=trip.objects.filter(from_where=from1,where_to=to,depart_date=departdate)[:6]
+        lenghtresult=len(result)
+        stops1=stops.objects.all()
+        context={'from':from1,
+                 'to':to,
+                 'date':date1,
+                 'traveler':traveler,
+                 'airport':airport,
+                 'result':result,
+                 'method':method,
+                 'lresult':lenghtresult,
+                 'stops':stops1
+               }
+    return render(request,'web/searchcontent.html',context)    
+
+def showflight(request):
+    from1=request.GET['from']
+    to= request.GET['to']
+    date1=request.GET['date1']
+    traveler= request.GET['traveler']
+    print(from1)
+    print(to)
+    print(date1)
+    print(traveler)
+    hotel1=hotel.objects.all().order_by('-id')[:3]
+    city1=city.objects.all().order_by('-id')[:3]
+    test=testimonial.objects.all().order_by('-id')
+    airport=airportcode.objects.all()
+    x= date1.split()
+    
+    if len(x) == 3:
+        method="Round Trip"
+        returndate=x[2]
+    else:
+        method="Single Trip"
+            
+    departdate = datetime.strptime(x[0],'%d-%m-%Y')
+    print(departdate)
+    result=trip.objects.filter(from_where=from1,where_to=to,depart_date=departdate)
+    print(len(result))
+    lenghtresult=len(result)
+    stops1=stops.objects.all()
+    context={'from':from1,
+            'to':to,
+            'date':date1,
+            'traveler':traveler,
+            'airport':airport,
+            'result':result,
+            'method':method,
+            'lresult':lenghtresult,
+            'stops':stops1
+            }
+    return render(request,'web/searchcontent.html',context)    
 
 
 

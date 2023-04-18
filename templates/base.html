@@ -377,15 +377,14 @@ h1[data-v-57b06d44] {
   .modal-backdrop {
    background-color: transparent;
 }
-.option1{
-	background: rgb(230, 14, 14);
-}
+
 </style>
 </head>
 
 
   <body class="d-flex flex-column min-vh-100">  
-  <div class="main " >
+    
+  <div class="main">
     <label class="menu-button-wrapper" for="">
       <input type="checkbox" class="menu-button">
       <div class="icon-wrapper">
@@ -447,7 +446,7 @@ h1[data-v-57b06d44] {
 		</div>
 	  </div>
 	</nav>
-  <main >
+  <main>
 
     <div class="hai">
     <div data-v-57b06d44 class="hero_bg mt-5">
@@ -457,11 +456,13 @@ h1[data-v-57b06d44] {
 
    
     <div class="container mt-4">
+    <form action="{% url 'search' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
     <div class="row searchbox d-flex justify-content-between pe-0 me-0 ps-lg-0 ps-3">
         <div class="col-lg-3 col-12 inner d-flex align-items-center ">
             <img data-v-2caec5eb="" width="24" height="24" src="{% static 'image/flight.svg' %}" width="90px">
         
-            <select class="selectpicker" >
+            <select class="selectpicker form-control" name="from">
               <option value="" hidden class="option1">From where?</option>
               {% for i in airport %}
               <option value="{{ i.code}}" class="option1">{{i.code}}</option>
@@ -472,7 +473,7 @@ h1[data-v-57b06d44] {
         <div class="col-lg-3 col-12 inner d-flex align-items-center ">
             <img  data-v-2caec5eb="" width="24" height="24" src="{% static 'image/arrive.svg' %}">
 
-            <select class="select" name="from" id="select1">
+            <select class="select form-control" name="to" id="select1">
               <option value="" hidden>where to?</option>
               {% for i in airport %}
               <option value="{{ i.code}}" class="dropdown-secondary">{{i.code}}</option>
@@ -482,7 +483,7 @@ h1[data-v-57b06d44] {
 
         <div class="col-lg-3 col-12 inner d-flex align-items-center " >
             <img data-v-2caec5eb="" width="24" height="24" src="{% static 'image/cal.svg' %}">
-            <input  placeholder="Depart-Return" class="form-control"  data-bs-toggle="modal" data-bs-target="#myModal">
+            <input  placeholder="Depart-Return" class="form-control"  data-bs-toggle="modal" data-bs-target="#myModal" name="date1">
 
             <div class="modal fade" id="myModal">
               <div class="modal-dialog modal-dialog-centered">
@@ -524,7 +525,7 @@ h1[data-v-57b06d44] {
         <div class="col-lg-2 col-12 inner d-flex align-items-center trav_engine" >
             <img data-v-2caec5eb="" width="24" height="24" src="{% static 'image/user.svg' %}">
             <div class="trav_engine w-100">
-              <input type="text" id="txtTotalTravelers" class=" form-control " value="1 Traveler(s)" />
+              <input type="text" id="txtTotalTravelers" class=" form-control " value="Traveler(s)" name="traveler" />
               <div class="trav_toggle open">
                   <a href="#">Open</a>
               </div>
@@ -561,7 +562,7 @@ h1[data-v-57b06d44] {
             <button  type='submit' class="m-0 w-100 button" >search</button>
           </div>
        
-     
+        </form>
     </div>
     </div>
    </div>

@@ -48,6 +48,9 @@ urlpatterns = [
     path('savestops/<int:id>',views.savestops,name='savestops'),
     path('deletestops/<int:id>',views.deletestops,name='deletestops'),
     path('searchcontent', views.searchcontent, name='searchcontent'),
+    path('search', views.search, name='search'),
+    path('showflight', views.showflight, name='showflight'),
+
 
 
 

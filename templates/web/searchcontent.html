@@ -16,7 +16,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
@@ -428,7 +428,6 @@ color: #6E7491;
   overflow-y: scroll;
   border: 1px solid #E9E8FC;
   border-radius: 12px;
-  height: 456px;
 }
 .flightcontent::-webkit-scrollbar {
   width: 1px;
@@ -463,7 +462,7 @@ color: #6E7491;
 
 
   <body class="d-flex flex-column min-vh-100">  
-  <div class="main " >
+  <div class="main">
     <label class="menu-button-wrapper" for="">
       <input type="checkbox" class="menu-button">
       <div class="icon-wrapper">
@@ -526,29 +525,41 @@ color: #6E7491;
 	  </div>
 	</nav>
   <section class="container-fluid ">
+    <form action="{% url 'search' %}" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
     <div class="row px-5 mt-5" >
         <div class="col-xl-9 col-md-12 col-12 ">
             <div class="row searchbox " >
                 <div class="col-lg-3 col-md-6 col-12 inner d-flex align-items-center ps-md-2 ">
                     <img data-v-2caec5eb="" width="24" height="24" src="{% static 'image/flight.svg' %}" width="90px">
-                    <input class="form-control" placeholder="From where?">
+                   
+            <select class="selectpicker form-control" name="from" id="from">
+              <option value="{{from}}" hidden class="option1">{{from}}</option>
+              {% for i in airport %}
+              <option value="{{ i.code}}" class="option1">{{i.code}}</option>
+              {% endfor %}
+            </select>
                 </div>
                 
                 <div class="col-lg-3 col-md-6 col-12 inner d-flex align-items-center ps-md-2 mt-lg-0 mt-md-0 mt-4" >
                     <img  data-v-2caec5eb="" width="24" height="24" src="{% static 'image/arrive.svg' %}">
-        
-                    <input class="form-control" placeholder="where to?">
+                    <select class="select form-control" name="to" id="to">
+                      <option value="{{to}}" hidden>{{to}}</option>
+                      {% for i in airport %}
+                      <option value="{{ i.code}}" class="dropdown-secondary">{{i.code}}</option>
+                      {% endfor %}
+                    </select>
                 </div>
                 <div class="col-lg-3 col-md-6 col-12 inner d-flex align-items-center mt-lg-0 mt-4 " >
                     <img data-v-2caec5eb="" width="24" height="24" src="{% static 'image/cal.svg' %}">
                   
-                    <input  placeholder="Depart-Return" class="form-control w-100" style="border: none;"/>
+                    <input  placeholder="Depart-Return" class="form-control w-100" style="border: none;" name="date1" value="{{date}}" id="date1"/>
                 </div>
 
                 <div class="col-lg-2 col-md-6 col-12 inner d-flex align-items-center mt-lg-0 mt-4 "  >
                     <img data-v-2caec5eb="" width="24" height="24" src="{% static 'image/user.svg' %}">
                     <div class="trav_engine " > 
-                      <input type="text" id="txtTotalTravelers" class=" form-control " value="" >
+                      <input type="text" id="txtTotalTravelers" class=" form-control " value="{{traveler}}" name="traveler"  >
                       <div class="trav_toggle open">
                           <a href="#">Open</a>
                       </div>
@@ -588,6 +599,7 @@ color: #6E7491;
                 </div>
                 </div>
             </div>
+          </form>
             <div class="dropmain col-xl-10 col-md-6 col-12 mt-4 ps-0 ">
                 <div class="dropdown dropdown1">
                     <button type="button" class="button2 dropdown-toggle py-2" data-bs-toggle="dropdown">
@@ -658,125 +670,43 @@ color: #6E7491;
                     </tr>
                   </thead>
                   <tbody>
+                    {% for i in result %}
                     <tr>
                       <td style="width:50px;">
                         <figure class="user-card__avatar" style="margin: auto;">
-                          <img src="//picsum.photos/50/50" alt="">
+                          <img src="{{i.flight.logo.url}}" alt="">
                         </figure>
                       </td>
                       <td>
-                        <p class="cardline1">16h 45m</p>
-                        <p class="cardline2">Hawaiian Airlines</p>
+                        <p class="cardline1">{{i.duration}}<p>
+                        <p class="cardline2">{{i.flight.flightname}}</p>
                       </td>
                       <td>
-                        <p class="cardline1">7:15am-4:24pm</p>
+                        <p class="cardline1">{{i.depart_time}}-{{i.arrive_time}}</p>
                       </td>
                       <td>
-                        <p class="cardline1">1 stop</p>
-                        <p class="cardline2">2h 45m in HNL</p>
+                        <p class="cardline1">{{i.no_stops}}</p>
+                        {% for p in stops %}
+                        {% if i.id == p.trip_id %}
+                        <p class="cardline2">{{p.duration}} in {{p.airport_code}}</p>
+                        {% endif %}
+                        {% endfor %}
                       </td>
                       <td>
-                        <p class="cardline1">654</p>
-                        <p class="cardline2">round trip</p>
+                        <p class="cardline1">{{i.price}}</p>
+                        <p class="cardline2">{{method}}</p>
                       </td>
                     </tr>
-                    <tr>
-                      <td style="width:50px;">
-                        <figure class="user-card__avatar" style="margin: auto;">
-                          <img src="//picsum.photos/50/50" alt="">
-                        </figure>
-                      </td>
-                      <td>
-                        <p class="cardline1">16h 45m</p>
-                        <p class="cardline2">Hawaiian Airlines</p>
-                      </td>
-                      <td>
-                        <p class="cardline1">7:15am-4:24pm</p>
-                      </td>
-                      <td>
-                        <p class="cardline1">1 stop</p>
-                        <p class="cardline2">2h 45m in HNL</p>
-                      </td>
-                      <td>
-                        <p class="cardline1">654</p>
-                        <p class="cardline2">round trip</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td style="width:50px;">
-                        <figure class="user-card__avatar" style="margin: auto;">
-                          <img src="//picsum.photos/50/50" alt="">
-                        </figure>
-                      </td>
-                      <td>
-                        <p class="cardline1">16h 45m</p>
-                        <p class="cardline2">Hawaiian Airlines</p>
-                      </td>
-                      <td>
-                        <p class="cardline1">7:15am-4:24pm</p>
-                      </td>
-                      <td>
-                        <p class="cardline1">1 stop</p>
-                        <p class="cardline2">2h 45m in HNL</p>
-                      </td>
-                      <td>
-                        <p class="cardline1">654</p>
-                        <p class="cardline2">round trip</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td style="width:50px;">
-                        <figure class="user-card__avatar" style="margin: auto;">
-                          <img src="//picsum.photos/50/50" alt="">
-                        </figure>
-                      </td>
-                      <td>
-                        <p class="cardline1">16h 45m</p>
-                        <p class="cardline2">Hawaiian Airlines</p>
-                      </td>
-                      <td>
-                        <p class="cardline1">7:15am-4:24pm</p>
-                      </td>
-                      <td>
-                        <p class="cardline1">1 stop</p>
-                        <p class="cardline2">2h 45m in HNL</p>
-                      </td>
-                      <td>
-                        <p class="cardline1">654</p>
-                        <p class="cardline2">round trip</p>
-                      </td>
-                    </tr>
-                    
-                    <tr>
-                      <td style="width:50px;">
-                        <figure class="user-card__avatar" style="margin: auto;">
-                          <img src="//picsum.photos/50/50" alt="">
-                        </figure>
-                      </td>
-                      <td>
-                        <p class="cardline1">16h 45m</p>
-                        <p class="cardline2">Hawaiian Airlines</p>
-                      </td>
-                      <td>
-                        <p class="cardline1">7:15am-4:24pm</p>
-                      </td>
-                      <td>
-                        <p class="cardline1">1 stop</p>
-                        <p class="cardline2">2h 45m in HNL</p>
-                      </td>
-                      <td>
-                        <p class="cardline1">654</p>
-                        <p class="cardline2">round trip</p>
-                      </td>
-                    </tr>
+                    {% endfor %}
                   </tbody>
                 </table>
               </div>
             </div>
+            {% if lresult >= 6   %}
             <div class="col-12 mt-4 d-flex justify-content-lg-end justify-content-center">
-              <button type="button" class="button3 px-4 py-2">Show all flight</button>
+              <button type="button" class="button3 px-4 py-2"  onclick="showf()" id="showflight1">Show all flight</button>
             </div>
-
+            {% endif %}
             <div class="col-12">
               mappp
             </div>
@@ -1244,7 +1174,24 @@ $('#example3').calendar({
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script>
+  function showf(){
+    document.getElementById("showflight1").style.display = "none"
+$.ajax({
+            type : 'GET',
+            url:"{% url 'showflight' %}",
+        
+            data:{
+              from:$("#from").val(),
+              to:$("#to").val(),
+              date1:$("#date1").val(),
+              traveler:$("#txtTotalTravelers").val(),
+                
+            },
+        });
 
+  }
+</script>
 </body>
 
 </html>
