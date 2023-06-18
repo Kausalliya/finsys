@@ -1,5 +1,5 @@
 from django.urls import path
-from .import views
+from . import views
 urlpatterns = [
     path('',views.base,name='base'),
     path('flight_signin',views.flight_signin,name='flight_signin'),
